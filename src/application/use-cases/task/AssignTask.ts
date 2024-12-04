@@ -3,11 +3,13 @@ import { IAssignTask } from './interface/IAssignTask';
 import { ITaskServices } from '../../services/ITaskServices';
 import { IUserServices } from '../../services/IUserServices';
 import { User } from '../../../domain/entities/User';
+import { returnTaskServicesImplement } from '../../../infra/locator/returnTaskServicesImplement';
+import { returnUserServicesImplement } from '../../../infra/locator/returnUserServicesImplement';
 
 export class AssignTask implements IAssignTask {
   constructor(
-    private readonly taskServices: ITaskServices,
-    private readonly userServices: IUserServices
+    private readonly taskServices: ITaskServices = returnTaskServicesImplement(),
+    private readonly userServices: IUserServices = returnUserServicesImplement()
   ) {}
   public execute = async (taskId: number, userId: number): Promise<Task> => {
     const userById: User | null = await this.userServices.getUserById(userId);

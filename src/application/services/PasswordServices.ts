@@ -1,28 +1,29 @@
-import { IPasswordHash } from '../interfaces/IPasswordHash'
-import { IPasswordServices } from './IPasswordServices'
+import { returnPasswordHashedImplementation } from '../../infra/locator/returnPasswordHashImplement';
+import { IPasswordHash } from '../interfaces/IPasswordHash';
+import { IPasswordServices } from './IPasswordServices';
 
 export class PasswordServices implements IPasswordServices {
-    constructor(private passwordHash: IPasswordHash) {}
-    public hashPassword = async (inputPassword: string): Promise<string> => {
-        try {
-            return await this.passwordHash.hashPassword(inputPassword)
-        } catch (error) {
-            console.log(error)
-            throw new Error()
-        }
+  constructor(private passwordHash: IPasswordHash = returnPasswordHashedImplementation()) {}
+  public hashPassword = async (inputPassword: string): Promise<string> => {
+    try {
+      return await this.passwordHash.hashPassword(inputPassword);
+    } catch (error) {
+      console.log(error);
+      throw new Error();
     }
-    public validatePassword = async (
-        inputPassword: string,
-        hashedPassword: string
-    ): Promise<boolean> => {
-        try {
-            return await this.passwordHash.comparePassword(
-                inputPassword,
-                hashedPassword
-            )
-        } catch (error) {
-            console.log(error)
-            throw new Error()
-        }
+  };
+  public validatePassword = async (
+    inputPassword: string,
+    hashedPassword: string
+  ): Promise<boolean> => {
+    try {
+      return await this.passwordHash.comparePassword(
+        inputPassword,
+        hashedPassword
+      );
+    } catch (error) {
+      console.log(error);
+      throw new Error();
     }
+  };
 }

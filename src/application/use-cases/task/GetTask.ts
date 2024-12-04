@@ -1,24 +1,25 @@
-import { IGetTask } from './interface/IGetTask'
-import { Task } from '../../../domain/entities/Task'
-import { ITaskServices } from '../../services/ITaskServices'
+import { IGetTask } from './interface/IGetTask';
+import { Task } from '../../../domain/entities/Task';
+import { ITaskServices } from '../../services/ITaskServices';
+import { returnTaskServicesImplement } from '../../../infra/locator/returnTaskServicesImplement';
 
 export class GetTask implements IGetTask {
-    constructor(private readonly taskServices: ITaskServices) {}
-    public executeById = async (taskId: number): Promise<Task> => {
-        const taskById: Task | null =
-            await this.taskServices.getEntityById(taskId)
-        if (!taskById) {
-            throw new Error()
-        }
-        return taskById
+  constructor(
+    private readonly taskServices: ITaskServices = returnTaskServicesImplement()
+  ) {}
+  public executeById = async (taskId: number): Promise<Task> => {
+    const taskById: Task | null = await this.taskServices.getEntityById(taskId);
+    if (!taskById) {
+      throw new Error();
     }
-    public executeByUserId = async (userId: number): Promise<Task | null> => {
-        const taskById: Task | null =
-            await this.taskServices.getByUserId(userId)
-        return taskById
-    }
-    public getAll = async (): Promise<Task[] | null> => {
-        const taskList: Task[] | null = await this.taskServices.showListEntity()
-        return taskList
-    }
+    return taskById;
+  };
+  public executeByUserId = async (userId: number): Promise<Task | null> => {
+    const taskById: Task | null = await this.taskServices.getByUserId(userId);
+    return taskById;
+  };
+  public getAll = async (): Promise<Task[] | null> => {
+    const taskList: Task[] | null = await this.taskServices.showListEntity();
+    return taskList;
+  };
 }

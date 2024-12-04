@@ -1,30 +1,31 @@
-import { User } from '../../../domain/entities/User'
-import { IGetUser } from './interface/IGetUser'
-import { IUserServices } from '../../services/IUserServices'
+import { User } from '../../../domain/entities/User';
+import { IGetUser } from './interface/IGetUser';
+import { IUserServices } from '../../services/IUserServices';
+import { returnUserServicesImplement } from '../../../infra/locator/returnUserServicesImplement';
 export class GetUser implements IGetUser {
-    constructor(
-       private userServices: IUserServices
-    ) {}
+  constructor(
+    private userServices: IUserServices = returnUserServicesImplement()
+  ) {}
 
-    public executeById = async (id: number): Promise<User> => {
-        const user = await this.userServices.getUserById(id)
-        if (!user) {
-            throw new Error(`User with id ${id} not found`)
-        }
-        return user
+  public executeById = async (id: number): Promise<User> => {
+    const user = await this.userServices.getUserById(id);
+    if (!user) {
+      throw new Error(`User with id ${id} not found`);
     }
-    public executeByUsername = async (username: string): Promise<User> => {
-        const user = await this.userServices.getUserByUsername(username)
-        if (!user) {
-            throw new Error(`User with id ${username} not found`)
-        }
-        return user
+    return user;
+  };
+  public executeByUsername = async (username: string): Promise<User> => {
+    const user = await this.userServices.getUserByUsername(username);
+    if (!user) {
+      throw new Error(`User with id ${username} not found`);
     }
-    public getAll = async (): Promise<User[]> => {
-        const users = await this.userServices.showListEntity()
-        if (!users) {
-            throw new Error('No users found')
-        }
-        return users
+    return user;
+  };
+  public getAll = async (): Promise<User[]> => {
+    const users = await this.userServices.showListEntity();
+    if (!users) {
+      throw new Error('No users found');
     }
+    return users;
+  };
 }
