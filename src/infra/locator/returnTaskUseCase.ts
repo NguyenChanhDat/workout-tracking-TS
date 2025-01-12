@@ -1,4 +1,4 @@
-import { CreateTask, DeleteTask, GetTask, ICreateTask, IDeleteTask, IGetTask, IUpdateTask, UpdateTask } from "../../application/use-cases/Task/TaskUseCaseExportDir";
+import { CreateTask, DeleteTask, GetTask, ICreateTask, IDeleteTask, IGetTask, IUpdateTask, UpdateTask } from "../../application/use-cases/task/TaskUseCaseExportDir";
 
 export function returnGetTask():IGetTask{
     return new GetTask()
