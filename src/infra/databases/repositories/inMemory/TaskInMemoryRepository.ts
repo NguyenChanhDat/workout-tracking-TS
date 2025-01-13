@@ -7,7 +7,7 @@ export class TaskInMemoryRepository implements ITaskRepository {
     private tasks: Task[] = [];
     private taskIdCounter = 1;
 
-    async createEntity(createTaskDto: CreateTaskDto): Promise<Task> {
+    async createEntity(createTaskDto: CreateTaskDto): Promise<void> {
         const newTask: Task = {
             id: this.taskIdCounter++,
             title: createTaskDto.title,
@@ -18,31 +18,20 @@ export class TaskInMemoryRepository implements ITaskRepository {
             status: createTaskDto.status,
         };
         this.tasks.push(newTask);
-        return newTask;
+        Promise.resolve()
     }
 
-    async updateEntity(taskById: Task, updateInfo: UpdateTaskDto): Promise<Task> {
-        const taskIndex = this.tasks.findIndex((task) => task.id === taskById.id);
-        if (taskIndex === -1) {
-            throw new Error(`Task with ID ${taskById.id} not found.`);
-        }
-
-        const updatedTask: Task = {
-            ...this.tasks[taskIndex],
-            ...updateInfo,
-            modifiedTime: new Date().toISOString(),
+    async updateEntity(taskId: number, updateInfo: UpdateTaskDto): Promise<void> {
+        this.tasks[taskId] = {
+            id: taskId,
+            createdTime:new Date().toISOString(),
+            ...updateInfo
         };
-
-        this.tasks[taskIndex] = updatedTask;
-        return updatedTask;
+        Promise.resolve();
     }
 
-    async deleteEntity(task: Task): Promise<void> {
-        const taskIndex = this.tasks.findIndex((t) => t.id === task.id);
-        if (taskIndex === -1) {
-            throw new Error(`Task with ID ${task.id} not found.`);
-        }
-        this.tasks.splice(taskIndex, 1);
+    async deleteEntity(taskId: number): Promise<void> {
+        this.tasks.splice(taskId, 1);
     }
 
     async getEntityById(taskId: number): Promise<Task | null> {

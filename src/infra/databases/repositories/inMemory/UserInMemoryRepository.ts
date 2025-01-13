@@ -1,53 +1,42 @@
 import { IUserRepository } from "../../../../domain/repositories/IUserRepository";
 import { User } from '../../../../domain/entities/User';
+import { UpdateUserDto } from "@application/dto/user/updateUserDto";
 
 export class UserInMemoryRepository implements IUserRepository {
     private users: User[] = [];
     private userIdCounter = 1;
 
-    async createEntity(user: User): Promise<User> {
+    async createEntity(user: User): Promise<void> {
         const newUser: User = {
             id: this.userIdCounter++,
             username: user.username,
             password: user.password,
         };
         this.users.push(newUser);
-        return newUser;
+        Promise.resolve()
     }
 
-    async updateEntity(user: User): Promise<User> {
-        const userIndex = this.users.findIndex((u) => u.id === user.id);
-        if (userIndex === -1) {
-            throw new Error(`User with ID ${user.id} not found.`);
-        }
-
-        this.users[userIndex] = {
-            ...this.users[userIndex],
-            ...user,
+    async updateEntity(userId: number, inforInput: UpdateUserDto): Promise<void> {
+        this.users[userId] = {
+            id:userId,
+            ...inforInput,
         };
-        return this.users[userIndex];
+        Promise.resolve()
     }
 
-    async deleteEntity(user: User): Promise<void> {
-        const userIndex = this.users.findIndex((u) => u.id === user.id);
-        if (userIndex === -1) {
-            throw new Error(`User with ID ${user.id} not found.`);
-        }
-        this.users.splice(userIndex, 1);
+    async deleteEntity(userId: number): Promise<void> {
+        this.users.splice(userId, 1);
     }
 
-    async getEntityById(userId: number): Promise<User> {
+    async getEntityById(userId: number): Promise<User|null> {
         const user = this.users.find((user) => user.id === userId);
-        if (!user) {
-            throw new Error(`User with ID ${userId} not found.`);
+        if(!user){
+            return null
         }
         return user;
     }
 
-    async showListEntity(): Promise<User[]> {
-        if (this.users.length === 0) {
-            throw new Error('No users found.');
-        }
+    async showListEntity(): Promise<User[]|null> {
         return this.users;
     }
 
