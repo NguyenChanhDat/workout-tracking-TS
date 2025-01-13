@@ -1,10 +1,10 @@
 export interface EntityRepository<Entity> {
     getEntityById(id: number): Promise<Entity | null>
     showListEntity(): Promise<Entity[] | null>
-    createEntity(entity: Partial<Entity>): Promise<Entity>
+    createEntity(entity: Partial<Entity>): Promise<void>
     updateEntity(
-        entityById: Entity,
+        entityId: number,
         updateInfor: Partial<Entity>
-    ): Promise<Entity>
-    deleteEntity(entity: Entity): Promise<void>
+    ): Promise<void>
+    deleteEntity(entityId: number): Promise<void>
 }
