@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "dev": "npx ts-node src/index.ts"
+    "dev": "npx ts-node src/index.ts",
+    "setup": "chmod +x tools/setupLocalDataBase.sh && npm run db-local",
+    "db-local":"./tools/setupLocalDataBase.sh"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",

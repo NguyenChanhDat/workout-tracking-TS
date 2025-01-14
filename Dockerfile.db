@@ -1,0 +1,6 @@
+FROM mcr.microsoft.com/mssql/server:2022-latest
+
+USER root
+RUN mkdir -p /home/mssql
+COPY ./tools/db/backup/LocalDatabase.bak /home/mssql
+RUN chmod -R 777 /home/mssql
