@@ -9,18 +9,19 @@ export class TaskServices implements ITaskServices {
   constructor(
     private readonly taskRepository: ITaskRepository = returnTaskRepositoryImplement()
   ) {}
-  public createEntity = async (taskInput: CreateTaskDto): Promise<Task> => {
-    const taskCreated: Task = await this.taskRepository.createEntity(taskInput);
-    return taskCreated;
+  public createEntity = async (taskInput: CreateTaskDto): Promise<void> => {
+    await this.taskRepository.createEntity(taskInput);
+    return Promise.resolve()
   };
   public updateEntity = async (
-    task: Task,
+    taskId: number,
     updateInfor: UpdateTaskDto
-  ): Promise<Task> => {
-    return await this.taskRepository.updateEntity(task, updateInfor);
+  ): Promise<void> => {
+    this.taskRepository.updateEntity(taskId, updateInfor);
+    return Promise.resolve()
   };
-  public deleteEntity = async (taskById: Task): Promise<void> => {
-    await this.taskRepository.deleteEntity(taskById);
+  public deleteEntity = async (taskId: number): Promise<void> => {
+    await this.taskRepository.deleteEntity(taskId);
     return Promise.resolve();
   };
   public getEntityById = async (taskId: number): Promise<Task | null> => {

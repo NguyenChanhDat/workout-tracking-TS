@@ -10,20 +10,21 @@ export class UserServices implements IUserServices {
     private readonly userRepository: IUserRepository = returnUserRepositoryImplement()
   ) {}
 
-  public createEntity = async (userInput: CreateUserDto): Promise<User> => {
-    const userCreated: User = await this.userRepository.createEntity(userInput);
-    return userCreated;
+  public createEntity = async (userInput: CreateUserDto): Promise<void> => {
+    this.userRepository.createEntity(userInput);
+    return Promise.resolve()
   };
 
   public updateEntity = async (
-    user: User,
+    userId: number,
     updateInfo: UpdateUserDto
-  ): Promise<User> => {
-    return await this.userRepository.updateEntity(user, updateInfo);
+  ): Promise<void> => {
+    await this.userRepository.updateEntity(userId, updateInfo);
+    return Promise.resolve()
   };
 
-  public deleteEntity = async (user: User): Promise<void> => {
-    await this.userRepository.deleteEntity(user);
+  public deleteEntity = async (userId: number): Promise<void> => {
+    await this.userRepository.deleteEntity(userId);
     return Promise.resolve();
   };
 
