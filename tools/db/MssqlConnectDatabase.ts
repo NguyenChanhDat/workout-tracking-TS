@@ -3,10 +3,10 @@ import sql from 'mssql';
 
 export class MssqlConnectDatabase implements IConnectDatabase {
   private sqlConfig = {
-    user: 'sa',
-    password: 'Dat20112011',
-    server: 'localhost',
-    port: 1401,
+    user: process.env.DB_USER || 'sa',
+    password: process.env.DB_PASSWORD || 'Dat20112011',
+    server: process.env.DB_SERVER || 'localhost',
+    port: Number(process.env.DB_PORT) || 1401,
     options: {
       trustServerCertificate: true,
     },
@@ -16,7 +16,7 @@ export class MssqlConnectDatabase implements IConnectDatabase {
       await sql.connect(this.sqlConfig);
       console.log('Connect Database Successfully');
     } catch (error) {
-      console.log(error);
+      await this.execute();
     }
   };
 }
