@@ -1,8 +1,9 @@
 {
   "scripts": {
     "dev": "npx ts-node src/index.ts",
-    "setup": "chmod +x tools/setupLocalDataBase.sh && npm run db-local",
-    "db-local":"./tools/setupLocalDataBase.sh"
+    "setup": "chmod +x tools/setupLocalDataBase.sh &&  npm run db-local",
+    "restore-db-local":"npx ts-node ./tools/db/restore/executeRestoreDatabase.ts",
+    "db-local": "./tools/setupLocalDataBase.sh"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -16,6 +17,7 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
-    "@types/express": "^5.0.0"
+    "@types/express": "^5.0.0",
+    "@types/mssql": "^9.1.6"
   }
 }
