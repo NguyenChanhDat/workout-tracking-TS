@@ -34,8 +34,8 @@ export class TaskServices implements ITaskServices {
     const taskList: Task[] | null = await this.taskRepository.showListEntity();
     return taskList;
   };
-  public getByUserId = async (userId: number): Promise<Task | null> => {
-    const taskById: Task | null = await this.taskRepository.getByUserId(userId);
+  public getByUserId = async (userId: number): Promise<Task[] | null> => {
+    const taskById: Task[] | null = await this.taskRepository.getByUserId(userId);
     return taskById;
   };
 }

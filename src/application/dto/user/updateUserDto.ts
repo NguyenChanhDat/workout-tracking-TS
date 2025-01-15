@@ -1,3 +1,3 @@
-import { User } from "../../../domain/entities/User"
+import { User } from '../../../domain/entities/User';
 
-export type UpdateUserDto = Omit<User, 'id'>
+export type UpdateUserDto = User;

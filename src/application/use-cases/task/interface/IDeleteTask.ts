@@ -1,3 +1,3 @@
 export interface IDeleteTask {
-    executeById(taskId: number): Promise<void>
+    executeById(taskId: number): Promise<number>
 }

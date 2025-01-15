@@ -7,12 +7,12 @@ export class DeleteUser implements IDeleteUser {
     private userServices: IUserServices = returnUserServicesImplement()
   ) {}
 
-  public executeById = async (id: number): Promise<void> => {
-    const userById = await this.userServices.getUserById(id);
+  public executeById = async (userId: number): Promise<number> => {
+    const userById = await this.userServices.getUserById(userId);
     if (!userById) {
       throw new Error();
     }
-    await this.userServices.createEntity(userById);
-    return Promise.resolve();
+    await this.userServices.deleteEntity(userId);
+    return userId;
   };
 }

@@ -6,7 +6,7 @@ import {
   ICreateTask,
   IDeleteTask,
   IUpdateTask,
-} from '../../../../application/use-cases/Task/TaskUseCaseExportDir';
+} from '../../../../application/use-cases/task/TaskUseCaseExportDir';
 import { CreateTaskDto } from '../../../../application/dto/task/createTaskDto';
 import { Task } from '../../../../domain/entities/Task';
 import { TaskApiStatus } from '../../../../shared/constant/ApiStatus';
@@ -106,6 +106,8 @@ export class TaskController implements ITaskController {
         res.send(error.message);
         return;
       }
+      console.log(error);
+
       res.status(TaskApiStatus.INTERNAL_SERVER_ERROR.status);
       res.send(TaskApiStatus.INTERNAL_SERVER_ERROR.message);
     }

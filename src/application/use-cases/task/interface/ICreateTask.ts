@@ -1,6 +1,5 @@
-import { CreateTaskDto } from "../../../dto/task/createTaskDto"
-import { Task } from "../../../../domain/entities/Task"
+import { CreateTaskDto } from '../../../dto/task/createTaskDto';
 
 export interface ICreateTask {
-    execute(taskInput: CreateTaskDto): Promise<Task>
+  execute(taskInput: CreateTaskDto): Promise<CreateTaskDto>;
 }

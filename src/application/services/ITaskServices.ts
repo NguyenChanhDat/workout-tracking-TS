@@ -8,5 +8,5 @@ export interface ITaskServices {
     deleteEntity(taskId: number): Promise<void>
     getEntityById(taskId: number): Promise<Task | null>
     showListEntity(): Promise<Task[] | null>
-    getByUserId(userId: number): Promise<Task | null>
+    getByUserId(userId: number): Promise<Task[] | null>
 }

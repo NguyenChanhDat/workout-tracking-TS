@@ -14,8 +14,8 @@ export class GetTask implements IGetTask {
     }
     return taskById;
   };
-  public executeByUserId = async (userId: number): Promise<Task | null> => {
-    const taskById: Task | null = await this.taskServices.getByUserId(userId);
+  public executeByUserId = async (userId: number): Promise<Task[] | null> => {
+    const taskById: Task[] | null = await this.taskServices.getByUserId(userId);
     return taskById;
   };
   public getAll = async (): Promise<Task[] | null> => {

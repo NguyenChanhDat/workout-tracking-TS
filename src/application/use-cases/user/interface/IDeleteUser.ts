@@ -1,3 +1,3 @@
 export interface IDeleteUser {
-    executeById(id: number): Promise<void>
+    executeById(id: number): Promise<number>
 }

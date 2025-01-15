@@ -71,7 +71,7 @@ export class UserController implements IUserController {
   };
   public get = async (req: Request, res: Response): Promise<void> => {
     try {
-      const userByInput: User | User[] =
+      const userByInput: User | User[] | null =
         'id' in req.query
           ? await this.getUser.executeById(Number(req.query.id))
           : 'username' in req.query

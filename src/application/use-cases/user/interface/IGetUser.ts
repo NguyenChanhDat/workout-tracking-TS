@@ -1,6 +1,6 @@
-import { User } from "../../../../domain/entities/User";
+import { User } from '../../../../domain/entities/User';
 export interface IGetUser {
-    executeById(id: number): Promise<User>
-    executeByUsername(username: string): Promise<User>
-    getAll(): Promise<User[]>
+  executeById(id: number): Promise<User>;
+  executeByUsername(username: string): Promise<User|null>;
+  getAll(): Promise<User[] | null>;
 }

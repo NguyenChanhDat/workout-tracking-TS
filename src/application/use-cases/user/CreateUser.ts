@@ -16,9 +16,11 @@ export class CreateUser implements ICreateUser {
   ): Promise<string> => {
     return await this.passwordServices.hashPassword(passwordInput);
   };
-  public execute = async (inputInfor: CreateUserDto): Promise<User> => {
+  public execute = async (
+    inputInfor: CreateUserDto
+  ): Promise<Omit<User, 'id'>> => {
     inputInfor.password = await this.returnPasswordHashed(inputInfor.password);
-    const userCreated: User = await this.userServices.createEntity(inputInfor);
-    return userCreated;
+    await this.userServices.createEntity(inputInfor);
+    return inputInfor;
   };
 }

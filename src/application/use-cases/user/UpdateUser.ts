@@ -19,12 +19,11 @@ export class UpdateUser {
     if (!userById) {
       throw new Error();
     }
-    const userByIdNonNull: User = userById;
     inforInput.password = await this.returnPasswordHashed(inforInput.password);
-    const userUpdated = await this.userServices.updateEntity(
-      userByIdNonNull,
+    await this.userServices.updateEntity(
+      inforInput.id,
       inforInput
     );
-    return userUpdated;
+    return inforInput;
   };
 }

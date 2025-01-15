@@ -14,18 +14,12 @@ export class GetUser implements IGetUser {
     }
     return user;
   };
-  public executeByUsername = async (username: string): Promise<User> => {
+  public executeByUsername = async (username: string): Promise<User|null> => {
     const user = await this.userServices.getUserByUsername(username);
-    if (!user) {
-      throw new Error(`User with id ${username} not found`);
-    }
     return user;
   };
-  public getAll = async (): Promise<User[]> => {
+  public getAll = async (): Promise<User[] | null> => {
     const users = await this.userServices.showListEntity();
-    if (!users) {
-      throw new Error('No users found');
-    }
     return users;
   };
 }
