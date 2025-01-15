@@ -1,4 +1,4 @@
-import { IBootstrap } from './IBootstrap';
+import { IBootstrap } from '../../../presentation/bootstrap/IBootstrap';
 
 export class BootstrapInMemory implements IBootstrap {
   public dataSourceIsInitialized = async (): Promise<boolean> => {

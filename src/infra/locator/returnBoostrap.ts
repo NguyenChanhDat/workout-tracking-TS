@@ -1,6 +1,6 @@
-import { BootstrapInMemory } from "../../presentation/bootstrap/BootstrapInMemory";
+import { BootstrapTypeOrm } from "../databases/dataSource/BootstrapTypeOrm";
 import { IBootstrap } from "../../presentation/bootstrap/IBootstrap";
 
 export function returnBootstrap():IBootstrap{
-    return new BootstrapInMemory()
+    return new BootstrapTypeOrm()
 }

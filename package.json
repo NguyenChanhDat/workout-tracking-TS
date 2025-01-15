@@ -8,7 +8,10 @@
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.7",
     "express": "^4.21.1",
+    "mssql": "^10.0.4",
+    "reflect-metadata": "^0.2.2",
     "ts-node": "^10.9.2",
+    "typeorm": "^0.3.20",
     "typescript": "^5.7.2"
   },
   "devDependencies": {
