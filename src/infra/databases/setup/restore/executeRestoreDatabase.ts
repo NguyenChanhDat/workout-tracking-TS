@@ -1,4 +1,4 @@
-import { returnDatabaseRestore } from '../../../src/infra/locator/returnDatabaseRestore';
+import { returnDatabaseRestore } from '../../../locator/returnDatabaseRestore';
 import { IRestoreDatabase } from './IRestoreLocalDatabase';
 
 (async function executeRestoreDatabase() {

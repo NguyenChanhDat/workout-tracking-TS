@@ -1,6 +1,6 @@
-import { IConnectDatabase } from '../../../tools/db/IConnectDatabase';
-import { MssqlConnectDatabase } from '../../../tools/db/MssqlConnectDatabase';
+import { IConnectDatabase } from '../../infra/databases/setup/connect/IConnectDatabase';
+import { MssqlConnectDatabase } from '../../infra/databases/setup/connect/MssqlConnectDatabase';
 
-export function returnDatabaseConnection(): IConnectDatabase {
+export const returnDatabaseConnection = (): IConnectDatabase => {
   return new MssqlConnectDatabase();
-}
+};

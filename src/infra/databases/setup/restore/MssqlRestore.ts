@@ -1,5 +1,5 @@
-import { returnDatabaseConnection } from '../../../src/infra/locator/returnDatabaseConnection';
-import { IConnectDatabase } from '../IConnectDatabase';
+import { returnDatabaseConnection } from '../../../../infra/locator/returnDatabaseConnection';
+import { IConnectDatabase } from '../connect/IConnectDatabase';
 import { IRestoreDatabase } from './IRestoreLocalDatabase';
 import sql from 'mssql';
 
