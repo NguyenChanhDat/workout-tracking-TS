@@ -1,5 +1,5 @@
-import { IConnectDatabase } from '../../infra/databases/setup/connect/IConnectDatabase';
-import { MssqlConnectDatabase } from '../../infra/databases/setup/connect/MssqlConnectDatabase';
+import { IConnectDatabase } from '../databases/setup/seed/connect/IConnectDatabase';
+import { MssqlConnectDatabase } from '../databases/setup/seed/connect/MssqlConnectDatabase';
 
 export const returnDatabaseConnection = (): IConnectDatabase => {
   return new MssqlConnectDatabase();
