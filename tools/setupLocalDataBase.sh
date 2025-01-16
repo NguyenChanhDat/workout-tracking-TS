@@ -19,7 +19,7 @@ h1 "Delete Old Container"
 docker rm fb-db-local || true
 
 h1 "Delete Old Image"
-docker rmi fb-db-local || true
+docker rmi fb/db-local || true
  
 h1 "Build DB Image"
 docker build --progress=plain -t fb/db-local -f Dockerfile.db .
