@@ -1,4 +1,4 @@
-import { IBootstrap } from '@presentation/bootstrap/IBootstrap';
+import { IBootstrap } from '../../../presentation/bootstrap/IBootstrap';
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 

@@ -30,3 +30,7 @@ docker run -d -e 'ACCEPT_EULA=Y' \
 -p 1401:1433 \
 --name fb-db-local \
 fb/db-local
+
+echo "Waiting for SQL Server to initialize..."
+sleep 10
+echo "SQL Server is ready"

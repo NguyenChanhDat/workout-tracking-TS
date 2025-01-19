@@ -1,6 +1,6 @@
 import { IUserRepository } from '../../../../domain/repositories/IUserRepository';
 import { User } from '../../../../domain/entities/User';
-import { UpdateUserDto } from '@application/dto/user/updateUserDto';
+import { UpdateUserDto } from '../../../../application/dto/user/updateUserDto';
 
 export class UserInMemoryRepository implements IUserRepository {
   private users: User[] = [];

@@ -1,4 +1,4 @@
-import { IPasswordHash } from '@application/interfaces/IPasswordHash';
+import { IPasswordHash } from '../../application/interfaces/IPasswordHash';
 import { compare, genSalt, hash } from 'bcrypt';
 
 export class Bcrypt implements IPasswordHash {
