@@ -1,5 +1,5 @@
 export function CreateUserTable() {
-  return `
+  return `--sql
   USE LocalDatabase
       CREATE TABLE [Users] (
       [id] INTEGER NOT NULL IDENTITY UNIQUE,

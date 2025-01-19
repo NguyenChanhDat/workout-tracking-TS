@@ -1,5 +1,5 @@
 export function InsertBodyTrackData(){
-    return `
+    return `--sql
         USE LocalDatabase
         INSERT INTO [BodyTracks] ([weight], [height], [date], [userId])
         VALUES 

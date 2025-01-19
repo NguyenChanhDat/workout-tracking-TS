@@ -1,5 +1,5 @@
 export function InsertUserData(){
-    return `
+    return `--sql
         USE LocalDatabase
         INSERT INTO [Users] ([username], [password], [membershipTier])
         VALUES 

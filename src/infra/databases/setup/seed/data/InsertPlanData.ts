@@ -1,5 +1,5 @@
 export function InsertPlanData(){
-    return `
+    return `--sql
         USE LocalDatabase
         INSERT INTO [Plans] ([userId], [name], [membershipTier])
         VALUES 

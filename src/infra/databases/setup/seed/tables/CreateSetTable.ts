@@ -1,5 +1,5 @@
 export function CreateSetTable() {
-    return `
+    return `--sql
     USE LocalDatabase
         CREATE TABLE [Sets] (
         [id] INTEGER NOT NULL IDENTITY UNIQUE,

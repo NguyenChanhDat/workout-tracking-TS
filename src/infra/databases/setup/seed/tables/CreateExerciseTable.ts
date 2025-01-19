@@ -1,5 +1,5 @@
 export function CreateExerciseTable() {
-    return `
+    return `--sql
     USE LocalDatabase
         CREATE TABLE [Exercises] (
         [id] INTEGER NOT NULL IDENTITY UNIQUE,

@@ -1,5 +1,5 @@
 export const MssqlRestoreDatabaseNamed = (databaseName: string) => {
-  return `
+  return `--sql
       USE [master];
         RESTORE DATABASE [LocalDatabase]
         FROM DISK = N'/home/mssql/${databaseName}'

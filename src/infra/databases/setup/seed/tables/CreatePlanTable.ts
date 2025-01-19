@@ -1,5 +1,5 @@
 export function CreatePlanTable() {
-    return `
+    return `--sql
     USE LocalDatabase
         CREATE TABLE [Plans] (
         [id] INTEGER NOT NULL IDENTITY UNIQUE,

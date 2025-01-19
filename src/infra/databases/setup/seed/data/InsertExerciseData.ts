@@ -1,5 +1,5 @@
 export function InsertExerciseData(){
-    return `
+    return `--sql
         USE LocalDatabase
         INSERT INTO [Exercises] ([name], [imageUrl], [targetMuscle1], [targetMuscle2], [targetMuscle3])
         VALUES 

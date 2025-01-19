@@ -1,5 +1,5 @@
 export function CreateBodyTrackTable() {
-    return `
+    return `--sql
         USE LocalDatabase
         CREATE TABLE [BodyTracks] (
         [id] INTEGER NOT NULL IDENTITY UNIQUE,
