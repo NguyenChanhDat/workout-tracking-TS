@@ -5,26 +5,28 @@ import { IUserServices } from '../../services/IUserServices';
 import { User } from '../../../domain/entities/User';
 import { returnTaskServicesImplement } from '../../../infra/locator/returnTaskServicesImplement';
 import { returnUserServicesImplement } from '../../../infra/locator/returnUserServicesImplement';
+import { UserNotFoundError } from '../../../shared/constant/UserNotFoundError';
+import { TaskNotFoundError } from '../../../shared/constant/TaskNotFoundError';
 
 export class AssignTask implements IAssignTask {
   constructor(
     private readonly taskServices: ITaskServices = returnTaskServicesImplement(),
     private readonly userServices: IUserServices = returnUserServicesImplement()
   ) {}
-  public execute = async (taskId: number, userId: number): Promise<Task> => {
+  public execute = async (taskId: number, userId: number): Promise<void> => {
     const userById: User | null = await this.userServices.getUserById(userId);
     if (!userById) {
-      throw new Error();
+      throw new UserNotFoundError();
     }
     const taskById: Task | null = await this.taskServices.getEntityById(taskId);
     if (!taskById) {
-      throw new Error();
+      throw new TaskNotFoundError();
     }
-    const taskUpdated: Task = await this.taskServices.updateEntity(taskById, {
+    await this.taskServices.updateEntity(taskId, {
       id: taskById.id,
       userId: userById.id,
       title: taskById.title,
     });
-    return taskUpdated;
+    Promise.resolve();
   };
 }

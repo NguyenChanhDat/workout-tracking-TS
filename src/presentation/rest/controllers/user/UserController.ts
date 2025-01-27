@@ -27,7 +27,7 @@ export class UserController implements IUserController {
   public create = async (req: Request, res: Response): Promise<void> => {
     try {
       const userInputInfor: CreateUserDto = req.body;
-      const userCreated: User = await this.createUser.execute(userInputInfor);
+      const userCreated = await this.createUser.execute(userInputInfor);
       res.status(UserApiStatus.OK.status);
       res.send(userCreated + UserApiStatus.OK.message);
     } catch (error) {

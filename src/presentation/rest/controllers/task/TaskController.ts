@@ -34,7 +34,7 @@ export class TaskController implements ITaskController {
   public create = async (req: Request, res: Response): Promise<void> => {
     try {
       const taskData: CreateTaskDto = req.body;
-      const taskCreated: Task = await this.createTask.execute(taskData);
+      const taskCreated = await this.createTask.execute(taskData);
       res.status(TaskApiStatus.OK.status);
       res.send({
         message: TaskApiStatus.OK.message,
@@ -50,7 +50,7 @@ export class TaskController implements ITaskController {
   public update = async (req: Request, res: Response): Promise<void> => {
     try {
       const taskData: UpdateTaskDto = req.body;
-      const taskUpdated: Task | null = await this.updateTask.execute(taskData);
+      const taskUpdated = await this.updateTask.execute(taskData);
       if (!taskUpdated) {
         throw new TaskNotFoundError();
       }
