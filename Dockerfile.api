@@ -4,13 +4,13 @@ RUN mkdir -p /home/fb
 
 WORKDIR /home/fb
 
-COPY package.json /home/fb
+COPY package.json package-lock.json ./
 RUN npm install 
 
-COPY . /home/fb
+COPY . .
+
 EXPOSE 8080
 
-COPY --chown=node:node . .
+USER node
 
 CMD [ "npm", "run", "dev" ]
-
