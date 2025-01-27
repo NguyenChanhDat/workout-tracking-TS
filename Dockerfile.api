@@ -1,0 +1,16 @@
+FROM node:20
+
+RUN mkdir -p /home/fb
+
+WORKDIR /home/fb
+
+COPY package.json /home/fb
+RUN npm install 
+
+COPY . /home/fb
+EXPOSE 8080
+
+COPY --chown=node:node . .
+
+CMD [ "npm", "run", "dev" ]
+

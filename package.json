@@ -1,11 +1,12 @@
 {
   "scripts": {
     "dev": "npx ts-node src/index.ts",
-    "setup-linux": "chmod +x tools/setupLocalDbContainer.sh &&  npm run db-local-linux && npm run restore-seed-db",
-    "setup-win": "npm run db-local-win && npm run restore-seed-db",
+    "setup-db-linux": "chmod +x tools/setupLocalDbContainer.sh &&  npm run db-local-linux && npm run restore-seed-db",
+    "setup-db-win": "npm run db-local-win && npm run restore-seed-db",
     "db-local-linux": "sh ./src/infra/databases/setup/setupLocalDbContainer.sh",
     "db-local-win": "powershell ./src/infra/databases/setup/setupLocalDbContainer.ps1",
-    "restore-seed-db": "npx ts-node src/infra/databases/setup/execute.ts"
+    "restore-seed-db": "npx ts-node src/infra/databases/setup/execute.ts",
+    "local-win": "powershell ./src/presentation/run/localApi.ps1"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
