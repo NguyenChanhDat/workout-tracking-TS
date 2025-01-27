@@ -1,5 +1,5 @@
 import { IPasswordHash } from '../../application/interfaces/IPasswordHash';
-import { compare, genSalt, hash } from 'bcrypt';
+import { compare, genSalt, hash } from 'bcryptjs';
 
 export class Bcrypt implements IPasswordHash {
   constructor(
