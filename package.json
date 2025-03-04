@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev": "npx ts-node src/index.ts",
-    "setup-linux": "chmod +x tools/setupLocalDbContainer.sh &&  npm run db-local-linux && npm run restore-seed-db",
+    "setup-linux": "chmod +x tools/setup/setupLocalDbContainer.sh &&  npm run db-local-linux && npm run restore-seed-db",
     "setup-win": "npm run db-local-win && npm run restore-seed-db",
     "db-local-linux": "sh ./tools/setup/setupLocalDbContainer.sh",
     "db-local-win": "powershell ./tools/setup/setupLocalDbContainer.ps1",
@@ -22,6 +22,8 @@
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
     "@types/express": "^5.0.0",
-    "@types/mssql": "^9.1.6"
+    "@types/mssql": "^9.1.6",
+    "grpc_tools_node_protoc_ts": "^5.3.3",
+    "grpc-tools": "^1.13.0"
   }
 }
