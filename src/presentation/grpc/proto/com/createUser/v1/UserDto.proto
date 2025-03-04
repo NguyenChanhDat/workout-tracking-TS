@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package com.UserDto.v1;
+
+message CreateUserRequest {
+    string username;
+    string password;
+}
+
+message CreateUserResponse{
+    string username;
+    string password;
+}

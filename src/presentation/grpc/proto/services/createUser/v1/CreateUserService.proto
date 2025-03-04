@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+import "com/createUser/v1/UserDto.proto";
+
+package services.CreateUserService.v1;
+
+service UserServices {
+    rpc CreateUser(com.UserDto.v1.CreateUserRequest) returns (com.UserDto.v1.CreateUserResponse){}
+}
+
