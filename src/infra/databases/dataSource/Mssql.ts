@@ -1,11 +1,11 @@
-import { returnMssqlConfig } from '../../../infra/locator/returnDbConfig';
+import { mssqlConfigGlobal } from '../../../infra/locator/DbConfigGlobal';
 import { MssqlConfigType } from '../config/configType';
 import { IDatabase } from './IDatabase';
 import sql from 'mssql';
 
 export class Mssql implements IDatabase<sql.ConnectionPool> {
   constructor(
-    private readonly sqlConfig: MssqlConfigType = returnMssqlConfig()
+    private readonly sqlConfig: MssqlConfigType = mssqlConfigGlobal
   ) {}
 
   public returnPool = async (): Promise<sql.ConnectionPool> => {

@@ -1,17 +1,17 @@
-import express from 'express'
-import { IUserController } from '../controllers/user/IUserControllers'
-import { returnUserControllers } from '../../../infra/locator/UserControllersGlobal'
+import express from 'express';
+import { IUserController } from '../controllers/user/IUserControllers';
+import { userControllersGlobal } from '../../../infra/locator/UserControllersGlobal';
 
-const router = express.Router()
+const router = express.Router();
 
-const userController: IUserController = returnUserControllers()
+const userController: IUserController = userControllersGlobal;
 
-router.get('/', userController.get)
+router.get('/', userController.get);
 
-router.post('/', userController.create)
+router.post('/', userController.create);
 
-router.delete('/', userController.delete)
+router.delete('/', userController.delete);
 
-router.put('/', userController.update)
+router.put('/', userController.update);
 
-export { router as UserRoutes }
+export { router as UserRoutes };

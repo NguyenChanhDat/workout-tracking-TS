@@ -1,34 +1,35 @@
-import { ITaskController } from './ITaskControllers';
-import { Response, Request } from 'express';
-import {
-  IAssignTask,
-  IGetTask,
-  ICreateTask,
-  IDeleteTask,
-  IUpdateTask,
-} from '../../../../application/use-cases/task/TaskUseCaseExportDir';
 import { CreateTaskDto } from '../../../../application/dto/task/createTaskDto';
 import { Task } from '../../../../domain/entities/Task';
 import { TaskApiStatus } from '../../../../shared/constant/ApiStatus';
-import { UpdateTaskDto } from '../../../../application/dto/task/updateTaskDto';
+import { ITaskController } from './ITaskControllers';
+import { Response, Request } from 'express';
 import { TaskNotFoundError } from '../../../../shared/constant/TaskNotFoundError';
+import {
+  IAssignTask,
+  ICreateTask,
+  IDeleteTask,
+  IGetTask,
+  IUpdateTask,
+} from '../../../../application/use-cases/task/TaskUseCaseExportDir';
+import {
+  createTaskGlobal,
+  deleteTaskGlobal,
+  getTaskGlobal,
+  updateTaskGlobal,
+} from '../../../../infra/locator/TaskUseCaseGlobal';
+import { UpdateTaskDto } from '../../../../application/dto/task/updateTaskDto';
 import { UserNotFoundError } from '../../../../shared/constant/UserNotFoundError';
 import { NoTaskIdError } from '../../../../shared/constant/NoTaskIdError';
 import { NoUserIdError } from '../../../../shared/constant/NoUserIdError';
-import {
-  returnCreateTask,
-  returnDeleteTask,
-  returnGetTask,
-  returnUpdateTask,
-} from '../../../../infra/locator/returnTaskUseCase';
-import { returnAssignTask } from '../../../../infra/locator/returnAssignTask';
+import { assignTaskGlobal } from '../../../../infra/locator/AssignTaskGlobal';
+
 export class TaskController implements ITaskController {
   constructor(
-    private readonly getTask: IGetTask = returnGetTask(),
-    private readonly createTask: ICreateTask = returnCreateTask(),
-    private readonly deleteTask: IDeleteTask = returnDeleteTask(),
-    private readonly updateTask: IUpdateTask = returnUpdateTask(),
-    private readonly assignTask: IAssignTask = returnAssignTask()
+    private readonly createTask: ICreateTask = createTaskGlobal,
+    private readonly deleteTask: IDeleteTask = deleteTaskGlobal,
+    private readonly getTask: IGetTask = getTaskGlobal,
+    private readonly updateTask: IUpdateTask = updateTaskGlobal,
+    private readonly assignTask: IAssignTask = assignTaskGlobal
   ) {}
 
   public create = async (req: Request, res: Response): Promise<void> => {

@@ -1,10 +1,11 @@
 import { User } from '../../../domain/entities/User';
 import { IGetUser } from './interface/IGetUser';
 import { IUserServices } from '../../services/IUserServices';
-import { returnUserServicesImplement } from '../../../infra/locator/returnUserServicesImplement';
+import { userServicesGlobal } from '../../../infra/locator/UserServicesGlobal';
+
 export class GetUser implements IGetUser {
   constructor(
-    private userServices: IUserServices = returnUserServicesImplement()
+    private readonly userServices: IUserServices = userServicesGlobal
   ) {}
 
   public executeById = async (id: number): Promise<User> => {
@@ -14,7 +15,7 @@ export class GetUser implements IGetUser {
     }
     return user;
   };
-  public executeByUsername = async (username: string): Promise<User|null> => {
+  public executeByUsername = async (username: string): Promise<User | null> => {
     const user = await this.userServices.getUserByUsername(username);
     return user;
   };

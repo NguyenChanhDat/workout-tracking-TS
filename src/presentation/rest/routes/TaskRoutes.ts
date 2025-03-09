@@ -1,10 +1,10 @@
 import express from 'express'
 import { ITaskController } from '../controllers/task/ITaskControllers'
-import { returnTaskControllers } from '../../../infra/locator/returnTaskControllers'
+import { taskControllerGlobal } from '../../../infra/locator/TaskControllerGlobal'
 
 const router = express.Router()
 
-const taskController: ITaskController = returnTaskControllers()
+const taskController: ITaskController = taskControllerGlobal
 
 router.post('/assign/', taskController.assignTaskController)
 

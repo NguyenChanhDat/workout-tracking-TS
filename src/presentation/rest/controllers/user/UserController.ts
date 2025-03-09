@@ -11,18 +11,18 @@ import {
   IUpdateUser,
 } from '../../../../application/use-cases/user/UserUseCaseExportDir';
 import {
-  returnCreateUser,
-  returnDeleteUser,
-  returnGetUser,
-  returnUpdateUser,
+  createUserGlobal,
+  deleteUserGlobal,
+  getUserGlobal,
+  updateUserGlobal,
 } from '../../../../infra/locator/UserUseCaseGlobal';
 
 export class UserController implements IUserController {
   constructor(
-    private readonly createUser: ICreateUser = returnCreateUser(),
-    private readonly deleteUser: IDeleteUser = returnDeleteUser(),
-    private readonly getUser: IGetUser = returnGetUser(),
-    private readonly updateUser: IUpdateUser = returnUpdateUser()
+    private readonly createUser: ICreateUser = createUserGlobal,
+    private readonly deleteUser: IDeleteUser = deleteUserGlobal,
+    private readonly getUser: IGetUser = getUserGlobal,
+    private readonly updateUser: IUpdateUser = updateUserGlobal
   ) {}
   public create = async (req: Request, res: Response): Promise<void> => {
     try {

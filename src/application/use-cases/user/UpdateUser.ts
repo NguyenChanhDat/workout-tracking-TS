@@ -1,29 +1,28 @@
-import { User } from '../../../domain/entities/User';
-import { IPasswordServices } from '../../services/IPasswordServices';
+import { IUpdateUser } from './interface/IUpdateUser';
 import { IUserServices } from '../../services/IUserServices';
-import { returnUserServicesImplement } from '../../../infra/locator/returnUserServicesImplement';
-import { returnPasswordServicesImplement } from '../../../infra/locator/returnPasswordServicesImplement';
+import { userServicesGlobal } from '../../../infra/locator/UserServicesGlobal';
+import { IPasswordServices } from '../../../application/services/IPasswordServices';
+import { passwordServicesGlobal } from '../../../infra/locator/PasswordServicesGlobal';
+import { User } from '../../../domain/entities/User';
 
-export class UpdateUser {
+export class UpdateUser implements IUpdateUser {
   constructor(
-    private readonly userServices: IUserServices = returnUserServicesImplement(),
-    private readonly passwordServices: IPasswordServices = returnPasswordServicesImplement()
+    private readonly userServices: IUserServices = userServicesGlobal,
+    private readonly passwordServices: IPasswordServices = passwordServicesGlobal
   ) {}
-  private returnPasswordHashed = async (
-    passwordInput: string
-  ): Promise<string> => {
-    return await this.passwordServices.hashPassword(passwordInput);
-  };
   public execute = async (inforInput: User): Promise<User> => {
     const userById = await this.userServices.getUserById(inforInput.id);
     if (!userById) {
       throw new Error();
     }
     inforInput.password = await this.returnPasswordHashed(inforInput.password);
-    await this.userServices.updateEntity(
-      inforInput.id,
-      inforInput
-    );
+    await this.userServices.updateEntity(inforInput.id, inforInput);
     return inforInput;
+  };
+
+  private returnPasswordHashed = async (
+    passwordInput: string
+  ): Promise<string> => {
+    return await this.passwordServices.hashPassword(passwordInput);
   };
 }

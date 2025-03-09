@@ -9,7 +9,7 @@ import {
   UpdateUser,
 } from '../../application/use-cases/user/UserUseCaseExportDir';
 
-export const GetUserGlobal: IGetUser = new GetUser();
-export const CreateUserGlobal: ICreateUser = new CreateUser();
-export const DeleteUserGlobal: IDeleteUser = new DeleteUser();
-export const UpdateUserGlobal: IUpdateUser = new UpdateUser();
+export const getUserGlobal: IGetUser = new GetUser();
+export const createUserGlobal: ICreateUser = new CreateUser();
+export const deleteUserGlobal: IDeleteUser = new DeleteUser();
+export const updateUserGlobal: IUpdateUser = new UpdateUser();

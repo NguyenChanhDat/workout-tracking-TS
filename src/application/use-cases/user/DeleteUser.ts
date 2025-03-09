@@ -1,10 +1,10 @@
 import { IDeleteUser } from './interface/IDeleteUser';
 import { IUserServices } from '../../services/IUserServices';
-import { returnUserServicesImplement } from '../../../infra/locator/returnUserServicesImplement';
+import { userServicesGlobal } from '../../../infra/locator/UserServicesGlobal';
 
 export class DeleteUser implements IDeleteUser {
   constructor(
-    private userServices: IUserServices = returnUserServicesImplement()
+    private readonly userServices: IUserServices = userServicesGlobal
   ) {}
 
   public executeById = async (userId: number): Promise<number> => {

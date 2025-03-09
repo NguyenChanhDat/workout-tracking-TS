@@ -6,10 +6,12 @@ import { userRepositoryGlobal } from '../../infra/locator/UserRepositoryGlobal';
 import { IUserRepository } from '../../domain/repositories/IUserRepository';
 
 export class UserServices implements IUserServices {
-  constructor(private readonly userRepository:IUserRepository = userRepositoryGlobal) {}
+  constructor(
+    private readonly userRepository: IUserRepository = userRepositoryGlobal
+  ) {}
 
   public createEntity = async (userInput: CreateUserDto): Promise<void> => {
-    this.userRepository.createEntity(userInput);
+    await this.userRepository.createEntity(userInput);
     return Promise.resolve();
   };
 
@@ -32,11 +34,12 @@ export class UserServices implements IUserServices {
     );
     return userById;
   };
-  public getUserByUsername(username: string): Promise<User | null> {
-    const userByUsername: Promise<User | null> =
-      this.userRepository.getByUsername(username);
+  public getUserByUsername = async (username: string): Promise<User | null> => {
+    const userByUsername: User | null = await this.userRepository.getByUsername(
+      username
+    );
     return userByUsername;
-  }
+  };
 
   public showListEntity = async (): Promise<User[] | null> => {
     const userList: User[] | null = await this.userRepository.showListEntity();
