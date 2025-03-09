@@ -7,9 +7,7 @@ import { User } from '../../../src/domain/entities/User';
 class MockUserRepository implements IUserRepository {
   createEntity = jest.fn();
   updateEntity = jest.fn();
-  deleteEntity = jest.fn();
-  getUserById = jest.fn();
-  getUserByUsername = jest.fn();
+  deleteEntity = jest.fn(); 
   showListEntity = jest.fn();
   getByUsername = jest.fn();
   getEntityById = jest.fn();
@@ -63,43 +61,43 @@ describe('UserServices', () => {
       username: 'testuser',
       password: 'password',
     };
-    mockUserRepository.getUserById.mockResolvedValue(user);
+    mockUserRepository.getEntityById.mockResolvedValue(user);
 
     const result = await userServices.getUserById(userId);
 
     expect(result).toEqual(user);
-    expect(mockUserRepository.getUserById).toHaveBeenCalledWith(userId);
+    expect(mockUserRepository.getEntityById).toHaveBeenCalledWith(userId);
   });
 
   it('should return null if user does not exist', async () => {
     const userId = 1;
-    mockUserRepository.getUserById.mockResolvedValue(null);
+    mockUserRepository.getEntityById.mockResolvedValue(null);
 
     const result = await userServices.getUserById(userId);
 
     expect(result).toBeNull();
-    expect(mockUserRepository.getUserById).toHaveBeenCalledWith(userId);
+    expect(mockUserRepository.getEntityById).toHaveBeenCalledWith(userId);
   });
 
   it('should get a user by username', async () => {
     const username = 'testuser';
     const user: User = { id: 1, username, password: 'password' };
-    mockUserRepository.getUserByUsername.mockResolvedValue(user);
+    mockUserRepository.getByUsername.mockResolvedValue(user);
 
     const result = await userServices.getUserByUsername(username);
 
     expect(result).toEqual(user);
-    expect(mockUserRepository.getUserByUsername).toHaveBeenCalledWith(username);
+    expect(mockUserRepository.getByUsername).toHaveBeenCalledWith(username);
   });
 
   it('should return null if user does not exist by username', async () => {
     const username = 'testuser';
-    mockUserRepository.getUserByUsername.mockResolvedValue(null);
+    mockUserRepository.getByUsername.mockResolvedValue(null);
 
     const result = await userServices.getUserByUsername(username);
 
     expect(result).toBeNull();
-    expect(mockUserRepository.getUserByUsername).toHaveBeenCalledWith(username);
+    expect(mockUserRepository.getByUsername).toHaveBeenCalledWith(username);
   });
 
   it('should show list of users', async () => {

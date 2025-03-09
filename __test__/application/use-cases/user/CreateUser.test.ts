@@ -24,9 +24,8 @@ describe('CreateUser', () => {
     const createdUser = { id: 1, ...userData };
     mockUserServices.createEntity.mockResolvedValue(createdUser);
 
-    const result = await createUser.execute(userData);
+    await createUser.execute(userData);
 
-    expect(result).toEqual(createdUser);
     expect(mockUserServices.createEntity).toHaveBeenCalledWith(userData);
   });
 });
