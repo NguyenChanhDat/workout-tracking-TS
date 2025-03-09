@@ -1,7 +1,7 @@
 import { CreateTaskDto } from '../../dto/task/createTaskDto';
 import { ICreateTask } from './interface/ICreateTask';
 import { ITaskServices } from '../../services/ITaskServices';
-import { taskServicesGlobal } from '../../../infra/locator/taskServicesGlobal';
+import { taskServicesGlobal } from '../../../infra/locator/TaskServicesGlobal';
 
 export class CreateTask implements ICreateTask {
   constructor(

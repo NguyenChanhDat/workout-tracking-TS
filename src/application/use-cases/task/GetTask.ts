@@ -1,7 +1,7 @@
 import { IGetTask } from './interface/IGetTask';
 import { Task } from '../../../domain/entities/Task';
 import { ITaskServices } from '../../services/ITaskServices';
-import { taskServicesGlobal } from '../../../infra/locator/taskServicesGlobal';
+import { taskServicesGlobal } from '../../../infra/locator/TaskServicesGlobal';
 
 export class GetTask implements IGetTask {
   constructor(

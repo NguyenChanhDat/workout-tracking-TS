@@ -2,7 +2,7 @@ import { IUpdateTask } from './interface/IUpdateTask';
 import { UpdateTaskDto } from '../../dto/task/updateTaskDto';
 import { Task } from '../../../domain/entities/Task';
 import { ITaskServices } from '../../services/ITaskServices';
-import { taskServicesGlobal } from '../../../infra/locator/taskServicesGlobal';
+import { taskServicesGlobal } from '../../../infra/locator/TaskServicesGlobal';
 
 export class UpdateTask implements IUpdateTask {
   constructor(

@@ -1,8 +1,8 @@
 import { IDeleteTask } from './interface/IDeleteTask';
-import { Task } from '../../../domain/entities/Task';
 import { ITaskServices } from '../../services/ITaskServices';
-import { taskServicesGlobal } from '../../../infra/locator/taskServicesGlobal';
+import { taskServicesGlobal } from '../../../infra/locator/TaskServicesGlobal';
 import { TaskNotFoundError } from '../../../shared/constant/TaskNotFoundError';
+import { Task } from '../../../domain/entities/Task';
 
 export class DeleteTask implements IDeleteTask {
   constructor(

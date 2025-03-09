@@ -3,8 +3,8 @@ import { IAssignTask } from './interface/IAssignTask';
 import { ITaskServices } from '../../services/ITaskServices';
 import { IUserServices } from '../../services/IUserServices';
 import { User } from '../../../domain/entities/User';
-import { taskServicesGlobal } from '../../../infra/locator/taskServicesGlobal';
-import { userServicesGlobal } from '../../../infra/locator/userServicesGlobal';
+import { taskServicesGlobal } from '../../../infra/locator/TaskServicesGlobal';
+import { userServicesGlobal } from '../../../infra/locator/UserServicesGlobal';
 import { UserNotFoundError } from '../../../shared/constant/UserNotFoundError';
 import { TaskNotFoundError } from '../../../shared/constant/TaskNotFoundError';
 

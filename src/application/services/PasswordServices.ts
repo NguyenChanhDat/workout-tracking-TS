@@ -1,4 +1,4 @@
-import { passwordHashGlobal } from '../../infra/locator/passwordHashGlobal';
+import { passwordHashGlobal } from '../../infra/locator/PasswordHashGlobal';
 import { IPasswordHash } from '../interfaces/IPasswordHash';
 import { IPasswordServices } from './IPasswordServices';
 
