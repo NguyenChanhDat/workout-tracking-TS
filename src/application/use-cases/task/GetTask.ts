@@ -1,11 +1,11 @@
 import { IGetTask } from './interface/IGetTask';
 import { Task } from '../../../domain/entities/Task';
 import { ITaskServices } from '../../services/ITaskServices';
-import { returnTaskServicesImplement } from '../../../infra/locator/returnTaskServicesImplement';
+import { taskServicesGlobal } from '../../../infra/locator/taskServicesGlobal';
 
 export class GetTask implements IGetTask {
   constructor(
-    private readonly taskServices: ITaskServices = returnTaskServicesImplement()
+    private readonly taskServices: ITaskServices = taskServicesGlobal
   ) {}
   public executeById = async (taskId: number): Promise<Task> => {
     const taskById: Task | null = await this.taskServices.getEntityById(taskId);

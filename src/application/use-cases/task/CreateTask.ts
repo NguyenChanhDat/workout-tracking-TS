@@ -1,11 +1,11 @@
 import { CreateTaskDto } from '../../dto/task/createTaskDto';
 import { ICreateTask } from './interface/ICreateTask';
 import { ITaskServices } from '../../services/ITaskServices';
-import { returnTaskServicesImplement } from '../../../infra/locator/returnTaskServicesImplement';
+import { taskServicesGlobal } from '../../../infra/locator/taskServicesGlobal';
 
 export class CreateTask implements ICreateTask {
   constructor(
-    private readonly taskServices: ITaskServices = returnTaskServicesImplement()
+    private readonly taskServices: ITaskServices = taskServicesGlobal
   ) {}
   public execute = async (taskInput: CreateTaskDto): Promise<CreateTaskDto> => {
     try {

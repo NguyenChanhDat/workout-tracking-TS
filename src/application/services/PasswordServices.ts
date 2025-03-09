@@ -1,9 +1,9 @@
-import { returnPasswordHashedImplementation } from '../../infra/locator/returnPasswordHashImplement';
+import { passwordHashGlobal } from '../../infra/locator/passwordHashGlobal';
 import { IPasswordHash } from '../interfaces/IPasswordHash';
 import { IPasswordServices } from './IPasswordServices';
 
 export class PasswordServices implements IPasswordServices {
-  constructor(private passwordHash: IPasswordHash = returnPasswordHashedImplementation()) {}
+  constructor(private passwordHash: IPasswordHash = passwordHashGlobal) {}
   public hashPassword = async (inputPassword: string): Promise<string> => {
     try {
       return await this.passwordHash.hashPassword(inputPassword);

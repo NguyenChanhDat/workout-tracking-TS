@@ -3,15 +3,15 @@ import { IAssignTask } from './interface/IAssignTask';
 import { ITaskServices } from '../../services/ITaskServices';
 import { IUserServices } from '../../services/IUserServices';
 import { User } from '../../../domain/entities/User';
-import { returnTaskServicesImplement } from '../../../infra/locator/returnTaskServicesImplement';
-import { returnUserServicesImplement } from '../../../infra/locator/returnUserServicesImplement';
+import { taskServicesGlobal } from '../../../infra/locator/taskServicesGlobal';
+import { userServicesGlobal } from '../../../infra/locator/userServicesGlobal';
 import { UserNotFoundError } from '../../../shared/constant/UserNotFoundError';
 import { TaskNotFoundError } from '../../../shared/constant/TaskNotFoundError';
 
 export class AssignTask implements IAssignTask {
   constructor(
-    private readonly taskServices: ITaskServices = returnTaskServicesImplement(),
-    private readonly userServices: IUserServices = returnUserServicesImplement()
+    private readonly taskServices: ITaskServices = taskServicesGlobal,
+    private readonly userServices: IUserServices = userServicesGlobal
   ) {}
   public execute = async (taskId: number, userId: number): Promise<void> => {
     const userById: User | null = await this.userServices.getUserById(userId);

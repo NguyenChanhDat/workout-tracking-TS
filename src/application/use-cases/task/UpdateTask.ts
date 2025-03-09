@@ -2,11 +2,11 @@ import { IUpdateTask } from './interface/IUpdateTask';
 import { UpdateTaskDto } from '../../dto/task/updateTaskDto';
 import { Task } from '../../../domain/entities/Task';
 import { ITaskServices } from '../../services/ITaskServices';
-import { returnTaskServicesImplement } from '../../../infra/locator/returnTaskServicesImplement';
+import { taskServicesGlobal } from '../../../infra/locator/taskServicesGlobal';
 
 export class UpdateTask implements IUpdateTask {
   constructor(
-    private readonly taskServices: ITaskServices = returnTaskServicesImplement()
+    private readonly taskServices: ITaskServices = taskServicesGlobal
   ) {}
   public execute = async (
     inforInput: UpdateTaskDto

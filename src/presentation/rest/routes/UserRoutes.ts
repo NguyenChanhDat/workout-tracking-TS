@@ -1,6 +1,6 @@
 import express from 'express'
 import { IUserController } from '../controllers/user/IUserControllers'
-import { returnUserControllers } from '../../../infra/locator/returnUserControllers'
+import { returnUserControllers } from '../../../infra/locator/UserControllersGlobal'
 
 const router = express.Router()
 

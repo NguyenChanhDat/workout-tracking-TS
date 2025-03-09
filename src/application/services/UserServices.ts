@@ -2,17 +2,14 @@ import { CreateUserDto } from '../dto/user/createUserDto';
 import { UpdateUserDto } from '../dto/user/updateUserDto';
 import { IUserServices } from './IUserServices';
 import { User } from '../../domain/entities/User';
-import { IUserRepository } from '../../domain/repositories/IUserRepository';
-import { returnUserRepositoryImplement } from '../../infra/locator/returnUserRepositoryImplement';
+import { userRepositoryGlobal } from '../../infra/locator/userRepositoryGlobal';
 
 export class UserServices implements IUserServices {
-  constructor(
-    private readonly userRepository: IUserRepository = returnUserRepositoryImplement()
-  ) {}
+  constructor(private readonly userRepository = userRepositoryGlobal) {}
 
   public createEntity = async (userInput: CreateUserDto): Promise<void> => {
     this.userRepository.createEntity(userInput);
-    return Promise.resolve()
+    return Promise.resolve();
   };
 
   public updateEntity = async (
@@ -20,7 +17,7 @@ export class UserServices implements IUserServices {
     updateInfo: UpdateUserDto
   ): Promise<void> => {
     await this.userRepository.updateEntity(userId, updateInfo);
-    return Promise.resolve()
+    return Promise.resolve();
   };
 
   public deleteEntity = async (userId: number): Promise<void> => {
