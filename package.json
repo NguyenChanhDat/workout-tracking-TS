@@ -7,7 +7,8 @@
     "db-local-win": "powershell ./tools/setup/setupLocalDbContainer.ps1",
     "restore-seed-db": "npx ts-node src/infra/databases/setup/execute.ts",
     "deploy-linux": "npm run setup-linux && sh ./tools/run/localApi.sh",
-    "deploy-win": "npm run setup-win && powershell ./tools/run/localApi.ps1"
+    "deploy-win": "npm run setup-win && powershell ./tools/run/localApi.ps1",
+    "test": "npx jest"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -22,8 +23,10 @@
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
     "@types/express": "^5.0.0",
+    "@types/jest": "^29.5.14",
     "@types/mssql": "^9.1.6",
     "grpc_tools_node_protoc_ts": "^5.3.3",
-    "grpc-tools": "^1.13.0"
+    "grpc-tools": "^1.13.0",
+    "ts-jest": "^29.2.6"
   }
 }
