@@ -1,8 +1,8 @@
 import { MembershipTierEnum } from '../../shared/enums/MembershipTierEnum';
 
-export type User = {
+export type Plan = {
   id: number;
-  username: string;
-  password: string;
+  userId: number;
+  name: string;
   membershipTier: MembershipTierEnum;
 };
