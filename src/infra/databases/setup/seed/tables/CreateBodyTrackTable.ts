@@ -3,8 +3,8 @@ export function CreateBodyTrackTable() {
         USE LocalDatabase
         CREATE TABLE [BodyTracks] (
         [id] INTEGER NOT NULL IDENTITY UNIQUE,
-        [weight] FLOAT(5,2) NOT NULL,
-        [height] FLOAT(5,2) NOT NULL,
+        [weight] DECIMAL(5,2) NOT NULL,
+        [height] DECIMAL(5,2) NOT NULL,
         [date] DATE NOT NULL,
         [userId] INTEGER NOT NULL,
         PRIMARY KEY ([id]),

@@ -5,7 +5,7 @@
     "setup-win": "npm run db-local-win && npm run restore-seed-db",
     "db-local-linux": "sh ./tools/setup/setupLocalDbContainer.sh",
     "db-local-win": "powershell ./tools/setup/setupLocalDbContainer.ps1",
-    "restore-seed-db": "npx ts-node src/infra/databases/setup/execute.ts",
+    "restore-seed-db": "rm -rf dist && npm run build && node dist/src/infra/databases/setup/execute.js",
     "deploy-linux": "npm run setup-linux && sh ./tools/run/localApi.sh",
     "deploy-win": "npm run setup-win && powershell ./tools/run/localApi.ps1",
     "unit-test": "npm run build && npx jest --config jest.config.js",
