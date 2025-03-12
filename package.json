@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "npx ts-node -r tsconfig-paths/register src/index.ts",
+    "dev": "rm -rf dist && npm run build && node dist/src/index.js",
     "setup-linux": "chmod +x tools/setup/setupLocalDbContainer.sh &&  npm run db-local-linux && npm run restore-seed-db",
     "setup-win": "npm run db-local-win && npm run restore-seed-db",
     "db-local-linux": "sh ./tools/setup/setupLocalDbContainer.sh",
@@ -8,7 +8,8 @@
     "restore-seed-db": "npx ts-node src/infra/databases/setup/execute.ts",
     "deploy-linux": "npm run setup-linux && sh ./tools/run/localApi.sh",
     "deploy-win": "npm run setup-win && powershell ./tools/run/localApi.ps1",
-    "test": "npx jest --config jest.config.js"
+    "test": "npm run build && npx jest --config jest.config.js",
+    "build": "npx swc ./src -d dist && npx swc ./__test__ -d dist"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -23,6 +24,8 @@
     "typescript": "^5.7.2"
   },
   "devDependencies": {
+    "@swc/cli": "^0.6.0",
+    "@swc/core": "^1.11.9",
     "@types/bcryptjs": "^2.4.6",
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
@@ -30,5 +33,6 @@
     "grpc_tools_node_protoc_ts": "^5.3.3",
     "grpc-tools": "^1.13.0",
     "ts-jest": "^29.2.6"
-  }
+  },
+  "type": "commonjs"
 }

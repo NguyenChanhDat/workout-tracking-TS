@@ -1,4 +1,4 @@
-import { IBootstrap } from '../../presentation/bootstrap/IBootstrap';
+import { IBootstrap } from '@presentation/bootstrap/IBootstrap';
 import * as fs from 'fs';
 import * as path from 'path';
 

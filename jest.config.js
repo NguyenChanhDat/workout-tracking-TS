@@ -1,18 +1,18 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} **/
 module.exports = {
   testEnvironment: 'node',
-  transform: {
-    '^.+\\.tsx?$': ['ts-jest', {}],
-  },
-  testMatch: ['**/__test__/**/*.test.ts'],
+  // transform: {
+  //   '^.+\\.tsx?$': ['ts-jest', {}],
+  // },
+  testMatch: ['<rootDir>/dist/__test__/**/*.test.js'],
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1',
-    '^@test/(.*)$': '<rootDir>/__test__/$1',
-    '@domain/(.*)$': '<rootDir>/src/domain/$1',
-    '@infra/(.*)$': '<rootDir>/src/infra/$1',
-    '@usecase/(.*)$': '<rootDir>/src/usecase/$1',
-    '@presentation/(.*)$': '<rootDir>/src/presentation/$1',
-    '@shared/(.*)$': '<rootDir>/src/shared/$1',
+    '^@/(.*)$': '<rootDir>/dist/src/$1',
+    '^@test/(.*)$': '<rootDir>/dist/__test__/$1',
+    '@domain/(.*)$': '<rootDir>/dist/src/domain/$1',
+    '@infra/(.*)$': '<rootDir>/dist/src/infra/$1',
+    '@usecase/(.*)$': '<rootDir>/dist/src/usecase/$1',
+    '@presentation/(.*)$': '<rootDir>/dist/src/presentation/$1',
+    '@shared/(.*)$': '<rootDir>/dist/src/shared/$1',
   },
-  preset: 'ts-jest',
+  // preset: 'ts-jest',
 };
