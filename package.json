@@ -17,9 +17,6 @@
     "express": "^4.21.1",
     "mssql": "^10.0.4",
     "reflect-metadata": "^0.2.2",
-    "ts-node": "^10.9.2",
-    "tsconfig-paths": "^4.2.0",
-    "tsconfig-paths-jest": "^0.0.1",
     "typeorm": "^0.3.20",
     "typescript": "^5.7.2"
   },
@@ -31,8 +28,7 @@
     "@types/jest": "^29.5.14",
     "@types/mssql": "^9.1.6",
     "grpc_tools_node_protoc_ts": "^5.3.3",
-    "grpc-tools": "^1.13.0",
-    "ts-jest": "^29.2.6"
+    "grpc-tools": "^1.13.0"
   },
   "type": "commonjs"
 }
