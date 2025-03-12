@@ -1,7 +1,7 @@
 import { CreateBodyTrackDto } from '../dto/bodyTrack/CreateBodyTrackDto';
 import { IBodyTrackServices } from './interfaces/IBodyTrackServices';
-import { bodyTrackRepositoryGlobal } from '../../infra/locator/RepositoryGlobal';
-import { IBodyTrackRepository } from '../../domain/repositories/IBodyTrackRepository';
+import { bodyTrackRepositoryGlobal } from '@infra/locator/RepositoryGlobal';
+import { IBodyTrackRepository } from '@domain/repositories/IBodyTrackRepository';
 
 export class BodyTrackServices implements IBodyTrackServices {
   constructor(

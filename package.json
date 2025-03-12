@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "npx ts-node src/index.ts",
+    "dev": "npx ts-node -r tsconfig-paths/register src/index.ts",
     "setup-linux": "chmod +x tools/setup/setupLocalDbContainer.sh &&  npm run db-local-linux && npm run restore-seed-db",
     "setup-win": "npm run db-local-win && npm run restore-seed-db",
     "db-local-linux": "sh ./tools/setup/setupLocalDbContainer.sh",
@@ -8,7 +8,7 @@
     "restore-seed-db": "npx ts-node src/infra/databases/setup/execute.ts",
     "deploy-linux": "npm run setup-linux && sh ./tools/run/localApi.sh",
     "deploy-win": "npm run setup-win && powershell ./tools/run/localApi.ps1",
-    "test": "npx jest"
+    "test": "npx jest --config jest.config.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -17,6 +17,8 @@
     "mssql": "^10.0.4",
     "reflect-metadata": "^0.2.2",
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "tsconfig-paths-jest": "^0.0.1",
     "typeorm": "^0.3.20",
     "typescript": "^5.7.2"
   },

@@ -1,7 +1,7 @@
 import { CreateExerciseDto } from '../dto/exercise/CreateExerciseDto';
 import { IExerciseServices } from './interfaces/IExerciseServices';
-import { exerciseRepositoryGlobal } from '../../infra/locator/RepositoryGlobal';
-import { IExerciseRepository } from '../../domain/repositories/IExerciseRepository';
+import { exerciseRepositoryGlobal } from '@infra/locator/RepositoryGlobal';
+import { IExerciseRepository } from '@domain/repositories/IExerciseRepository';
 
 export class ExerciseServices implements IExerciseServices {
   constructor(

@@ -1,7 +1,7 @@
 import { CreateSetDto } from '../dto/set/CreateSetDto';
 import { ISetServices } from './interfaces/ISetServices';
-import { setRepositoryGlobal } from '../../infra/locator/RepositoryGlobal';
-import { ISetRepository } from '../../domain/repositories/ISetRepository';
+import { setRepositoryGlobal } from '@infra/locator/RepositoryGlobal';
+import { ISetRepository } from '@domain/repositories/ISetRepository';
 
 export class SetServices implements ISetServices {
   constructor(

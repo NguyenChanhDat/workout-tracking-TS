@@ -3,11 +3,12 @@ import { IUserRepository } from '../../../src/domain/repositories/IUserRepositor
 import { CreateUserDto } from '../../../src/application/dto/user/createUserDto';
 import { UpdateUserDto } from '../../../src/application/dto/user/updateUserDto';
 import { User } from '../../../src/domain/entities/User';
+import { MembershipTierEnum } from '@shared/enums/MembershipTierEnum';
 
 class MockUserRepository implements IUserRepository {
   createEntity = jest.fn();
   updateEntity = jest.fn();
-  deleteEntity = jest.fn(); 
+  deleteEntity = jest.fn();
   showListEntity = jest.fn();
   getByUsername = jest.fn();
   getEntityById = jest.fn();
@@ -26,6 +27,7 @@ describe('UserServices', () => {
     const userInput: CreateUserDto = {
       username: 'testuser',
       password: 'password',
+      membershipTier: MembershipTierEnum.BASIC,
     };
     await userServices.createEntity(userInput);
 
@@ -38,6 +40,7 @@ describe('UserServices', () => {
       id: userId,
       username: 'updateduser',
       password: 'newpassword',
+      membershipTier: MembershipTierEnum.BASIC,
     };
     await userServices.updateEntity(userId, updateInfor);
 
@@ -60,6 +63,7 @@ describe('UserServices', () => {
       id: userId,
       username: 'testuser',
       password: 'password',
+      membershipTier: MembershipTierEnum.BASIC,
     };
     mockUserRepository.getEntityById.mockResolvedValue(user);
 
@@ -81,7 +85,12 @@ describe('UserServices', () => {
 
   it('should get a user by username', async () => {
     const username = 'testuser';
-    const user: User = { id: 1, username, password: 'password' };
+    const user: User = {
+      id: 1,
+      username,
+      password: 'password',
+      membershipTier: MembershipTierEnum.BASIC,
+    };
     mockUserRepository.getByUsername.mockResolvedValue(user);
 
     const result = await userServices.getUserByUsername(username);
@@ -102,8 +111,18 @@ describe('UserServices', () => {
 
   it('should show list of users', async () => {
     const users: User[] = [
-      { id: 1, username: 'user1', password: 'password1' },
-      { id: 2, username: 'user2', password: 'password2' },
+      {
+        id: 1,
+        username: 'user1',
+        password: 'password1',
+        membershipTier: MembershipTierEnum.BASIC,
+      },
+      {
+        id: 2,
+        username: 'user2',
+        password: 'password2',
+        membershipTier: MembershipTierEnum.BASIC,
+      },
     ];
     mockUserRepository.showListEntity.mockResolvedValue(users);
 

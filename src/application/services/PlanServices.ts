@@ -1,7 +1,7 @@
 import { CreatePlanDto } from '../dto/plan/CreatePlanDto';
 import { IPlanServices } from './interfaces/IPlanServices';
-import { planRepositoryGlobal } from '../../infra/locator/RepositoryGlobal';
-import { IPlanRepository } from '../../domain/repositories/IPlanRepository';
+import { planRepositoryGlobal } from '@infra/locator/RepositoryGlobal';
+import { IPlanRepository } from '@domain/repositories/IPlanRepository';
 
 export class PlanServices implements IPlanServices {
   constructor(
