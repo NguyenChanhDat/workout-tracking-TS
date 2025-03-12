@@ -1,4 +1,5 @@
 {
+  "name": "boilerplate-ts",
   "scripts": {
     "dev": "rm -rf dist && npm run build && node dist/src/index.js",
     "setup-linux": "chmod +x tools/setup/setupLocalDbContainer.sh &&  npm run db-local-linux && npm run restore-seed-db",
@@ -11,6 +12,8 @@
     "unit-test": "npm run build && npx jest --config jest.config.js",
     "build": "npx swc ./src -d dist && npx swc ./__test__ -d dist"
   },
+  "author": "Dat NguyenChanh",
+  "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.7",
