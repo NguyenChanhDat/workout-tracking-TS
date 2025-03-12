@@ -6,10 +6,10 @@ export class BodyTrackModel {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ type: 'int', nullable: false })
+  @Column({ type: 'float', precision: 5, scale: 2, nullable: false })
   weight!: number;
 
-  @Column({ type: 'int', nullable: false })
+  @Column({ type: 'float', precision: 5, scale: 2, nullable: false })
   height!: number;
 
   @Column({ type: 'date', nullable: false })

@@ -5,6 +5,7 @@ import { IUserServices } from '../../services/IUserServices';
 import { userServicesGlobal } from '../../../infra/locator/UserServicesGlobal';
 import { IPasswordServices } from '../../../application/services/IPasswordServices';
 import { passwordServicesGlobal } from '../../../infra/locator/PasswordServicesGlobal';
+import { MembershipTierEnum } from '@shared/enums/MembershipTierEnum';
 
 export class CreateUser implements ICreateUser {
   constructor(
@@ -22,6 +23,7 @@ export class CreateUser implements ICreateUser {
     const userToBeCreate: CreateUserDto = {
       username: inputInfor.username,
       password: inputInfor.password,
+      membershipTier: MembershipTierEnum.BASIC,
     };
     userToBeCreate.password = await this.returnPasswordHashed(
       inputInfor.password

@@ -1,6 +1,7 @@
 import { IUserRepository } from '../../../../domain/repositories/IUserRepository';
 import { User } from '../../../../domain/entities/User';
 import { UpdateUserDto } from '../../../../application/dto/user/updateUserDto';
+import { MembershipTierEnum } from '@shared/enums/MembershipTierEnum';
 
 export class UserInMemoryRepository implements IUserRepository {
   private users: User[] = [];
@@ -11,6 +12,7 @@ export class UserInMemoryRepository implements IUserRepository {
       id: this.userIdCounter++,
       username: user.username,
       password: user.password,
+      membershipTier: MembershipTierEnum.BASIC,
     };
     this.users.push(newUser);
     Promise.resolve();

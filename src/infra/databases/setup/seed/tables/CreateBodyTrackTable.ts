@@ -1,10 +1,10 @@
 export function CreateBodyTrackTable() {
-    return `--sql
+  return `--sql
         USE LocalDatabase
         CREATE TABLE [BodyTracks] (
         [id] INTEGER NOT NULL IDENTITY UNIQUE,
-        [weight] INTEGER NOT NULL,
-        [height] INTEGER NOT NULL,
+        [weight] FLOAT(5,2) NOT NULL,
+        [height] FLOAT(5,2) NOT NULL,
         [date] DATE NOT NULL,
         [userId] INTEGER NOT NULL,
         PRIMARY KEY ([id]),
@@ -12,5 +12,4 @@ export function CreateBodyTrackTable() {
             ON UPDATE NO ACTION ON DELETE NO ACTION
     );
       `;
-  }
-  
+}

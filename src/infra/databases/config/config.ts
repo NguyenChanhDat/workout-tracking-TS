@@ -20,4 +20,5 @@ export const typeormConfig = new DataSource({
   options: {
     trustServerCertificate: true,
   },
+  entities: [__dirname + '/../models/*.ts'],
 });
