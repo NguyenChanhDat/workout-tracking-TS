@@ -13,11 +13,13 @@ A simple ToDo List build follow Clean Architecture in Typescript, you can use it
 - Setup
 
 ### FOR LINUX
+
 ```bash
 nvm install && npm install && npm run setup-linux
 ```
 
 ### FOR WIN
+
 ```bash
 nvm install && npm install && npm run setup-win
 ```
@@ -26,4 +28,12 @@ nvm install && npm install && npm run setup-win
 
 ```bash
 npm run dev
+```
+
+### TESTING
+
+- For Unit testing
+
+```bash
+npm run unit-test
 ```
