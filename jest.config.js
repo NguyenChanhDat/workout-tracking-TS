@@ -13,10 +13,5 @@ module.exports = {
     '@usecase/(.*)$': '<rootDir>/dist/src/usecase/$1',
     '@presentation/(.*)$': '<rootDir>/dist/src/presentation/$1',
     '@shared/(.*)$': '<rootDir>/dist/src/shared/$1',
-  },
-  // collectCoverage: true,
-  // collectCoverageFrom: ['<rootDir>/dist/src/**/*.js'],
-  // coverageDirectory: '<rootDir>/dist/coverage',
-  // coverageReporters: ['json', 'lcov', 'text', 'clover'],
-  // preset: 'ts-jest',
+  }
 };

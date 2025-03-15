@@ -1,21 +1,25 @@
 {
   "name": "boilerplate-ts",
   "scripts": {
-    "dev": "rm -rf dist && npm run build && node dist/src/index.js",
-    "setup-linux": "chmod +x tools/setup/setupLocalDbContainer.sh &&  npm run db-local-linux && npm run restore-seed-db",
-    "setup-win": "npm run db-local-win && npm run restore-seed-db",
+    "dev-linux": "rm -rf dist && npm run build && node dist/src/index.js",
+    "dev-win": "powershell Remove-Item dist -Recurse -Force && npm run build && node dist/src/index.js",
+    "setup-linux": "chmod +x tools/setup/setupLocalDbContainer.sh &&  npm run db-local-linux && npm run restore-seed-db-linux",
+    "setup-win": "npm run db-local-win && npm run restore-seed-db-win",
     "db-local-linux": "sh ./tools/setup/setupLocalDbContainer.sh",
     "db-local-win": "powershell ./tools/setup/setupLocalDbContainer.ps1",
-    "restore-seed-db": "rm -rf dist && npm run build && node dist/src/infra/databases/setup/execute.js",
+    "restore-seed-db-linux": "rm -rf dist && npm run build && node dist/src/infra/databases/setup/execute.js",
+    "restore-seed-db-win": "powershell Remove-Item dist -Recurse -Force && npm run build && node dist/src/infra/databases/setup/execute.js",
     "deploy-linux": "npm run setup-linux && sh ./tools/run/localApi.sh",
     "deploy-win": "npm run setup-win && powershell ./tools/run/localApi.ps1",
-    "unit-test": "npm run build && npx jest --config jest.config.js",
-    "build": "npx swc ./src -d dist && npx swc ./__test__ -d dist"
+    "unit-test-linux": "rm -rf dist && npm run build && jest --config jest.config.js",
+    "unit-test-win": "powershell Remove-Item dist -Recurse -Force && npm run build && jest --config jest.config.js",
+    "build": "concurrently \"swc src -d dist -D\" \"swc __test__ -d dist -D\""
   },
   "author": "Dat NguyenChanh",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "concurrently": "^9.1.2",
     "dotenv": "^16.4.7",
     "express": "^4.21.1",
     "mssql": "^10.0.4",
