@@ -13,6 +13,7 @@
     "deploy-win": "npm run setup-win && powershell ./tools/run/localApi.ps1",
     "unit-test-linux": "rm -rf dist && npm run build && jest --config jest.config.js",
     "unit-test-win": "powershell Remove-Item dist -Recurse -Force && npm run build && jest --config jest.config.js",
+    "setup-streaming-win":"npm run setup-win && powershell ./tools/setup/setupCdcTools.ps1",
     "build": "concurrently \"swc src -d dist -D\" \"swc __test__ -d dist -D\""
   },
   "author": "Dat NguyenChanh",
