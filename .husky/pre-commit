@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
 . "$(dirname "$0")/_/husky.sh"
 
-node scripts/run-tests.js
 npm run typecheck
+node scripts/run-tests.js

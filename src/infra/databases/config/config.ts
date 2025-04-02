@@ -25,5 +25,4 @@ export const typeormConfig = new DataSource({
     trustServerCertificate: true,
   },
   entities: [UserModel, BodyTrackModel, ExerciseModel],
-  synchronize: true,
 });
