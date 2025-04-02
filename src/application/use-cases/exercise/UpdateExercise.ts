@@ -1,5 +1,5 @@
 import { ExerciseServices } from '../../services/ExerciseServices';
-import { UpdateExerciseDto } from '../../dto/exercise/updateExerciseDto';
+import { UpdateExerciseDto } from '../../dto/exercise/UpdateExerciseDto';
 import { IUpdateExercise } from './interfaces/IUpdateExercise';
 
 export class UpdateExercise implements IUpdateExercise {

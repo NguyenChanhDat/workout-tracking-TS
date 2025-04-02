@@ -1,5 +1,5 @@
 import { CreateExerciseDto } from '../dto/exercise/CreateExerciseDto';
-import { UpdateExerciseDto } from '../dto/exercise/updateExerciseDto';
+import { UpdateExerciseDto } from '../dto/exercise/UpdateExerciseDto';
 import { IExerciseServices } from './interfaces/IExerciseServices';
 import { exerciseRepositoryGlobal } from '@infra/locator/RepositoryGlobal';
 import { IExerciseRepository } from '@domain/repositories/IExerciseRepository';

@@ -1,13 +1,13 @@
 import { IPasswordServices } from '../../services/IPasswordServices';
 import { ILogin } from './interface/ILogin';
 import { IUserServices } from '../../services/IUserServices';
-import { returnUserServicesImplement } from '../../../infra/locator/returnUserServicesImplement';
-import { returnPasswordServicesImplement } from '../../../infra/locator/returnPasswordServicesImplement';
+import { userServicesGlobal } from '@infra/locator/UserServicesGlobal';
+import { passwordServicesGlobal } from '@infra/locator/PasswordServicesGlobal';
 
 export class LoginServices implements ILogin {
   constructor(
-    private readonly userServices: IUserServices = returnUserServicesImplement(),
-    private readonly passwordServices: IPasswordServices = returnPasswordServicesImplement()
+    private readonly userServices: IUserServices = userServicesGlobal,
+    private readonly passwordServices: IPasswordServices = passwordServicesGlobal
   ) {}
 
   private getUserPasswordByUsername = async (

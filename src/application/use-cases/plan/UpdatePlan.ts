@@ -1,5 +1,5 @@
 import { PlanServices } from '../../services/PlanServices';
-import { UpdatePlanDto } from '../../dto/plan/updatePlanDto';
+import { UpdatePlanDto } from '../../dto/plan/UpdatePlanDto';
 import { IUpdatePlan } from './interfaces/IUpdatePlan';
 
 export class UpdatePlan implements IUpdatePlan {

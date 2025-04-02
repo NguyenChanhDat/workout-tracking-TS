@@ -1,4 +1,8 @@
+import 'reflect-metadata';
 import { DataSource } from 'typeorm';
+import { UserModel } from '../models/UserModel';
+import { BodyTrackModel } from '../models/BodyTrackModel';
+import { ExerciseModel } from '../models/ExerciseModel';
 
 export const MssqlConfig = {
   user: process.env.DB_USER || 'sa',
@@ -20,5 +24,6 @@ export const typeormConfig = new DataSource({
   options: {
     trustServerCertificate: true,
   },
-  entities: [__dirname + '/../models/*.ts'],
+  entities: [UserModel, BodyTrackModel, ExerciseModel],
+  synchronize: true,
 });

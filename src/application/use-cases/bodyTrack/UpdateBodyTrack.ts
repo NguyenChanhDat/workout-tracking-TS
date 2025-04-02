@@ -1,5 +1,5 @@
 import { BodyTrackServices } from '../../services/BodyTrackServices';
-import { UpdateBodyTrackDto } from '../../dto/bodyTrack/updateBodyTrackDto';
+import { UpdateBodyTrackDto } from '../../dto/bodyTrack/UpdateBodyTrackDto';
 import { IUpdateBodyTrack } from './interfaces/IUpdateBodyTrack';
 
 export class UpdateBodyTrack implements IUpdateBodyTrack {

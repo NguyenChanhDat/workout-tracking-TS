@@ -1,5 +1,5 @@
 import { SetServices } from '../../services/SetServices';
-import { UpdateSetDto } from '../../dto/set/updateSetDto';
+import { UpdateSetDto } from '../../dto/set/UpdateSetDto';
 import { IUpdateSet } from './interfaces/IUpdateSet';
 
 export class UpdateSet implements IUpdateSet {

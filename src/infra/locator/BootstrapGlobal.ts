@@ -1,3 +1,4 @@
+import { appDataSource } from '@infra/databases/dataSource/BootstrapTypeOrm';
 import { IBootstrap } from '@presentation/bootstrap/IBootstrap';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -12,6 +13,7 @@ export class BootstrapGlobal implements IBootstrap {
         await import(path.join(locatorFolder, file));
       }
     }
+    console.log(appDataSource);
     return Promise.resolve();
   };
 }

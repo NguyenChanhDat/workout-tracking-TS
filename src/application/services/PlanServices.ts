@@ -1,5 +1,5 @@
 import { CreatePlanDto } from '../dto/plan/CreatePlanDto';
-import { UpdatePlanDto } from '../dto/plan/updatePlanDto';
+import { UpdatePlanDto } from '../dto/plan/UpdatePlanDto';
 import { IPlanServices } from './interfaces/IPlanServices';
 import { planRepositoryGlobal } from '@infra/locator/RepositoryGlobal';
 import { IPlanRepository } from '@domain/repositories/IPlanRepository';

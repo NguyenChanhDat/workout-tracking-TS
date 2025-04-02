@@ -42,7 +42,13 @@ export class UserServices implements IUserServices {
   };
 
   public showListEntity = async (): Promise<User[] | null> => {
-    const userList: User[] | null = await this.userRepository.showListEntity();
-    return userList;
+    try {
+      const userList: User[] | null =
+        await this.userRepository.showListEntity();
+      return userList;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
   };
 }
