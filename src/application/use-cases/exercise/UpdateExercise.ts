@@ -1,17 +1,21 @@
-import { UpdateExerciseDto } from '../../dto/exercise/UpdateExerciseDto';
 import { IUpdateExercise } from './interfaces/IUpdateExercise';
 import { exerciseServicesGlobal } from '@infra/locator/ExerciseServicesGlobal';
 import { IExerciseServices } from '@application/services/interfaces/IExerciseServices';
+import { Exercise } from '@domain/entities/Exercise';
 
 export class UpdateExercise implements IUpdateExercise {
   constructor(
     private readonly exerciseServices: IExerciseServices = exerciseServicesGlobal
   ) {}
 
-  public execute = async (
-    exerciseId: number,
-    updateInfo: UpdateExerciseDto
-  ): Promise<void> => {
-    await this.exerciseServices.updateEntity(exerciseId, updateInfo);
+  public execute = async (exerciseInfo: Exercise): Promise<Exercise> => {
+    const exerciseById = await this.exerciseServices.getEntityById(
+      exerciseInfo.id
+    );
+    if (!exerciseById) {
+      throw new Error(`Exercise with id ${exerciseInfo.id} not found`);
+    }
+    await this.exerciseServices.updateEntity(exerciseInfo.id, exerciseInfo);
+    return exerciseInfo;
   };
 }

@@ -1,5 +1,5 @@
-import { UpdateSetDto } from '../../../dto/set/UpdateSetDto';
+import { Set } from '../../../../domain/entities/Set';
 
 export interface IUpdateSet {
-  execute(setId: number, updateInfo: UpdateSetDto): Promise<void>;
+  execute(setInfo: Set): Promise<Set>;
 }

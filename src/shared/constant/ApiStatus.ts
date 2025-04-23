@@ -80,3 +80,57 @@ export const BodyTrackApiStatus: IApiStatusObj = {
     message: 'Access Denied',
   },
 };
+
+export const ExerciseApiStatus: IApiStatusObj = {
+  INTERNAL_SERVER_ERROR: {
+    status: 500,
+    message: 'Server Error',
+  },
+  BAD_REQUEST: {
+    status: 400,
+    message: 'Bad Request',
+  },
+  NOT_FOUND: {
+    status: 404,
+    message: 'Exercise not Found',
+  },
+  OK: {
+    status: 200,
+    message: 'Action Completed',
+  },
+  UNPROCESSABLE_ENTITY: {
+    status: 422,
+    message: 'Exercise data is invalid!',
+  },
+  UNAUTHORIZED: {
+    status: 401,
+    message: 'Access Denied',
+  },
+};
+
+export const SetApiStatus: IApiStatusObj = {
+  INTERNAL_SERVER_ERROR: {
+    status: 500,
+    message: 'Server Error',
+  },
+  BAD_REQUEST: {
+    status: 400,
+    message: 'Bad Request',
+  },
+  NOT_FOUND: {
+    status: 404,
+    message: 'Set not Found',
+  },
+  OK: {
+    status: 200,
+    message: 'Action Completed',
+  },
+  UNPROCESSABLE_ENTITY: {
+    status: 422,
+    message: 'Set data is invalid!',
+  },
+  UNAUTHORIZED: {
+    status: 401,
+    message: 'Access Denied',
+  },
+};

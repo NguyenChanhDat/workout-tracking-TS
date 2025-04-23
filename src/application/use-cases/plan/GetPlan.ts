@@ -16,7 +16,7 @@ export class GetPlan implements IGetPlan {
     return await this.planServices.getEntityById(id);
   };
 
-  public getByUserId(userId: number): Promise<Plan[] | undefined> {
+  public getByUserId(userId: number): Promise<Plan[] | null> {
     return this.planServices.getByUserId(userId);
   }
 }

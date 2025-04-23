@@ -1,4 +1,5 @@
-import { UpdateExerciseDto } from "@application/dto/exercise/UpdateExerciseDto";
+import { Exercise } from '../../../../domain/entities/Exercise';
+
 export interface IUpdateExercise {
-  execute(exerciseId: number, updateInfo: UpdateExerciseDto): Promise<void>;
+  execute(exerciseInfo: Exercise): Promise<Exercise>;
 }

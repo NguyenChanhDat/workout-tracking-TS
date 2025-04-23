@@ -1,5 +1,5 @@
-import { UpdateBodyTrackDto } from '../../../dto/bodyTrack/UpdateBodyTrackDto';
+import { BodyTrack } from '../../../../domain/entities/BodyTrack';
 
 export interface IUpdateBodyTrack {
-  execute(id: number, updateInfo: UpdateBodyTrackDto): Promise<void>;
+  execute(bodyTrackInfo: BodyTrack): Promise<BodyTrack>;
 }

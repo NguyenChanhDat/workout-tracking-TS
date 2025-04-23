@@ -23,7 +23,7 @@ export class PlanServices implements IPlanServices {
     return Promise.resolve();
   };
 
-  public getByUserId = async (userId: number): Promise<Plan[] | undefined> => {
+  public getByUserId = async (userId: number): Promise<Plan[] | null> => {
     return await this.planRepository.getByUserId(userId);
   };
 

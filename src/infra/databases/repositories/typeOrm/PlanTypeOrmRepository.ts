@@ -27,7 +27,7 @@ export class PlanTypeOrmRepository implements IPlanRepository {
     return await appDataSource.getRepository(PlanModel).find();
   }
 
-  async getByUserId(userId: number): Promise<Plan[] | undefined> {
+  async getByUserId(userId: number): Promise<Plan[] | null> {
     return await appDataSource
       .getRepository(PlanModel)
       .find({ where: { userId } });

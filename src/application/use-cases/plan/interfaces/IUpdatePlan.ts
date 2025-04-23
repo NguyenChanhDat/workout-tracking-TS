@@ -1,5 +1,5 @@
-import { UpdatePlanDto } from '../../../dto/plan/UpdatePlanDto';
+import { Plan } from '../../../../domain/entities/Plan';
 
 export interface IUpdatePlan {
-  execute(planId: number, updateInfo: UpdatePlanDto): Promise<void>;
+  execute(planInfo: Plan): Promise<Plan>;
 }
