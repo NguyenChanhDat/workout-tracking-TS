@@ -9,8 +9,9 @@ class MockPlanRepository implements IPlanRepository {
   createEntity = jest.fn();
   updateEntity = jest.fn();
   deleteEntity = jest.fn();
-  showListEntity = jest.fn();
   getEntityById = jest.fn();
+  showListEntity = jest.fn();
+  getByUserId = jest.fn();
 }
 
 describe('PlanServices', () => {

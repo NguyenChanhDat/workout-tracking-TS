@@ -1,6 +1,6 @@
 import { CreateUserDto } from '../dto/user/createUserDto';
 import { UpdateUserDto } from '../dto/user/updateUserDto';
-import { IUserServices } from './IUserServices';
+import { IUserServices } from './interfaces/IUserServices';
 import { User } from '../../domain/entities/User';
 import { userRepositoryGlobal } from '../../infra/locator/UserRepositoryGlobal';
 import { IUserRepository } from '../../domain/repositories/IUserRepository';

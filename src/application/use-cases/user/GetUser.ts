@@ -1,6 +1,6 @@
 import { User } from '@domain/entities/User';
 import { IGetUser } from './interface/IGetUser';
-import { IUserServices } from '../../services/IUserServices';
+import { IUserServices } from '../../services/interfaces/IUserServices';
 import { userServicesGlobal } from '@infra/locator/UserServicesGlobal';
 
 export class GetUser implements IGetUser {

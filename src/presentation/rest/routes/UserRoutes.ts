@@ -10,7 +10,7 @@ router.get('/', userController.get);
 
 router.post('/', userController.create);
 
-router.delete('/', userController.delete);
+router.delete('/:id', userController.delete);
 
 router.put('/', userController.update);
 

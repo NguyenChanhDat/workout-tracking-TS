@@ -1,5 +1,5 @@
 import { IUpdateUser } from './interface/IUpdateUser';
-import { IUserServices } from '../../services/IUserServices';
+import { IUserServices } from '../../services/interfaces/IUserServices';
 import { userServicesGlobal } from '@infra/locator/UserServicesGlobal';
 import { IPasswordServices } from '@application/services/IPasswordServices';
 import { passwordServicesGlobal } from '@infra/locator/PasswordServicesGlobal';

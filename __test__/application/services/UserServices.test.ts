@@ -9,9 +9,9 @@ class MockUserRepository implements IUserRepository {
   createEntity = jest.fn();
   updateEntity = jest.fn();
   deleteEntity = jest.fn();
+  getEntityById = jest.fn();
   showListEntity = jest.fn();
   getByUsername = jest.fn();
-  getEntityById = jest.fn();
 }
 
 describe('UserServices', () => {
@@ -37,7 +37,6 @@ describe('UserServices', () => {
   it('should update an existing user', async () => {
     const userId = 1;
     const updateInfor: UpdateUserDto = {
-      id: userId,
       username: 'updateduser',
       password: 'newpassword',
       membershipTier: MembershipTierEnum.BASIC,

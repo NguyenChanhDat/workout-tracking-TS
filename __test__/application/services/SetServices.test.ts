@@ -8,8 +8,9 @@ class MockSetRepository implements ISetRepository {
   createEntity = jest.fn();
   updateEntity = jest.fn();
   deleteEntity = jest.fn();
-  showListEntity = jest.fn();
   getEntityById = jest.fn();
+  showListEntity = jest.fn();
+  getExerciseByPlanId = jest.fn();
 }
 
 describe('SetServices', () => {

@@ -3,6 +3,7 @@ import { UpdateExerciseDto } from '../dto/exercise/UpdateExerciseDto';
 import { IExerciseServices } from './interfaces/IExerciseServices';
 import { exerciseRepositoryGlobal } from '@infra/locator/RepositoryGlobal';
 import { IExerciseRepository } from '@domain/repositories/IExerciseRepository';
+import { Exercise } from '@domain/entities/Exercise';
 
 export class ExerciseServices implements IExerciseServices {
   constructor(
@@ -22,5 +23,20 @@ export class ExerciseServices implements IExerciseServices {
   ): Promise<void> => {
     await this.exerciseRepository.updateEntity(exerciseId, updateInfo);
     return Promise.resolve();
+  };
+
+  public deleteEntity = async (exerciseId: number): Promise<void> => {
+    await this.exerciseRepository.deleteEntity(exerciseId);
+    return Promise.resolve();
+  };
+
+  public getEntityById = async (
+    exerciseId: number
+  ): Promise<Exercise | null> => {
+    return await this.exerciseRepository.getEntityById(exerciseId);
+  };
+
+  public showListEntity = async (): Promise<Exercise[] | null> => {
+    return await this.exerciseRepository.showListEntity();
   };
 }

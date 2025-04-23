@@ -1,5 +1,5 @@
 import { CreateUser } from '../../../../src/application/use-cases/user/CreateUser';
-import { IUserServices } from '../../../../src/application/services/IUserServices';
+import { IUserServices } from '../../../../src/application/services/interfaces/IUserServices';
 import { MembershipTierEnum } from '@shared/enums/MembershipTierEnum';
 
 class MockUserServices implements IUserServices {

@@ -26,4 +26,10 @@ export class SetTypeOrmRepository implements ISetRepository {
   async showListEntity(): Promise<Set[] | null> {
     return await appDataSource.getRepository(SetModel).find();
   }
+
+  async getExerciseByPlanId(planId: number): Promise<Set[]> {
+    return await appDataSource
+      .getRepository(SetModel)
+      .findBy({ PlanId: planId });
+  }
 }

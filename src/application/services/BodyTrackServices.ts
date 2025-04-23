@@ -3,6 +3,7 @@ import { UpdateBodyTrackDto } from '../dto/bodyTrack/UpdateBodyTrackDto';
 import { IBodyTrackServices } from './interfaces/IBodyTrackServices';
 import { bodyTrackRepositoryGlobal } from '@infra/locator/RepositoryGlobal';
 import { IBodyTrackRepository } from '@domain/repositories/IBodyTrackRepository';
+import { BodyTrack } from '@domain/entities/BodyTrack';
 
 export class BodyTrackServices implements IBodyTrackServices {
   constructor(
@@ -13,7 +14,6 @@ export class BodyTrackServices implements IBodyTrackServices {
     bodyTrackInput: CreateBodyTrackDto
   ): Promise<void> => {
     await this.bodyTrackRepository.createEntity(bodyTrackInput);
-    return Promise.resolve();
   };
 
   public updateEntity = async (
@@ -21,6 +21,19 @@ export class BodyTrackServices implements IBodyTrackServices {
     updateInfo: UpdateBodyTrackDto
   ): Promise<void> => {
     await this.bodyTrackRepository.updateEntity(bodyTrackId, updateInfo);
-    return Promise.resolve();
+  };
+
+  public deleteEntity = async (bodyTrackId: number): Promise<void> => {
+    await this.bodyTrackRepository.deleteEntity(bodyTrackId);
+  };
+
+  public getEntityById = async (
+    bodyTrackId: number
+  ): Promise<BodyTrack | null> => {
+    return await this.bodyTrackRepository.getEntityById(bodyTrackId);
+  };
+
+  public showListEntity = async (): Promise<BodyTrack[] | null> => {
+    return await this.bodyTrackRepository.showListEntity();
   };
 }

@@ -1,9 +1,12 @@
-import { ExerciseServices } from '../../services/ExerciseServices';
 import { CreateExerciseDto } from '@application/dto/exercise/CreateExerciseDto';
 import { ICreateExercise } from './interfaces/ICreateExercise';
+import { exerciseServicesGlobal } from '@infra/locator/ExerciseServicesGlobal';
+import { IExerciseServices } from '@application/services/interfaces/IExerciseServices';
 
 export class CreateExercise implements ICreateExercise {
-  constructor(private readonly exerciseServices: ExerciseServices) {}
+  constructor(
+    private readonly exerciseServices: IExerciseServices = exerciseServicesGlobal
+  ) {}
 
   public execute = async (exerciseInput: CreateExerciseDto): Promise<void> => {
     await this.exerciseServices.createEntity(exerciseInput);

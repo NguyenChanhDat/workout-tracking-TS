@@ -9,8 +9,10 @@ export class UserTypeOrmRepository implements IUserRepository {
     await appDataSource.getRepository(UserModel).save(user);
   }
 
-  async updateEntity(userId: number, inforInput: UpdateUserDto): Promise<void> {
-    await appDataSource.getRepository(UserModel).update(userId, inforInput);
+  async updateEntity(userId: number, inforInput: User): Promise<void> {
+    const { id, ...rest } = inforInput;
+    const updateInfor: UpdateUserDto = rest;
+    await appDataSource.getRepository(UserModel).update(userId, updateInfor);
   }
 
   async deleteEntity(userId: number): Promise<void> {

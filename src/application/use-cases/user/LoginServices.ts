@@ -1,6 +1,6 @@
 import { IPasswordServices } from '../../services/IPasswordServices';
 import { ILogin } from './interface/ILogin';
-import { IUserServices } from '../../services/IUserServices';
+import { IUserServices } from '../../services/interfaces/IUserServices';
 import { userServicesGlobal } from '@infra/locator/UserServicesGlobal';
 import { passwordServicesGlobal } from '@infra/locator/PasswordServicesGlobal';
 

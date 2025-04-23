@@ -56,7 +56,8 @@ export class UserController implements IUserController {
   };
   public delete = async (req: Request, res: Response): Promise<void> => {
     try {
-      await this.deleteUser.executeById(req.body.id);
+      const id = Number(req.params.id);
+      await this.deleteUser.executeById(id);
       res.status(UserApiStatus.OK.status);
       res.send(UserApiStatus.OK);
     } catch (error) {

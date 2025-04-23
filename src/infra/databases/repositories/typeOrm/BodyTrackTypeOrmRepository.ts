@@ -22,10 +22,9 @@ export class BodyTrackTypeOrmRepository implements IBodyTrackRepository {
   }
 
   async getEntityById(bodyTrackId: number): Promise<BodyTrack | null> {
-    const bodyTrack = await appDataSource
+    return await appDataSource
       .getRepository(BodyTrackModel)
       .findOne({ where: { id: bodyTrackId } });
-    return bodyTrack;
   }
 
   async showListEntity(): Promise<BodyTrack[] | null> {

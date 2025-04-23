@@ -1,5 +1,5 @@
 import { DeleteUser } from '../../../../src/application/use-cases/user/DeleteUser';
-import { IUserServices } from '../../../../src/application/services/IUserServices';
+import { IUserServices } from '../../../../src/application/services/interfaces/IUserServices';
 
 class MockUserServices implements IUserServices {
   getUserById = jest.fn();
