@@ -1,6 +1,6 @@
 import { CreatePlanDto } from '@application/dto/plan/CreatePlanDto';
 import { ICreatePlan } from './interfaces/ICreatePlan';
-import { planServicesGlobal } from '@infra/locator/PlanServicesGlobal';
+import { planServicesGlobal } from '@infra/locator/services/PlanServicesGlobal';
 import { IPlanServices } from '@application/services/interfaces/IPlanServices';
 
 export class CreatePlan implements ICreatePlan {

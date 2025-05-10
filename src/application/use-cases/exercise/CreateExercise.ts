@@ -1,6 +1,6 @@
 import { CreateExerciseDto } from '@application/dto/exercise/CreateExerciseDto';
 import { ICreateExercise } from './interfaces/ICreateExercise';
-import { exerciseServicesGlobal } from '@infra/locator/ExerciseServicesGlobal';
+import { exerciseServicesGlobal } from '@infra/locator/services/ExerciseServicesGlobal';
 import { IExerciseServices } from '@application/services/interfaces/IExerciseServices';
 
 export class CreateExercise implements ICreateExercise {

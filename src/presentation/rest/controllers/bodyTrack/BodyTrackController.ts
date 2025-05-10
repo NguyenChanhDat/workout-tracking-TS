@@ -15,7 +15,7 @@ import {
   getBodyTrackGlobal,
   updateBodyTrackGlobal,
   deleteBodyTrackGlobal,
-} from '../../../../infra/locator/BodyTrackUseCaseGlobal';
+} from '../../../../infra/locator/use-cases/BodyTrackUseCaseGlobal';
 
 export class BodyTrackController implements IBodyTrackController {
   constructor(

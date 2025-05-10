@@ -2,9 +2,9 @@ import { User } from '@domain/entities/User';
 import { CreateUserDto } from '../../dto/user/createUserDto';
 import { ICreateUser } from './interface/ICreateUser';
 import { IUserServices } from '../../services/interfaces/IUserServices';
-import { userServicesGlobal } from '@infra/locator/UserServicesGlobal';
+import { userServicesGlobal } from '@infra/locator/services/UserServicesGlobal';
 import { IPasswordServices } from '@application/services/IPasswordServices';
-import { passwordServicesGlobal } from '@infra/locator/PasswordServicesGlobal';
+import { passwordServicesGlobal } from '@infra/locator/services/PasswordServicesGlobal';
 import { MembershipTierEnum } from '@shared/enums/MembershipTierEnum';
 
 export class CreateUser implements ICreateUser {
