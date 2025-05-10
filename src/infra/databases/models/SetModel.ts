@@ -4,6 +4,7 @@ import {
   Column,
   ManyToOne,
   BaseEntity,
+  JoinColumn,
 } from 'typeorm';
 import { ExerciseModel } from './ExerciseModel';
 import { SessionModel } from './SessionModel';
@@ -16,9 +17,13 @@ export class SetModel extends BaseEntity {
   id!: number;
 
   @ManyToOne(() => SessionModel, (session) => session.id)
+  @JoinColumn({ name: 'sessionId' })
+  @Column({ type: 'int', nullable: false })
   sessionId!: number;
 
   @ManyToOne(() => ExerciseModel, (exercise) => exercise.id)
+  @JoinColumn({ name: 'exerciseId' })
+  @Column({ type: 'int', nullable: false })
   exerciseId!: number;
 
   @Column({ type: 'int', nullable: false })

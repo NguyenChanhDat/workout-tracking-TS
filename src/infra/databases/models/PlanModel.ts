@@ -4,9 +4,12 @@ import {
   Column,
   ManyToOne,
   BaseEntity,
+  OneToMany,
 } from 'typeorm';
 import { UserModel } from './UserModel';
 import { MembershipTierEnum } from '../../../shared/enums/MembershipTierEnum';
+import { SessionModel } from './SessionModel';
+import { Session } from '@domain/entities/Session';
 
 @Entity('Plans')
 export class PlanModel extends BaseEntity {
@@ -25,4 +28,7 @@ export class PlanModel extends BaseEntity {
   // Relationships
   @ManyToOne(() => UserModel, (user) => user.id)
   user!: number[];
+
+  @OneToMany(() => SessionModel, (session) => session.planId)
+  session!: Session[];
 }

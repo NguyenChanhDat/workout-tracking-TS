@@ -9,7 +9,7 @@ import { IDeleteSet } from '../../../application/use-cases/set/interfaces/IDelet
 import { IGetSet } from '../../../application/use-cases/set/interfaces/IGetSet';
 import { IUpdateSet } from '../../../application/use-cases/set/interfaces/IUpdateSet';
 
-export const createSetGlobal: ICreateSet = new CreateSet();
-export const deleteSetGlobal: IDeleteSet = new DeleteSet();
-export const getSetGlobal: IGetSet = new GetSet();
-export const updateSetGlobal: IUpdateSet = new UpdateSet();
+export const createSeUseCasetGlobal: ICreateSet = new CreateSet();
+export const deleteSeUseCasetGlobal: IDeleteSet = new DeleteSet();
+export const getSeUseCasetGlobal: IGetSet = new GetSet();
+export const updateSeUseCasetGlobal: IUpdateSet = new UpdateSet();

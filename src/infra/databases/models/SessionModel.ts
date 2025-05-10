@@ -4,9 +4,12 @@ import {
   Column,
   ManyToOne,
   BaseEntity,
+  OneToMany,
 } from 'typeorm';
 import { PlanModel } from './PlanModel';
 import { Plan } from '@domain/entities/Plan';
+import { SetModel } from './SetModel';
+import { Set } from '@domain/entities/Set';
 
 @Entity('Sessions')
 export class SessionModel extends BaseEntity {
@@ -21,5 +24,8 @@ export class SessionModel extends BaseEntity {
 
   // Relationships
   @ManyToOne(() => PlanModel, (plan) => plan.id)
-  Plan!: Plan[];
+  plan!: Plan[];
+
+  @OneToMany(() => SetModel, (set) => set.sessionId)
+  set!: Set[];
 }

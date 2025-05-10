@@ -29,7 +29,7 @@ export class UserController implements IUserController {
       const userInputInfor: CreateUserDto = req.body;
       const userCreated = await this.createUser.execute(userInputInfor);
       res.status(UserApiStatus.OK.status);
-      res.send(userCreated + UserApiStatus.OK.message);
+      res.send(userCreated);
     } catch (error) {
       console.log(error);
       res.status(UserApiStatus.INTERNAL_SERVER_ERROR.status);

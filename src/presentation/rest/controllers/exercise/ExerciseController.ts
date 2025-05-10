@@ -31,7 +31,7 @@ export class ExerciseController implements IExerciseController {
       await this.createExercise.execute(exerciseInput);
       res
         .status(ExerciseApiStatus.OK.status)
-        .send(ExerciseApiStatus.OK.message);
+        .send(exerciseInput);
     } catch (error) {
       console.error(error);
       res

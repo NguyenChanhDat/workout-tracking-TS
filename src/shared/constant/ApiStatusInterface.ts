@@ -8,5 +8,5 @@ export type IApiStatusObj = {
     NOT_FOUND: IApiStatus
     OK: IApiStatus
     UNPROCESSABLE_ENTITY?: IApiStatus
-    UNAUTHORIZED?: IApiStatus
+    UNAUTHORIZED: IApiStatus
 }

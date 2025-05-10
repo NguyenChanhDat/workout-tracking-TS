@@ -29,9 +29,7 @@ export class BodyTrackController implements IBodyTrackController {
     try {
       const bodyTrackInput: CreateBodyTrackDto = req.body;
       await this.createBodyTrack.execute(bodyTrackInput);
-      res
-        .status(BodyTrackApiStatus.OK.status)
-        .send(BodyTrackApiStatus.OK.message + ` ${bodyTrackInput}`);
+      res.status(BodyTrackApiStatus.OK.status).send(bodyTrackInput);
     } catch (error) {
       console.error(error);
       res

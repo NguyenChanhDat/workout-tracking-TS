@@ -26,10 +26,10 @@ export class PlanController implements IPlanController {
   ) {}
   public create = async (req: Request, res: Response): Promise<void> => {
     try {
-      const PlanInputInfor: CreatePlanDto = req.body;
-      const PlanCreated = await this.createPlan.execute(PlanInputInfor);
+      const planInputInfor: CreatePlanDto = req.body;
+      const planCreated = await this.createPlan.execute(planInputInfor);
       res.status(PlanApiStatus.OK.status);
-      res.send(PlanCreated + PlanApiStatus.OK.message);
+      res.send(planCreated);
     } catch (error) {
       console.log(error);
       res.status(PlanApiStatus.INTERNAL_SERVER_ERROR.status);
@@ -72,14 +72,14 @@ export class PlanController implements IPlanController {
   };
   public get = async (req: Request, res: Response): Promise<void> => {
     try {
-      const PlanByInput: Plan | Plan[] | null =
+      const planByInput: Plan | Plan[] | null =
         'id' in req.query
           ? await this.getPlan.getById(Number(req.query.id))
           : 'userId' in req.query
           ? await this.getPlan.getByUserId(Number(req.query.userId))
           : await this.getPlan.getAll();
       res.status(PlanApiStatus.OK.status);
-      res.send(PlanByInput);
+      res.send(planByInput);
     } catch (error) {
       console.log(error);
 

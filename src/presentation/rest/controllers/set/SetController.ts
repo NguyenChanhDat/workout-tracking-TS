@@ -1,26 +1,32 @@
 import { ISetController } from './ISetController';
 import { Request, Response } from 'express';
-import { CreateSet } from '@application/use-cases/set/CreateSet';
-import { UpdateSet } from '@application/use-cases/set/UpdateSet';
-import { DeleteSet } from '@application/use-cases/set/DeleteSet';
-import { GetSet } from '@application/use-cases/set/GetSet';
 import { SetApiStatus } from '@shared/constant/ApiStatus';
 import { Set } from '@domain/entities/Set';
+import {
+  ICreateSet,
+  IDeleteSet,
+  IGetSet,
+  IUpdateSet,
+} from '@application/use-cases/set/SetUseCaseExportDir';
+import {
+  createSeUseCasetGlobal,
+  deleteSeUseCasetGlobal,
+  getSeUseCasetGlobal,
+  updateSeUseCasetGlobal,
+} from '@infra/locator/use-cases/SetUseCaseGlobal';
 
 export class SetController implements ISetController {
   constructor(
-    private readonly createSetUseCase: CreateSet,
-    private readonly updateSetUseCase: UpdateSet,
-    private readonly deleteSetUseCase: DeleteSet,
-    private readonly getSetUseCase: GetSet
+    private readonly createSetUseCase: ICreateSet = createSeUseCasetGlobal,
+    private readonly updateSetUseCase: IUpdateSet = updateSeUseCasetGlobal,
+    private readonly deleteSetUseCase: IDeleteSet = deleteSeUseCasetGlobal,
+    private readonly getSetUseCase: IGetSet = getSeUseCasetGlobal
   ) {}
 
   public async create(req: Request, res: Response): Promise<void> {
     try {
       const result = await this.createSetUseCase.execute(req.body);
-      res
-        .status(SetApiStatus.OK.status)
-        .send(SetApiStatus.OK.message + ` ${result}`);
+      res.status(SetApiStatus.OK.status).send(result);
     } catch (error) {
       console.error(error);
       res

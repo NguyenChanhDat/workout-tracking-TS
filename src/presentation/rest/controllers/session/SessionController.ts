@@ -1,18 +1,24 @@
 import { ISessionController } from './ISessionController';
 import { Request, Response } from 'express';
-import { CreateSession } from '@application/use-cases/session/CreateSession';
-import { UpdateSession } from '@application/use-cases/session/UpdateSession';
-import { DeleteSession } from '@application/use-cases/session/DeleteSession';
-import { GetSession } from '@application/use-cases/session/GetSession';
 import { SessionApiStatus } from '@shared/constant/ApiStatus';
 import { Session } from '@domain/entities/Session';
+import { ICreateSession } from '@application/use-cases/session/interfaces/ICreateSession';
+import { IUpdateSession } from '@application/use-cases/session/interfaces/IUpdateSession';
+import { IDeleteSession } from '@application/use-cases/session/interfaces/IDeleteSession';
+import { IGetSession } from '@application/use-cases/session/interfaces/IGetSession';
+import {
+  createSessionUseCaseGlobal,
+  deleteSessionUseCaseGlobal,
+  getSessionUseCaseGlobal,
+  updateSessionUseCaseGlobal,
+} from '@infra/locator/use-cases/SessionUseCaseGlobal';
 
 export class SessionController implements ISessionController {
   constructor(
-    private readonly createSessionUseCase: CreateSession,
-    private readonly updateSessionUseCase: UpdateSession,
-    private readonly deleteSessionUseCase: DeleteSession,
-    private readonly getSessionUseCase: GetSession
+    private readonly createSessionUseCase: ICreateSession = createSessionUseCaseGlobal,
+    private readonly updateSessionUseCase: IUpdateSession = updateSessionUseCaseGlobal,
+    private readonly deleteSessionUseCase: IDeleteSession = deleteSessionUseCaseGlobal,
+    private readonly getSessionUseCase: IGetSession = getSessionUseCaseGlobal
   ) {}
 
   public async create(req: Request, res: Response): Promise<void> {
@@ -20,7 +26,7 @@ export class SessionController implements ISessionController {
       const result = await this.createSessionUseCase.execute(req.body);
       res
         .status(SessionApiStatus.OK.status)
-        .send(SessionApiStatus.OK.message + ` ${result}`);
+        .send(result);
     } catch (error) {
       console.error(error);
       res
@@ -78,7 +84,6 @@ export class SessionController implements ISessionController {
           break;
       }
       res.status(SessionApiStatus.OK.status);
-
       res.send(sessionData);
     } catch (error) {
       console.error(error);
