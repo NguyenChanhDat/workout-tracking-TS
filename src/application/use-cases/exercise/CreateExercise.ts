@@ -8,7 +8,10 @@ export class CreateExercise implements ICreateExercise {
     private readonly exerciseServices: IExerciseServices = exerciseServicesGlobal
   ) {}
 
-  public execute = async (exerciseInput: CreateExerciseDto): Promise<void> => {
+  public execute = async (
+    exerciseInput: CreateExerciseDto
+  ): Promise<CreateExerciseDto> => {
     await this.exerciseServices.createEntity(exerciseInput);
+    return exerciseInput;
   };
 }

@@ -8,7 +8,8 @@ export class CreatePlan implements ICreatePlan {
     private readonly planServices: IPlanServices = planServicesGlobal
   ) {}
 
-  public execute = async (planInput: CreatePlanDto): Promise<void> => {
+  public execute = async (planInput: CreatePlanDto): Promise<CreatePlanDto> => {
     await this.planServices.createEntity(planInput);
+    return planInput;
   };
 }

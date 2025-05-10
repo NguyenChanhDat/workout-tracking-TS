@@ -10,7 +10,8 @@ export class CreateBodyTrack implements ICreateBodyTrack {
 
   public execute = async (
     bodyTrackInput: CreateBodyTrackDto
-  ): Promise<void> => {
+  ): Promise<CreateBodyTrackDto> => {
     await this.bodyTrackServices.createEntity(bodyTrackInput);
+    return bodyTrackInput;
   };
 }
