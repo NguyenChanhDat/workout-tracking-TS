@@ -1,8 +1,8 @@
 export type Set = {
   id: number;
-  PlanId: number;
+  sessionId: number;
   exerciseId: number;
-  weight: number;
+  weight: number; // kg
   reps: number;
-  restTime: number;
+  restTime: number; // seconds
 };

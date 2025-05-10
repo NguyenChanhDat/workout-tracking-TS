@@ -16,7 +16,7 @@
     "setup-streaming-win": "npm run setup-win && powershell ./tools/setup/setupCdcTools.ps1",
     "build": "concurrently \"swc src -d dist -D\" \"swc __test__ -d dist -D\"",
     "prepare": "husky",
-    "typecheck": "./node_modules/.bin/tsc --noEmit"
+    "typecheck": "tsc --noEmit"
   },
   "author": "Dat NguyenChanh",
   "license": "ISC",

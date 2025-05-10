@@ -8,7 +8,7 @@ export class SetModel {
   id!: number;
 
   @ManyToOne(() => PlanModel, (plan) => plan.id)
-  PlanId!: number;
+  sessionId!: number;
 
   @ManyToOne(() => ExerciseModel, (exercise) => exercise.id)
   exerciseId!: number;

@@ -10,7 +10,7 @@ class MockSetRepository implements ISetRepository {
   deleteEntity = jest.fn();
   getEntityById = jest.fn();
   showListEntity = jest.fn();
-  getExerciseByPlanId = jest.fn();
+  getExerciseBySessionId = jest.fn();
 }
 
 describe('SetServices', () => {
@@ -24,11 +24,11 @@ describe('SetServices', () => {
 
   it('should create a new set', async () => {
     const setInput: CreateSetDto = {
+      sessionId: 1,
       exerciseId: 1,
-      PlanId: 1,
       weight: 50,
-      reps: 10,
-      restTime: 60,
+      reps: 12,
+      restTime: 30,
     };
     await setServices.createEntity(setInput);
 
@@ -38,10 +38,11 @@ describe('SetServices', () => {
   it('should update an existing set', async () => {
     const setId = 1;
     const updateInfo: UpdateSetDto = {
-      id: setId,
-      weight: 55,
+      id: 1,
+      exerciseId: 1,
+      weight: 50,
       reps: 12,
-      restTime: 70,
+      restTime: 30,
     };
     await setServices.updateEntity(setId, updateInfo);
 

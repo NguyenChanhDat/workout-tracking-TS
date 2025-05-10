@@ -1,7 +1,7 @@
 export function InsertSetData(){
     return `--sql
         USE LocalDatabase
-        INSERT INTO [Sets] ([PlanId], [exerciseId], [weight], [reps], [restTime])
+        INSERT INTO [Sets] ([sessionId], [exerciseId], [weight], [reps], [restTime])
         VALUES 
         (1, 1, 50, 12, 60),
         (1, 5, 30, 15, 45),
