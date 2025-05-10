@@ -14,7 +14,7 @@ export class SessionModel extends BaseEntity {
   id!: number;
 
   @ManyToOne(() => PlanModel, (plan) => plan.id)
-  PlanId!: number;
+  planId!: number;
 
   @Column({ type: 'date', nullable: false })
   date!: Date;
