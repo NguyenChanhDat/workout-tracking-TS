@@ -1,13 +1,13 @@
 import { IExerciseRepository } from '../../../../domain/repositories/IExerciseRepository';
 import { Exercise } from '../../../../domain/entities/Exercise';
-import { ExerciseModel } from '@infra/databases/models/ExerciseModel';
+import { ExercisesModel } from '@infra/databases/models/ExercisesModel';
 import { appDataSource } from '@infra/databases/dataSource/BootstrapTypeOrm';
 import { Repository } from 'typeorm';
 
 export class ExerciseTypeOrmRepository implements IExerciseRepository {
   constructor(
     private readonly repository: Repository<Exercise> = appDataSource.getRepository(
-      ExerciseModel
+      ExercisesModel
     )
   ) {}
 

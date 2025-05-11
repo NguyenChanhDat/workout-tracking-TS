@@ -1,13 +1,13 @@
 import { IPlanRepository } from '../../../../domain/repositories/IPlanRepository';
 import { Plan } from '../../../../domain/entities/Plan';
-import { PlanModel } from '@infra/databases/models/PlanModel';
+import { PlansModel } from '@infra/databases/models/PlansModel';
 import { appDataSource } from '@infra/databases/dataSource/BootstrapTypeOrm';
 import { Repository } from 'typeorm';
 
 export class PlanTypeOrmRepository implements IPlanRepository {
   constructor(
     private readonly repository: Repository<Plan> = appDataSource.getRepository(
-      PlanModel
+      PlansModel
     )
   ) {}
 

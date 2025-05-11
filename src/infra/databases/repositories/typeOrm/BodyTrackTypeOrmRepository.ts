@@ -1,13 +1,13 @@
 import { IBodyTrackRepository } from '../../../../domain/repositories/IBodyTrackRepository';
 import { BodyTrack } from '../../../../domain/entities/BodyTrack';
-import { BodyTrackModel } from '@infra/databases/models/BodyTrackModel';
+import { BodyTracksModel } from '@infra/databases/models/BodyTracksModel';
 import { appDataSource } from '@infra/databases/dataSource/BootstrapTypeOrm';
 import { Repository } from 'typeorm';
 
 export class BodyTrackTypeOrmRepository implements IBodyTrackRepository {
   constructor(
     private readonly repository: Repository<BodyTrack> = appDataSource.getRepository(
-      BodyTrackModel
+      BodyTracksModel
     )
   ) {}
 
@@ -19,9 +19,7 @@ export class BodyTrackTypeOrmRepository implements IBodyTrackRepository {
     bodyTrackId: number,
     bodyTrack: Partial<BodyTrack>
   ): Promise<void> {
-    await appDataSource
-      .getRepository(BodyTrackModel)
-      .update(bodyTrackId, bodyTrack);
+    await this.repository.update(bodyTrackId, bodyTrack);
   }
 
   async deleteEntity(bodyTrackId: number): Promise<void> {
@@ -29,9 +27,7 @@ export class BodyTrackTypeOrmRepository implements IBodyTrackRepository {
   }
 
   async getEntityById(bodyTrackId: number): Promise<BodyTrack | null> {
-    return await appDataSource
-      .getRepository(BodyTrackModel)
-      .findOne({ where: { id: bodyTrackId } });
+    return await this.repository.findOne({ where: { id: bodyTrackId } });
   }
 
   async showListEntity(): Promise<BodyTrack[] | null> {

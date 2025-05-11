@@ -19,7 +19,8 @@
     "typecheck": "tsc --noEmit",
     "unit-test": "node scripts/run-tests.js",
     "dev": "node scripts/run-dev.js",
-    "setup": "node scripts/run-setup.js"
+    "setup": "node scripts/run-setup.js",
+    "gen-type": "powershell ./tools/setup/genModel.ps1 && powershell ./tools/setup/renameGenModel.ps1"
   },
   "author": "Dat NguyenChanh",
   "license": "ISC",

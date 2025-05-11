@@ -3,7 +3,7 @@ export function CreateSessionTable() {
     USE LocalDatabase
         CREATE TABLE [Sessions] (
             [id] INTEGER NOT NULL IDENTITY UNIQUE,
-            [date] DATE,
+            [date] DATE NOT NULL,
             [planId] INTEGER,
             PRIMARY KEY([id], [planId]),
             FOREIGN KEY([planId]) REFERENCES [Plans]([id])

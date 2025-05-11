@@ -1,13 +1,13 @@
 import { ISessionRepository } from '@domain/repositories/ISessionRepository';
 import { Session } from '@domain/entities/Session';
 import { Repository } from 'typeorm';
-import { SessionModel } from '@infra/databases/models/SessionModel';
+import { SessionsModel } from '@infra/databases/models/SessionsModel';
 import { appDataSource } from '@infra/databases/dataSource/BootstrapTypeOrm';
 
 export class SessionTypeOrmRepository implements ISessionRepository {
   constructor(
     private readonly repository: Repository<Session> = appDataSource.getRepository(
-      SessionModel
+      SessionsModel
     )
   ) {}
 

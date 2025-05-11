@@ -1,14 +1,14 @@
 import { IUserRepository } from '../../../../domain/repositories/IUserRepository';
 import { User } from '../../../../domain/entities/User';
 import { UpdateUserDto } from '../../../../application/dto/user/updateUserDto';
-import { UserModel } from '@infra/databases/models/UserModel';
+import { UsersModel } from '@infra/databases/models/UsersModel';
 import { appDataSource } from '@infra/databases/dataSource/BootstrapTypeOrm';
 import { Repository } from 'typeorm';
 
 export class UserTypeOrmRepository implements IUserRepository {
   constructor(
     private readonly repository: Repository<User> = appDataSource.getRepository(
-      UserModel
+      UsersModel
     )
   ) {}
 

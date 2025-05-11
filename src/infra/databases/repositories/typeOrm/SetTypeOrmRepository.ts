@@ -1,13 +1,13 @@
-import { ISetRepository } from '../../../../domain/repositories/ISetRepository';
-import { Set } from '../../../../domain/entities/Set';
-import { SetModel } from '@infra/databases/models/SetModel';
+import { ISetRepository } from '@domain/repositories/ISetRepository';
+import { Set } from '@domain/entities/Set';
+import { SetsModel } from '@infra/databases/models/SetsModel';
 import { appDataSource } from '@infra/databases/dataSource/BootstrapTypeOrm';
 import { Repository } from 'typeorm';
 
 export class SetTypeOrmRepository implements ISetRepository {
   constructor(
     private readonly repository: Repository<Set> = appDataSource.getRepository(
-      SetModel
+      SetsModel
     )
   ) {}
 
@@ -24,9 +24,7 @@ export class SetTypeOrmRepository implements ISetRepository {
   }
 
   async getEntityById(setId: number): Promise<Set | null> {
-    const set = await appDataSource
-      .getRepository(SetModel)
-      .findOne({ where: { id: setId } });
+    const set = this.repository.findOne({ where: { id: setId } });
     return set;
   }
 

@@ -1,11 +1,11 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
-import { UserModel } from '../models/UserModel';
-import { BodyTrackModel } from '../models/BodyTrackModel';
-import { ExerciseModel } from '../models/ExerciseModel';
-import { PlanModel } from '../models/PlanModel';
-import { SessionModel } from '../models/SessionModel';
-import { SetModel } from '../models/SetModel';
+import { UsersModel } from '../models/UsersModel';
+import { BodyTracksModel } from '../models/BodyTracksModel';
+import { ExercisesModel } from '../models/ExercisesModel';
+import { PlansModel } from '../models/PlansModel';
+import { SessionsModel } from '../models/SessionsModel';
+import { SetsModel } from '../models/SetsModel';
 
 export const MssqlConfig = {
   user: process.env.DB_USER || 'sa',
@@ -28,11 +28,11 @@ export const typeormConfig = new DataSource({
     trustServerCertificate: true,
   },
   entities: [
-    UserModel,
-    BodyTrackModel,
-    ExerciseModel,
-    PlanModel,
-    SessionModel,
-    SetModel,
+    UsersModel,
+    BodyTracksModel,
+    ExercisesModel,
+    PlansModel,
+    SessionsModel,
+    SetsModel,
   ],
 });
