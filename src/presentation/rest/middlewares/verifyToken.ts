@@ -29,6 +29,7 @@ export class TokenVerifyMiddleware {
         return;
       }
       const verified = await this.tokenServices.verifyToken(tokenExtracted);
+
       if (verified) {
         next();
       }

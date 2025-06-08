@@ -7,6 +7,7 @@ import { SetRoutes } from './routes/SetRoutes';
 import { ExerciseRoutes } from './routes/ExerciseRoutes';
 import { SessionRoutes } from './routes/SessionRoutes';
 import { BodyTrackRoutes } from './routes/BodyTrackRoutes';
+import { TokenVerifyMiddleware } from './middlewares/verifyToken';
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(cors());
 
 export const rest = (PORT: number) => {
   app.use(express.json());
+  app.use('/', new TokenVerifyMiddleware().verifyToken);
   app.use('/user', UserRoutes);
   app.use('/plan', PlanRoutes);
   app.use('/set', SetRoutes);

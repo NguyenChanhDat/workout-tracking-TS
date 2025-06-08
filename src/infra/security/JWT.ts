@@ -1,7 +1,7 @@
 import { ITokenServices } from '@application/services/interfaces/ITokenServices';
 import { TOKEN_EXPIRE_DATE } from '@presentation/rest/constants/token';
 import { config } from 'dotenv';
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 config({ path: '.env' });
 
 export class JWT implements ITokenServices {
@@ -19,11 +19,8 @@ export class JWT implements ITokenServices {
 
   public verifyToken = async (
     tokenExtracted: string
-  ): Promise<string | null> => {
+  ): Promise<string | JwtPayload> => {
     const decoded = jwt.verify(tokenExtracted, this.tokenSecret);
-    if (typeof decoded === 'string') {
-      return decoded;
-    }
-    return null;
+    return decoded;
   };
 }
