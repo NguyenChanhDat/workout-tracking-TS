@@ -1,3 +1,6 @@
 export interface ILogin {
-    validatePassword(username: string, inputPassword: string): Promise<boolean>
+  returnToken(input: {
+    username: string;
+    password: string;
+  }): Promise<string | undefined>;
 }

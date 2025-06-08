@@ -8,6 +8,8 @@ const userController: IUserController = userControllersGlobal;
 
 router.get('/', userController.get);
 
+router.post('/login', userController.login);
+
 router.post('/', userController.create);
 
 router.delete('/:id', userController.delete);

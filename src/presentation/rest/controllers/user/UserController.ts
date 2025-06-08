@@ -14,8 +14,10 @@ import {
   createUserGlobal,
   deleteUserGlobal,
   getUserGlobal,
+  loginUseCase,
   updateUserGlobal,
 } from '../../../../infra/locator/use-cases/UserUseCaseGlobal';
+import { LoginDto } from '@application/dto/user/loginDto';
 
 export class UserController implements IUserController {
   constructor(
@@ -90,6 +92,23 @@ export class UserController implements IUserController {
       }
       res.status(UserApiStatus.INTERNAL_SERVER_ERROR.status);
       res.send(UserApiStatus.INTERNAL_SERVER_ERROR.message);
+    }
+  };
+
+  public login = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const inputLogin: LoginDto = req.body;
+      const token = await loginUseCase.returnToken(inputLogin);
+      if (!token) {
+        res.status(UserApiStatus.UNPROCESSABLE_ENTITY.status);
+        res.send(UserApiStatus.UNPROCESSABLE_ENTITY);
+        return;
+      }
+      res.status(UserApiStatus.OK.status);
+      res.send(JSON.stringify(token));
+    } catch (error) {
+      res.status(UserApiStatus.UNPROCESSABLE_ENTITY.status);
+      res.send(UserApiStatus.UNPROCESSABLE_ENTITY);
     }
   };
 }
