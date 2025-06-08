@@ -3,6 +3,7 @@ import { Session } from '@domain/entities/Session';
 import { Repository } from 'typeorm';
 import { SessionsModel } from '@infra/databases/models/SessionsModel';
 import { appDataSource } from '@infra/databases/dataSource/BootstrapTypeOrm';
+import { UpdateSessionDto } from '@application/dto/session/UpdateSessionDto';
 
 export class SessionTypeOrmRepository implements ISessionRepository {
   constructor(
@@ -17,9 +18,11 @@ export class SessionTypeOrmRepository implements ISessionRepository {
 
   public async updateEntity(
     sessionId: number,
-    session: Partial<Session>
+    session: Session
   ): Promise<void> {
-    await this.repository.update(sessionId, session);
+    const { id, ...rest } = session;
+    const updateInfor: UpdateSessionDto = rest;
+    await this.repository.update(sessionId, updateInfor);
   }
 
   public async deleteEntity(sessionId: number): Promise<void> {

@@ -3,6 +3,7 @@ import { Set } from '@domain/entities/Set';
 import { SetsModel } from '@infra/databases/models/SetsModel';
 import { appDataSource } from '@infra/databases/dataSource/BootstrapTypeOrm';
 import { Repository } from 'typeorm';
+import { UpdateSetDto } from '@application/dto/set/UpdateSetDto';
 
 export class SetTypeOrmRepository implements ISetRepository {
   constructor(
@@ -15,8 +16,10 @@ export class SetTypeOrmRepository implements ISetRepository {
     await this.repository.save(set);
   }
 
-  async updateEntity(setId: number, set: Partial<Set>): Promise<void> {
-    await this.repository.update(setId, set);
+  async updateEntity(setId: number, set: Set): Promise<void> {
+    const { id, ...rest } = set;
+    const updateInfor: UpdateSetDto = rest;
+    await this.repository.update(setId, updateInfor);
   }
 
   async deleteEntity(setId: number): Promise<void> {

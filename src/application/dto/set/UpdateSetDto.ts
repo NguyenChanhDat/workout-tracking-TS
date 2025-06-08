@@ -1,3 +1,3 @@
 import { Set } from '../../../domain/entities/Set';
 
-export type UpdateSetDto = Omit<Set, 'sessionId'>;
+export type UpdateSetDto = Omit<Set, 'sessionId' | 'id'>;

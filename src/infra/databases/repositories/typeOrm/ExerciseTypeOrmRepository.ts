@@ -3,6 +3,7 @@ import { Exercise } from '../../../../domain/entities/Exercise';
 import { ExercisesModel } from '@infra/databases/models/ExercisesModel';
 import { appDataSource } from '@infra/databases/dataSource/BootstrapTypeOrm';
 import { Repository } from 'typeorm';
+import { UpdateExerciseDto } from '@application/dto/exercise/UpdateExerciseDto';
 
 export class ExerciseTypeOrmRepository implements IExerciseRepository {
   constructor(
@@ -15,11 +16,10 @@ export class ExerciseTypeOrmRepository implements IExerciseRepository {
     await this.repository.save(exercise);
   }
 
-  async updateEntity(
-    exerciseId: number,
-    exercise: Partial<Exercise>
-  ): Promise<void> {
-    await this.repository.update(exerciseId, exercise);
+  async updateEntity(exerciseId: number, exercise: Exercise): Promise<void> {
+    const { id, ...rest } = exercise;
+    const updateInfor: Omit<UpdateExerciseDto, 'id'> = rest;
+    await this.repository.update(exerciseId, updateInfor);
   }
 
   async deleteEntity(exerciseId: number): Promise<void> {

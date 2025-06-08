@@ -3,6 +3,7 @@ import { Plan } from '../../../../domain/entities/Plan';
 import { PlansModel } from '@infra/databases/models/PlansModel';
 import { appDataSource } from '@infra/databases/dataSource/BootstrapTypeOrm';
 import { Repository } from 'typeorm';
+import { UpdatePlanDto } from '@application/dto/plan/UpdatePlanDto';
 
 export class PlanTypeOrmRepository implements IPlanRepository {
   constructor(
@@ -15,8 +16,10 @@ export class PlanTypeOrmRepository implements IPlanRepository {
     await this.repository.save(plan);
   }
 
-  async updateEntity(planId: number, plan: Partial<Plan>): Promise<void> {
-    await this.repository.update(planId, plan);
+  async updateEntity(planId: number, plan: Plan): Promise<void> {
+    const { id, ...rest } = plan;
+    const updateInfor: Omit<UpdatePlanDto, 'id'> = rest;
+    await this.repository.update(planId, updateInfor);
   }
 
   async deleteEntity(planId: number): Promise<void> {

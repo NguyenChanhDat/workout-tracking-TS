@@ -38,7 +38,6 @@ describe('SetServices', () => {
   it('should update an existing set', async () => {
     const setId = 1;
     const updateInfo: UpdateSetDto = {
-      id: 1,
       exerciseId: 1,
       weight: 50,
       reps: 12,
