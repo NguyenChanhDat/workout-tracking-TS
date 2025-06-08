@@ -111,4 +111,17 @@ export class UserController implements IUserController {
       res.send(UserApiStatus.UNPROCESSABLE_ENTITY);
     }
   };
+  public signup = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const userInputInfor: CreateUserDto = req.body;
+
+      const userCreated = await this.createUser.execute(userInputInfor);
+      res.status(UserApiStatus.OK.status);
+      res.send(userCreated);
+    } catch (error) {
+      console.log(error);
+      res.status(UserApiStatus.INTERNAL_SERVER_ERROR.status);
+      res.send(UserApiStatus.INTERNAL_SERVER_ERROR.message);
+    }
+  };
 }

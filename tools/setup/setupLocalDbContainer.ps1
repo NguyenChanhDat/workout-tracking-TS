@@ -1,3 +1,5 @@
+npm install
+
 #Kill any runnning container
 docker kill fb-db-local 
 

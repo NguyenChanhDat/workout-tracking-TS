@@ -5,4 +5,5 @@ export interface IUserController {
   delete(req: Request, res: Response): Promise<void>;
   get(req: Request, res: Response): Promise<void>;
   login(req: Request, res: Response): Promise<void>;
+  signup(req: Request, res: Response): Promise<void>;
 }
