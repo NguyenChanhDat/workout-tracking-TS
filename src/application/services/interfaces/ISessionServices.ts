@@ -9,5 +9,8 @@ export interface ISessionServices {
   getEntityById(sessionId: number): Promise<Session | null>;
   showListEntity(): Promise<Session[] | null>;
   getByPlanId(planId: number): Promise<Session[] | null>;
-  getByDate(date: Date): Promise<Session[] | null>;
+  getByDateUserId(input: {
+    date: Date;
+    userId: number;
+  }): Promise<Session[] | null>;
 }

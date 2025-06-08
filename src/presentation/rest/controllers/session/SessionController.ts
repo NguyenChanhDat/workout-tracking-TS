@@ -76,10 +76,11 @@ export class SessionController implements ISessionController {
           );
           break;
 
-        case !!req.query.date:
-          sessionData = await this.getSessionUseCase.getByDate(
-            new Date(String(req.query.date))
-          );
+        case !!req.query.date && !!req.query.userId:
+          sessionData = await this.getSessionUseCase.getByDateUserId({
+            date: new Date(String(req.query.date)),
+            userId: Number(req.query.userId),
+          });
           break;
 
         default:

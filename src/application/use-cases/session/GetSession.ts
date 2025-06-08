@@ -20,7 +20,11 @@ export class GetSession implements IGetSession {
     return await this.sessionServices.getByPlanId(planId);
   }
 
-  public async getByDate(date: Date): Promise<Session[] | null> {
-    return await this.sessionServices.getByDate(date);
+  public async getByDateUserId(input: {
+    date: Date;
+    userId: number;
+  }): Promise<Session[] | null> {
+    const { date, userId } = input;
+    return await this.sessionServices.getByDateUserId({ date, userId });
   }
 }

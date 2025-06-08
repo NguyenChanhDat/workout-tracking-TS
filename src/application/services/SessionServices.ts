@@ -35,7 +35,10 @@ export class SessionServices implements ISessionServices {
     return await this.sessionRepository.getByPlanId(planId);
   }
 
-  public async getByDate(date: Date): Promise<Session[] | null> {
-    return await this.sessionRepository.getByDate(date);
+  public async getByDateUserId(input: {
+    date: Date;
+    userId: number;
+  }): Promise<Session[] | null> {
+    return await this.sessionRepository.getByDateUserId(input);
   }
 }

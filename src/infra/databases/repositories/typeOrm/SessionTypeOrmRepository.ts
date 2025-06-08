@@ -9,7 +9,10 @@ export class SessionTypeOrmRepository implements ISessionRepository {
   constructor(
     private readonly repository: Repository<Session> = appDataSource.getRepository(
       SessionsModel
-    )
+    ),
+    private readonly sessionAlisas: string = 'session',
+    private readonly planAlisas: string = 'plan',
+    private readonly userAlias: string = 'user'
   ) {}
 
   public async createEntity(session: Session): Promise<void> {
@@ -41,7 +44,29 @@ export class SessionTypeOrmRepository implements ISessionRepository {
     return await this.repository.find({ where: { planId } });
   }
 
-  public async getByDate(date: Date): Promise<Session[] | null> {
-    return await this.repository.find({ where: { date } });
+  public async getByDateUserId(input: {
+    date: Date;
+    userId: number;
+  }): Promise<Session[] | null> {
+    const { date, userId } = input;
+    const formattedDate = new Date(date).toISOString().slice(0, 10);
+    console.log('formattedDate ', formattedDate);
+
+    return await this.repository
+      .createQueryBuilder(this.sessionAlisas)
+      .select([
+        `${this.sessionAlisas}.id as id`,
+        `${this.sessionAlisas}.date as date`,
+        `${this.sessionAlisas}.planId as planId`,
+      ])
+      .leftJoin(`${this.sessionAlisas}.plan`, this.planAlisas)
+      .leftJoin(`${this.planAlisas}.user`, this.userAlias)
+      .where(`CAST(${this.sessionAlisas}.date AS DATE) = :date`, {
+        date: formattedDate,
+      })
+      .andWhere(`${this.userAlias}.id = :userId`, {
+        userId,
+      })
+      .getRawMany();
   }
 }
