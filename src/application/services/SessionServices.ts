@@ -2,6 +2,7 @@ import { ISessionServices } from './interfaces/ISessionServices';
 import { ISessionRepository } from '@domain/repositories/ISessionRepository';
 import { Session } from '@domain/entities/Session';
 import { sessionRepositoryGlobal } from '@infra/locator/repository/RepositoryGlobal';
+import { Set } from '@domain/entities/Set';
 
 export class SessionServices implements ISessionServices {
   constructor(
@@ -38,7 +39,7 @@ export class SessionServices implements ISessionServices {
   public async getByDateUserId(input: {
     date: Date;
     userId: number;
-  }): Promise<Session[] | null> {
+  }): Promise<Set[] | null> {
     return await this.sessionRepository.getByDateUserId(input);
   }
 }

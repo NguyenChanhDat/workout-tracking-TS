@@ -4,6 +4,9 @@ import { Repository } from 'typeorm';
 import { SessionsModel } from '@infra/databases/models/SessionsModel';
 import { appDataSource } from '@infra/databases/dataSource/BootstrapTypeOrm';
 import { UpdateSessionDto } from '@application/dto/session/UpdateSessionDto';
+// import { ExercisesModel } from '@infra/databases/models/ExercisesModel';
+import { SetsModel } from '@infra/databases/models/SetsModel';
+import { Set } from '@domain/entities/Set';
 
 export class SessionTypeOrmRepository implements ISessionRepository {
   constructor(
@@ -12,7 +15,9 @@ export class SessionTypeOrmRepository implements ISessionRepository {
     ),
     private readonly sessionAlisas: string = 'session',
     private readonly planAlisas: string = 'plan',
-    private readonly userAlias: string = 'user'
+    private readonly userAlias: string = 'user',
+    private readonly setAlias: string = 'set',
+    private readonly exerciseAlias: string = 'exercise'
   ) {}
 
   public async createEntity(session: Session): Promise<void> {
@@ -47,18 +52,25 @@ export class SessionTypeOrmRepository implements ISessionRepository {
   public async getByDateUserId(input: {
     date: Date;
     userId: number;
-  }): Promise<Session[] | null> {
+  }): Promise<Set[] | null> {
     const { date, userId } = input;
     const formattedDate = new Date(date).toISOString().slice(0, 10);
-    console.log('formattedDate ', formattedDate);
-
-    return await this.repository
-      .createQueryBuilder(this.sessionAlisas)
+    return await appDataSource
+      .getRepository(SetsModel)
+      .createQueryBuilder(this.setAlias)
       .select([
-        `${this.sessionAlisas}.id as id`,
-        `${this.sessionAlisas}.date as date`,
-        `${this.sessionAlisas}.planId as planId`,
+        `${this.setAlias}.id as id`,
+        `${this.setAlias}.weight as weight`,
+        `${this.setAlias}.reps as reps`,
+        `${this.setAlias}.restTime as restTime`,
+        `${this.exerciseAlias}.name as name`,
+        `${this.exerciseAlias}.imageUrl as imageUrl`,
+        `${this.exerciseAlias}.targetMuscle1 as targetMuscle1`,
+        `${this.exerciseAlias}.targetMuscle2 as targetMuscle2`,
+        `${this.exerciseAlias}.targetMuscle3 as targetMuscle3`,
       ])
+      .leftJoin(`${this.setAlias}.exercise`, this.exerciseAlias)
+      .leftJoin(`${this.setAlias}.session`, this.sessionAlisas)
       .leftJoin(`${this.sessionAlisas}.plan`, this.planAlisas)
       .leftJoin(`${this.planAlisas}.user`, this.userAlias)
       .where(`CAST(${this.sessionAlisas}.date AS DATE) = :date`, {
