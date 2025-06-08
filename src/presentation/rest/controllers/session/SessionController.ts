@@ -35,10 +35,12 @@ export class SessionController implements ISessionController {
 
   public async update(req: Request, res: Response): Promise<void> {
     try {
-      const sessionId = parseInt(req.params.id, 10);
+      const sessionId = Number(req.body.id);
       await this.updateSessionUseCase.execute(sessionId, req.body);
       res.status(SessionApiStatus.OK.status).send(SessionApiStatus.OK.message);
     } catch (error) {
+      console.log(error);
+
       res
         .status(SessionApiStatus.INTERNAL_SERVER_ERROR.status)
         .send(SessionApiStatus.INTERNAL_SERVER_ERROR.message);
@@ -47,7 +49,7 @@ export class SessionController implements ISessionController {
 
   public async delete(req: Request, res: Response): Promise<void> {
     try {
-      const sessionId = parseInt(req.params.id, 10);
+      const sessionId = Number(req.params.id);
       await this.deleteSessionUseCase.execute(sessionId);
       res.status(SessionApiStatus.OK.status).send(SessionApiStatus.OK.message);
     } catch (error) {
