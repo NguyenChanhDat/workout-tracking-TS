@@ -24,9 +24,7 @@ export class SessionController implements ISessionController {
   public async create(req: Request, res: Response): Promise<void> {
     try {
       const result = await this.createSessionUseCase.execute(req.body);
-      res
-        .status(SessionApiStatus.OK.status)
-        .send(result);
+      res.status(SessionApiStatus.OK.status).send(result);
     } catch (error) {
       console.error(error);
       res
@@ -63,26 +61,30 @@ export class SessionController implements ISessionController {
     try {
       let sessionData: Session | Session[] | null;
 
-      switch (req.query.type) {
-        case 'id':
+      switch (true) {
+        case !!req.query.id:
           sessionData = await this.getSessionUseCase.getById(
             Number(req.query.id)
           );
           break;
-        case 'planId':
+
+        case !!req.query.planId:
           sessionData = await this.getSessionUseCase.getByPlanId(
             Number(req.query.planId)
           );
           break;
-        case 'date':
+
+        case !!req.query.date:
           sessionData = await this.getSessionUseCase.getByDate(
             new Date(String(req.query.date))
           );
           break;
+
         default:
           sessionData = await this.getSessionUseCase.getAll();
           break;
       }
+
       res.status(SessionApiStatus.OK.status);
       res.send(sessionData);
     } catch (error) {
