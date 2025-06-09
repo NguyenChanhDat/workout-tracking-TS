@@ -1,6 +1,7 @@
 import { CreateUser } from '../../../../src/application/use-cases/user/CreateUser';
 import { IUserServices } from '../../../../src/application/services/interfaces/IUserServices';
 import { MembershipTierEnum } from '@shared/enums/MembershipTierEnum';
+import { RoleEnum } from '@shared/enums/RoleEnum';
 
 class MockUserServices implements IUserServices {
   getUserById = jest.fn();
@@ -25,6 +26,7 @@ describe('CreateUser', () => {
       username: 'testuser',
       password: 'password',
       membershipTier: MembershipTierEnum.BASIC,
+      role: RoleEnum.USER,
     };
     const createdUser = { id: 1, ...userData };
     mockUserServices.createEntity.mockResolvedValue(createdUser);

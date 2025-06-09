@@ -4,6 +4,8 @@ export interface IUserController {
   update(eq: Request, res: Response): Promise<void>;
   delete(req: Request, res: Response): Promise<void>;
   get(req: Request, res: Response): Promise<void>;
-  login(req: Request, res: Response): Promise<void>;
-  signup(req: Request, res: Response): Promise<void>;
+  adminLogin(req: Request, res: Response): Promise<void>;
+  userLogin(req: Request, res: Response): Promise<void>;
+  adminSignup(req: Request, res: Response): Promise<void>;
+  userSignup(req: Request, res: Response): Promise<void>;
 }

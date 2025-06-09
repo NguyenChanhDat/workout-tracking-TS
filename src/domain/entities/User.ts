@@ -1,3 +1,4 @@
+import { RoleEnum } from '@shared/enums/RoleEnum';
 import { MembershipTierEnum } from '../../shared/enums/MembershipTierEnum';
 
 export type User = {
@@ -9,4 +10,5 @@ export type User = {
   phoneNumber?: string;
   avaUrl?: string;
   membershipTier: MembershipTierEnum;
+  role: RoleEnum;
 };

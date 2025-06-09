@@ -4,6 +4,7 @@ import { CreateUserDto } from '../../../src/application/dto/user/createUserDto';
 import { UpdateUserDto } from '../../../src/application/dto/user/updateUserDto';
 import { User } from '../../../src/domain/entities/User';
 import { MembershipTierEnum } from '@shared/enums/MembershipTierEnum';
+import { RoleEnum } from '@shared/enums/RoleEnum';
 
 class MockUserRepository implements IUserRepository {
   createEntity = jest.fn();
@@ -28,6 +29,7 @@ describe('UserServices', () => {
       username: 'testuser',
       password: 'password',
       membershipTier: MembershipTierEnum.BASIC,
+      role: RoleEnum.USER,
     };
     await userServices.createEntity(userInput);
 
@@ -40,6 +42,7 @@ describe('UserServices', () => {
       username: 'updateduser',
       password: 'newpassword',
       membershipTier: MembershipTierEnum.BASIC,
+      role: RoleEnum.USER,
     };
     await userServices.updateEntity(userId, updateInfor);
 
@@ -63,6 +66,7 @@ describe('UserServices', () => {
       username: 'testuser',
       password: 'password',
       membershipTier: MembershipTierEnum.BASIC,
+      role: RoleEnum.USER,
     };
     mockUserRepository.getEntityById.mockResolvedValue(user);
 
@@ -89,6 +93,7 @@ describe('UserServices', () => {
       username,
       password: 'password',
       membershipTier: MembershipTierEnum.BASIC,
+      role: RoleEnum.USER,
     };
     mockUserRepository.getByUsername.mockResolvedValue(user);
 
@@ -115,12 +120,14 @@ describe('UserServices', () => {
         username: 'user1',
         password: 'password1',
         membershipTier: MembershipTierEnum.BASIC,
+        role: RoleEnum.USER,
       },
       {
         id: 2,
         username: 'user2',
         password: 'password2',
         membershipTier: MembershipTierEnum.BASIC,
+        role: RoleEnum.USER,
       },
     ];
     mockUserRepository.showListEntity.mockResolvedValue(users);

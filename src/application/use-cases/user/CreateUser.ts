@@ -19,19 +19,21 @@ export class CreateUser implements ICreateUser {
   public execute = async (
     inputInfor: CreateUserDto
   ): Promise<Omit<CreateUserDto, 'password'>> => {
-    const { username, password } = inputInfor;
+    const { username, password, role } = inputInfor;
     const passwordHashed = await this.returnPasswordHashed(password);
 
     const userToBeCreate: CreateUserDto = {
-      username,
+      ...inputInfor,
       password: passwordHashed,
       membershipTier: MembershipTierEnum.BASIC,
+      role,
     };
 
     await this.userServices.createEntity(userToBeCreate);
 
     return {
       username,
+      role,
       membershipTier: MembershipTierEnum.BASIC,
     };
   };

@@ -17,8 +17,11 @@ const tokenVerifyMiddleware = new TokenVerifyMiddleware();
 
 export const rest = (PORT: number) => {
   app.use(express.json());
-  app.post('/login', userControllersGlobal.login);
-  app.post('/signup', userControllersGlobal.signup);
+  app.post('/admin/login', userControllersGlobal.adminLogin);
+  app.post('/admin/signup', userControllersGlobal.adminSignup);
+
+  app.post('/client/login', userControllersGlobal.userLogin);
+  app.post('/client/signup', userControllersGlobal.userSignup);
 
   app.use('/user', tokenVerifyMiddleware.verifyToken, UserRoutes);
   app.use('/plan', tokenVerifyMiddleware.verifyToken, PlanRoutes);

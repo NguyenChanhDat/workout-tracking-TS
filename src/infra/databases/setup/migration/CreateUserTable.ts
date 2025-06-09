@@ -10,6 +10,7 @@ export function CreateUserTable() {
       [phoneNumber] NVARCHAR(MAX),
       [avaUrl] NVARCHAR(MAX),
       [membershipTier] NVARCHAR(MAX) NOT NULL DEFAULT 'Basic' CHECK ([membershipTier] IN ('Basic', 'Advance', 'High')),
+      [role] NVARCHAR(MAX) NOT NULL CHECK ([role] IN ('Admin', 'User')),
       PRIMARY KEY ([id])
     );
     `;

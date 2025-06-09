@@ -8,6 +8,7 @@ import {
 import { BodyTracksModel } from './BodyTracksModel';
 import { PlansModel } from './PlansModel';
 import { MembershipTierEnum } from '@shared/enums/MembershipTierEnum';
+import { RoleEnum } from '@shared/enums/RoleEnum';
 
 @Index('PK__Users__3213E83F329786CD', ['id'], { unique: true })
 @Index('UQ__Users__3213E83E4C87412E', ['id'], { unique: true })
@@ -36,6 +37,9 @@ export class UsersModel {
 
   @Column('nvarchar', { name: 'membershipTier', default: () => "'Basic'" })
   membershipTier!: MembershipTierEnum;
+
+  @Column('nvarchar', { name: 'role' })
+  role!: RoleEnum;
 
   @OneToMany(() => BodyTracksModel, (bodyTracks) => bodyTracks.user)
   bodyTracks!: BodyTracksModel[];

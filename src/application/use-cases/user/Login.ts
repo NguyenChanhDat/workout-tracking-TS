@@ -6,6 +6,7 @@ import { passwordServicesGlobal } from '@infra/locator/services/PasswordServices
 import { ITokenServices } from '@application/services/interfaces/ITokenServices';
 import { tokenServicesGlobal } from '@infra/locator/repository/TokenRepositoryGlobal';
 import { LoginResponseDto } from '@application/dto/user/loginDto';
+import { RoleEnum } from '@shared/enums/RoleEnum';
 
 export class LoginUseCase implements ILogin {
   constructor(
@@ -13,10 +14,13 @@ export class LoginUseCase implements ILogin {
     private readonly passwordServices: IPasswordServices = passwordServicesGlobal,
     private readonly tokenServices: ITokenServices = tokenServicesGlobal
   ) {}
-  public returnResult = async (input: {
-    username: string;
-    password: string;
-  }): Promise<LoginResponseDto> => {
+  public returnResult = async (
+    input: {
+      username: string;
+      password: string;
+    },
+    role: RoleEnum
+  ): Promise<LoginResponseDto> => {
     const { username, password } = input;
     const userByUsername = await this.userServices.getUserByUsername(username);
     if (!userByUsername) {
@@ -28,7 +32,7 @@ export class LoginUseCase implements ILogin {
       userByUsername?.password || ''
     );
 
-    if (verifiedUser) {
+    if (verifiedUser && userByUsername.role === role) {
       const token = await this.tokenServices.generateToken({
         username,
         password,
