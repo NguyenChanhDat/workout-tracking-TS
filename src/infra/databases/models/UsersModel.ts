@@ -22,6 +22,18 @@ export class UsersModel {
   @Column('nvarchar', { name: 'password' })
   password!: string;
 
+  @Column('nvarchar', { name: 'email', nullable: true })
+  email?: string;
+
+  @Column('date', { name: 'dateOfBirth', nullable: true })
+  dateOfBirth?: Date;
+
+  @Column('nvarchar', { name: 'phoneNumber', nullable: true })
+  phoneNumber?: string;
+
+  @Column('nvarchar', { name: 'avaUrl', nullable: true })
+  avaUrl?: string;
+
   @Column('nvarchar', { name: 'membershipTier', default: () => "'Basic'" })
   membershipTier!: MembershipTierEnum;
 
