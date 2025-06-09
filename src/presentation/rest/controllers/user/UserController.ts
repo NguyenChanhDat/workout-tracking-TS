@@ -98,7 +98,7 @@ export class UserController implements IUserController {
   public login = async (req: Request, res: Response): Promise<void> => {
     try {
       const inputLogin: LoginDto = req.body;
-      const token = await loginUseCase.returnToken(inputLogin);
+      const token = await loginUseCase.returnResult(inputLogin);
       if (!token) {
         res.status(UserApiStatus.UNPROCESSABLE_ENTITY.status);
         res.send(UserApiStatus.UNPROCESSABLE_ENTITY);

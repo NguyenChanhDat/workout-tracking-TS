@@ -13,23 +13,19 @@ import { userControllersGlobal } from '@infra/locator/controllers/UserController
 const app = express();
 
 app.use(cors());
+const tokenVerifyMiddleware = new TokenVerifyMiddleware();
 
 export const rest = (PORT: number) => {
   app.use(express.json());
   app.post('/login', userControllersGlobal.login);
   app.post('/signup', userControllersGlobal.signup);
-  app.use('/user', new TokenVerifyMiddleware().verifyToken);
-  app.use('/user', UserRoutes);
-  app.use('/plan', new TokenVerifyMiddleware().verifyToken);
-  app.use('/plan', PlanRoutes);
-  app.use('/set', new TokenVerifyMiddleware().verifyToken);
-  app.use('/set', SetRoutes);
-  app.use('/exercise', new TokenVerifyMiddleware().verifyToken);
-  app.use('/exercise', ExerciseRoutes);
-  app.use('/session', new TokenVerifyMiddleware().verifyToken);
-  app.use('/session', SessionRoutes);
-  app.use('/bodytrack', new TokenVerifyMiddleware().verifyToken);
-  app.use('/bodytrack', BodyTrackRoutes);
+
+  app.use('/user', tokenVerifyMiddleware.verifyToken, UserRoutes);
+  app.use('/plan', tokenVerifyMiddleware.verifyToken, PlanRoutes);
+  app.use('/set', tokenVerifyMiddleware.verifyToken, SetRoutes);
+  app.use('/exercise', tokenVerifyMiddleware.verifyToken, ExerciseRoutes);
+  app.use('/session', tokenVerifyMiddleware.verifyToken, SessionRoutes);
+  app.use('/bodytrack', tokenVerifyMiddleware.verifyToken, BodyTrackRoutes);
 
   app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);

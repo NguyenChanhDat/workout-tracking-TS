@@ -1,6 +1,7 @@
+import { LoginResponseDto } from '@application/dto/user/loginDto';
 export interface ILogin {
-  returnToken(input: {
+  returnResult(input: {
     username: string;
     password: string;
-  }): Promise<string | undefined>;
+  }): Promise<LoginResponseDto>;
 }

@@ -5,6 +5,7 @@ import { userServicesGlobal } from '@infra/locator/services/UserServicesGlobal';
 import { passwordServicesGlobal } from '@infra/locator/services/PasswordServicesGlobal';
 import { ITokenServices } from '@application/services/interfaces/ITokenServices';
 import { tokenServicesGlobal } from '@infra/locator/repository/TokenRepositoryGlobal';
+import { LoginResponseDto } from '@application/dto/user/loginDto';
 
 export class LoginUseCase implements ILogin {
   constructor(
@@ -12,35 +13,33 @@ export class LoginUseCase implements ILogin {
     private readonly passwordServices: IPasswordServices = passwordServicesGlobal,
     private readonly tokenServices: ITokenServices = tokenServicesGlobal
   ) {}
-
-  private getUserPasswordByUsername = async (
-    username: string
-  ): Promise<string> => {
-    const userByUsername = await this.userServices.getUserByUsername(username);
-    return userByUsername?.password || '';
-  };
-
-  public returnToken = async (input: {
+  public returnResult = async (input: {
     username: string;
     password: string;
-  }): Promise<string | undefined> => {
+  }): Promise<LoginResponseDto> => {
     const { username, password } = input;
-    const userPasswordHashed = await this.getUserPasswordByUsername(username);
-    if (!userPasswordHashed) {
+    const userByUsername = await this.userServices.getUserByUsername(username);
+    if (!userByUsername) {
       return;
     }
 
     const verifiedUser = await this.passwordServices.validatePassword(
       password,
-      userPasswordHashed
+      userByUsername?.password || ''
     );
+
     if (verifiedUser) {
       const token = await this.tokenServices.generateToken({
         username,
         password,
       });
       if (token) {
-        return token;
+        const { password, ...rest } = userByUsername;
+        const result: LoginResponseDto = {
+          ...rest,
+          token,
+        };
+        return result;
       }
     }
   };
