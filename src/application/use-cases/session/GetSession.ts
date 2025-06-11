@@ -2,7 +2,7 @@ import { IGetSession } from './interfaces/IGetSession';
 import { ISessionServices } from '@application/services/interfaces/ISessionServices';
 import { sessionServicesGlobal } from '@infra/locator/services/SessionServicesGlobal';
 import { Session } from '@domain/entities/Session';
-import { Set } from '@domain/entities/Set';
+import { GetByDateUserIdResponse } from '@application/dto/set/GetSetDto';
 
 export class GetSession implements IGetSession {
   constructor(
@@ -24,7 +24,7 @@ export class GetSession implements IGetSession {
   public async getByDateUserId(input: {
     date: Date;
     userId: number;
-  }): Promise<Set[] | null> {
+  }): Promise<GetByDateUserIdResponse | null> {
     const { date, userId } = input;
     return await this.sessionServices.getByDateUserId({ date, userId });
   }

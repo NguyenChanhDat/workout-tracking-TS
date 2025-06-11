@@ -4,6 +4,7 @@ import { ISetServices } from './interfaces/ISetServices';
 import { setRepositoryGlobal } from '@infra/locator/repository/RepositoryGlobal';
 import { ISetRepository } from '@domain/repositories/ISetRepository';
 import { Set } from '@domain/entities/Set';
+import { GetAllByUserIdResponseDto } from '@application/dto/set/GetSetDto';
 
 export class SetServices implements ISetServices {
   constructor(
@@ -34,5 +35,11 @@ export class SetServices implements ISetServices {
 
   public showListEntity = async (): Promise<Set[] | null> => {
     return await this.setRepository.showListEntity();
+  };
+
+  public getAllByUserId = async (
+    userId: number
+  ): Promise<GetAllByUserIdResponseDto | null> => {
+    return await this.setRepository.getAllByUserId(userId);
   };
 }

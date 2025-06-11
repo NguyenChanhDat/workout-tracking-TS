@@ -13,6 +13,7 @@ import {
   updateSessionUseCaseGlobal,
 } from '@infra/locator/use-cases/SessionUseCaseGlobal';
 import { Set } from '@domain/entities/Set';
+import { GetByDateUserIdResponse } from '@application/dto/set/GetSetDto';
 
 export class SessionController implements ISessionController {
   constructor(
@@ -62,7 +63,12 @@ export class SessionController implements ISessionController {
 
   public get = async (req: Request, res: Response): Promise<void> => {
     try {
-      let sessionData: Set[] | Session | Session[] | null;
+      let sessionData:
+        | Set[]
+        | Session
+        | Session[]
+        | null
+        | GetByDateUserIdResponse;
 
       switch (true) {
         case !!req.query.id:

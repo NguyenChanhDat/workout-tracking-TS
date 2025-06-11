@@ -14,6 +14,7 @@ import {
   getSeUseCasetGlobal,
   updateSeUseCasetGlobal,
 } from '@infra/locator/use-cases/SetUseCaseGlobal';
+import { GetAllByUserIdResponseDto } from '@application/dto/set/GetSetDto';
 
 export class SetController implements ISetController {
   constructor(
@@ -62,10 +63,20 @@ export class SetController implements ISetController {
 
   public async get(req: Request, res: Response): Promise<void> {
     try {
-      const setData: Set | Set[] | null =
-        'id' in req.query
-          ? await this.getSetUseCase.getById(Number(req.query.id))
-          : await this.getSetUseCase.getAll();
+      let setData: Set | Set[] | null | GetAllByUserIdResponseDto;
+      switch (true) {
+        case !!req.query.id:
+          setData = await this.getSetUseCase.getById(Number(req.query.id));
+          break;
+        case !!req.query.userId:
+          setData = await this.getSetUseCase.getAllByUserId(
+            Number(req.query.userId)
+          );
+          break;
+        default:
+          setData = await this.getSetUseCase.getAll();
+          break;
+      }
       res.status(SetApiStatus.OK.status);
       res.send(setData);
     } catch (error) {

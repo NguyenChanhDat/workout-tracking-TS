@@ -1,3 +1,4 @@
+import { GetAllByUserIdResponseDto } from '@application/dto/set/GetSetDto';
 import { CreateSetDto } from '../../dto/set/CreateSetDto';
 import { UpdateSetDto } from '../../dto/set/UpdateSetDto';
 import { Set } from '@domain/entities/Set';
@@ -8,4 +9,5 @@ export interface ISetServices {
   deleteEntity(setId: number): Promise<void>;
   getEntityById(setId: number): Promise<Set | null>;
   showListEntity(): Promise<Set[] | null>;
+  getAllByUserId(userId: number): Promise<GetAllByUserIdResponseDto | null>;
 }

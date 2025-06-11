@@ -11,6 +11,7 @@ class MockSetRepository implements ISetRepository {
   getEntityById = jest.fn();
   showListEntity = jest.fn();
   getExerciseBySessionId = jest.fn();
+  getAllByUserId = jest.fn();
 }
 
 describe('SetServices', () => {

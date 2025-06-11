@@ -4,6 +4,8 @@ import { SetsModel } from '@infra/databases/models/SetsModel';
 import { appDataSource } from '@infra/databases/dataSource/BootstrapTypeOrm';
 import { Repository } from 'typeorm';
 import { UpdateSetDto } from '@application/dto/set/UpdateSetDto';
+import { entitiesAlias } from './entitiesAlias';
+import { GetAllByUserIdResponseDto } from '@application/dto/set/GetSetDto';
 
 export class SetTypeOrmRepository implements ISetRepository {
   constructor(
@@ -38,4 +40,37 @@ export class SetTypeOrmRepository implements ISetRepository {
   async getExerciseBySessionId(sessionId: number): Promise<Set[]> {
     return await this.repository.findBy({ sessionId });
   }
+
+  getAllByUserId = async (
+    userId: number
+  ): Promise<GetAllByUserIdResponseDto | null> => {
+    return await this.repository
+      .createQueryBuilder(entitiesAlias.set)
+      .select([
+        `${entitiesAlias.set}.id as id`,
+        `${entitiesAlias.set}.weight as weight`,
+        `${entitiesAlias.set}.reps as reps`,
+        `${entitiesAlias.set}.restTime as restTime`,
+        `${entitiesAlias.exercise}.name as name`,
+        `${entitiesAlias.session}.date as date`,
+      ])
+      .leftJoin(
+        `${entitiesAlias.set}.${entitiesAlias.session}`,
+        entitiesAlias.session
+      )
+      .leftJoin(
+        `${entitiesAlias.session}.${entitiesAlias.plan}`,
+        entitiesAlias.plan
+      )
+      .leftJoin(
+        `${entitiesAlias.plan}.${entitiesAlias.user}`,
+        entitiesAlias.user
+      )
+      .leftJoin(
+        `${entitiesAlias.set}.${entitiesAlias.exercise}`,
+        entitiesAlias.exercise
+      )
+      .where(`${entitiesAlias.user}.id = :userId`, { userId })
+      .getRawMany();
+  };
 }
