@@ -21,6 +21,9 @@ export class ExercisesModel {
   @Column('nvarchar', { name: 'imageUrl', nullable: true })
   imageUrl?: string;
 
+  @Column('nvarchar', { name: 'description', nullable: true })
+  description?: string;
+
   @Column('nvarchar', { name: 'targetMuscle1', nullable: true })
   targetMuscle1?: MuscleEnum;
 

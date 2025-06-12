@@ -7,4 +7,5 @@ export type Exercise = {
   targetMuscle1?: MuscleEnum;
   targetMuscle2?: MuscleEnum;
   targetMuscle3?: MuscleEnum;
+  description?: string;
 };

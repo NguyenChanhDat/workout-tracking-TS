@@ -43,6 +43,7 @@ export class BodyTrackTypeOrmRepository implements IBodyTrackRepository {
       .select([
         `${entitiesAlias.bodyTrack}.id`,
         `${entitiesAlias.bodyTrack}.weight`,
+        `${entitiesAlias.bodyTrack}.height`,
         `${entitiesAlias.bodyTrack}.date`,
       ])
       .where(`${entitiesAlias.bodyTrack}.userId = :userId`, { userId })
