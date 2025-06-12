@@ -2,7 +2,6 @@ import { BodyTrackServices } from '@application/services/BodyTrackServices';
 import { IBodyTrackRepository } from '@domain/repositories/IBodyTrackRepository';
 import { CreateBodyTrackDto } from '@application/dto/bodyTrack/CreateBodyTrackDto';
 import { UpdateBodyTrackDto } from '@application/dto/bodyTrack/UpdateBodyTrackDto';
-// import { BodyTrack } from '@domain/entities/BodyTrack';
 
 class MockBodyTrackRepository implements IBodyTrackRepository {
   createEntity = jest.fn();
@@ -10,6 +9,7 @@ class MockBodyTrackRepository implements IBodyTrackRepository {
   deleteEntity = jest.fn();
   showListEntity = jest.fn();
   getEntityById = jest.fn();
+  getBodyWeightByUserId = jest.fn();
 }
 
 describe('BodyTrackServices', () => {

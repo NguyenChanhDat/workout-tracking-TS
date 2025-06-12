@@ -3,6 +3,7 @@ import { ISessionRepository } from '@domain/repositories/ISessionRepository';
 import { Session } from '@domain/entities/Session';
 import { sessionRepositoryGlobal } from '@infra/locator/repository/RepositoryGlobal';
 import { GetByDateUserIdResponse } from '@application/dto/set/GetSetDto';
+import { GetSessionVolumeByUserIdResponseDto } from '@application/dto/session/GetSessionDto';
 
 export class SessionServices implements ISessionServices {
   constructor(
@@ -41,5 +42,11 @@ export class SessionServices implements ISessionServices {
     userId: number;
   }): Promise<GetByDateUserIdResponse | null> {
     return await this.sessionRepository.getByDateUserId(input);
+  }
+
+  public async getSessionVolumeByUserId(
+    userId: number
+  ): Promise<GetSessionVolumeByUserIdResponseDto| null> {
+    return await this.sessionRepository.getSessionVolumeByUserId(userId);
   }
 }

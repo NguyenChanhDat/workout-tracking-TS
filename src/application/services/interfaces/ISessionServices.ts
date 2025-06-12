@@ -2,6 +2,7 @@ import { CreateSessionDto } from '@application/dto/session/CreateSessionDto';
 import { UpdateSessionDto } from '@application/dto/session/UpdateSessionDto';
 import { GetByDateUserIdResponse } from '@application/dto/set/GetSetDto';
 import { Session } from '@domain/entities/Session';
+import { GetSessionVolumeByUserIdResponseDto } from '@application/dto/session/GetSessionDto';
 export interface ISessionServices {
   createEntity(session: CreateSessionDto): Promise<void>;
   updateEntity(sessionId: number, session: UpdateSessionDto): Promise<void>;
@@ -13,4 +14,7 @@ export interface ISessionServices {
     date: Date;
     userId: number;
   }): Promise<GetByDateUserIdResponse | null>;
+  getSessionVolumeByUserId(
+    userId: number
+  ): Promise<GetSessionVolumeByUserIdResponseDto | null>;
 }

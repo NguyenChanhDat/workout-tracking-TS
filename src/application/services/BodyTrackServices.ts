@@ -4,6 +4,7 @@ import { IBodyTrackServices } from './interfaces/IBodyTrackServices';
 import { bodyTrackRepositoryGlobal } from '@infra/locator/repository/RepositoryGlobal';
 import { IBodyTrackRepository } from '@domain/repositories/IBodyTrackRepository';
 import { BodyTrack } from '@domain/entities/BodyTrack';
+import { GetBodyWeightByUserIdResponseDto } from '@application/dto/bodyTrack/GetBodyTrackDto';
 
 export class BodyTrackServices implements IBodyTrackServices {
   constructor(
@@ -35,5 +36,11 @@ export class BodyTrackServices implements IBodyTrackServices {
 
   public showListEntity = async (): Promise<BodyTrack[] | null> => {
     return await this.bodyTrackRepository.showListEntity();
+  };
+
+  public getBodyWeightByUserId = async (
+    userId: number
+  ): Promise<GetBodyWeightByUserIdResponseDto | null> => {
+    return await this.bodyTrackRepository.getBodyWeightByUserId(userId);
   };
 }

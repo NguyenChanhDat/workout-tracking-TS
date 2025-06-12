@@ -8,6 +8,7 @@ import { UpdateSessionDto } from '@application/dto/session/UpdateSessionDto';
 import { SetsModel } from '@infra/databases/models/SetsModel';
 import { GetByDateUserIdResponse } from '@application/dto/set/GetSetDto';
 import { entitiesAlias } from './entitiesAlias';
+import { GetSessionVolumeByUserIdResponseDto } from '@application/dto/session/GetSessionDto';
 
 export class SessionTypeOrmRepository implements ISessionRepository {
   constructor(
@@ -77,4 +78,23 @@ export class SessionTypeOrmRepository implements ISessionRepository {
       })
       .getRawMany();
   }
+
+  getSessionVolumeByUserId = async (
+    userId: number
+  ): Promise<GetSessionVolumeByUserIdResponseDto | null> => {
+    return await appDataSource
+      .getRepository(SetsModel)
+      .createQueryBuilder(entitiesAlias.set)
+      .select([
+        `FORMAT(${entitiesAlias.session}.date, 'yyyy-MM-dd') as date`,
+        `SUM(${entitiesAlias.set}.weight * ${entitiesAlias.set}.reps) as volume`,
+      ])
+      .leftJoin(`${entitiesAlias.set}.session`, entitiesAlias.session)
+      .leftJoin(`${entitiesAlias.session}.plan`, entitiesAlias.plan)
+      .leftJoin(`${entitiesAlias.plan}.user`, entitiesAlias.user)
+      .where(`${entitiesAlias.user}.id = :userId`, { userId })
+      .groupBy(`FORMAT(${entitiesAlias.session}.date, 'yyyy-MM-dd')`)
+      .orderBy(`FORMAT(${entitiesAlias.session}.date, 'yyyy-MM-dd')`, 'ASC')
+      .getRawMany();
+  };
 }

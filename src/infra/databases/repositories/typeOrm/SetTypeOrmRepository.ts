@@ -52,7 +52,7 @@ export class SetTypeOrmRepository implements ISetRepository {
         `${entitiesAlias.set}.reps as reps`,
         `${entitiesAlias.set}.restTime as restTime`,
         `${entitiesAlias.exercise}.name as name`,
-        `${entitiesAlias.session}.date as date`,
+        `FORMAT(${entitiesAlias.session}.date, 'yyyy-MM-dd') as date`,
       ])
       .leftJoin(
         `${entitiesAlias.set}.${entitiesAlias.session}`,

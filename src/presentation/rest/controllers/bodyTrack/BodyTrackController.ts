@@ -70,10 +70,22 @@ export class BodyTrackController implements IBodyTrackController {
 
   public get = async (req: Request, res: Response): Promise<void> => {
     try {
-      const bodyTrackData: BodyTrack | BodyTrack[] | null =
-        'id' in req.query
-          ? await this.getBodyTrack.getById(Number(req.query.id))
-          : await this.getBodyTrack.getAll();
+      let bodyTrackData: BodyTrack | BodyTrack[] | null | any;
+
+      switch (true) {
+        case !!req.query.id:
+          bodyTrackData = await this.getBodyTrack.getById(Number(req.query.id));
+          break;
+        case !!req.query.userId:
+          bodyTrackData = await this.getBodyTrack.getBodyWeightByUserId(
+            Number(req.query.userId)
+          );
+          break;
+        default:
+          bodyTrackData = await this.getBodyTrack.getAll();
+          break;
+      }
+
       res.status(BodyTrackApiStatus.OK.status);
       res.send(bodyTrackData);
     } catch (error) {

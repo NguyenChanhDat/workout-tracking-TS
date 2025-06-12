@@ -1,5 +1,6 @@
 import { GetByDateUserIdResponse } from '@application/dto/set/GetSetDto';
 import { Session } from '@domain/entities/Session';
+import { GetSessionVolumeByUserIdResponseDto } from '@application/dto/session/GetSessionDto';
 
 export interface IGetSession {
   getAll(): Promise<Session[] | null>;
@@ -9,4 +10,7 @@ export interface IGetSession {
     date: Date;
     userId: number;
   }): Promise<GetByDateUserIdResponse | null>;
+  getSessionVolumeByUserId(
+    userId: number
+  ): Promise<GetSessionVolumeByUserIdResponseDto| null>;
 }

@@ -3,6 +3,7 @@ import { ISessionServices } from '@application/services/interfaces/ISessionServi
 import { sessionServicesGlobal } from '@infra/locator/services/SessionServicesGlobal';
 import { Session } from '@domain/entities/Session';
 import { GetByDateUserIdResponse } from '@application/dto/set/GetSetDto';
+import { GetSessionVolumeByUserIdResponseDto } from '@application/dto/session/GetSessionDto';
 
 export class GetSession implements IGetSession {
   constructor(
@@ -27,5 +28,11 @@ export class GetSession implements IGetSession {
   }): Promise<GetByDateUserIdResponse | null> {
     const { date, userId } = input;
     return await this.sessionServices.getByDateUserId({ date, userId });
+  }
+
+  public async getSessionVolumeByUserId(
+    userId: number
+  ): Promise<GetSessionVolumeByUserIdResponseDto | null> {
+    return await this.sessionServices.getSessionVolumeByUserId(userId);
   }
 }

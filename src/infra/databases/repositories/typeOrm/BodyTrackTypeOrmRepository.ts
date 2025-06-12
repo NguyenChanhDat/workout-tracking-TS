@@ -4,6 +4,8 @@ import { BodyTracksModel } from '@infra/databases/models/BodyTracksModel';
 import { appDataSource } from '@infra/databases/dataSource/BootstrapTypeOrm';
 import { Repository } from 'typeorm';
 import { UpdateBodyTrackDto } from '@application/dto/bodyTrack/UpdateBodyTrackDto';
+import { GetBodyWeightByUserIdResponseDto } from '@application/dto/bodyTrack/GetBodyTrackDto';
+import { entitiesAlias } from './entitiesAlias';
 
 export class BodyTrackTypeOrmRepository implements IBodyTrackRepository {
   constructor(
@@ -33,4 +35,18 @@ export class BodyTrackTypeOrmRepository implements IBodyTrackRepository {
   async showListEntity(): Promise<BodyTrack[] | null> {
     return await this.repository.find();
   }
+  getBodyWeightByUserId = async (
+    userId: number
+  ): Promise<GetBodyWeightByUserIdResponseDto | null> => {
+    return await this.repository
+      .createQueryBuilder(entitiesAlias.bodyTrack)
+      .select([
+        `${entitiesAlias.bodyTrack}.id`,
+        `${entitiesAlias.bodyTrack}.weight`,
+        `${entitiesAlias.bodyTrack}.date`,
+      ])
+      .where(`${entitiesAlias.bodyTrack}.userId = :userId`, { userId })
+      .orderBy(`${entitiesAlias.bodyTrack}.date`, `DESC`)
+      .getMany();
+  };
 }

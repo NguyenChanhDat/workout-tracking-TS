@@ -14,6 +14,7 @@ import {
 } from '@infra/locator/use-cases/SessionUseCaseGlobal';
 import { Set } from '@domain/entities/Set';
 import { GetByDateUserIdResponse } from '@application/dto/set/GetSetDto';
+import { GetSessionVolumeByUserIdResponseDto } from '@application/dto/session/GetSessionDto';
 
 export class SessionController implements ISessionController {
   constructor(
@@ -68,7 +69,8 @@ export class SessionController implements ISessionController {
         | Session
         | Session[]
         | null
-        | GetByDateUserIdResponse;
+        | GetByDateUserIdResponse
+        | GetSessionVolumeByUserIdResponseDto;
 
       switch (true) {
         case !!req.query.id:
@@ -89,7 +91,11 @@ export class SessionController implements ISessionController {
             userId: Number(req.query.userId),
           });
           break;
-
+        case !!req.query.userId:
+          sessionData = await this.getSessionUseCase.getSessionVolumeByUserId(
+            Number(req.query.userId)
+          );
+          break;
         default:
           sessionData = await this.getSessionUseCase.getAll();
           break;

@@ -1,3 +1,4 @@
+import { GetSessionVolumeByUserIdResponseDto } from '@application/dto/session/GetSessionDto';
 import { Session } from '../entities/Session';
 import { EntityRepository } from './EntityRepository';
 import { GetByDateUserIdResponse } from '@application/dto/set/GetSetDto';
@@ -8,4 +9,7 @@ export interface ISessionRepository extends EntityRepository<Session> {
     date: Date;
     userId: number;
   }): Promise<GetByDateUserIdResponse | null>;
+  getSessionVolumeByUserId(
+    userId: number
+  ): Promise<GetSessionVolumeByUserIdResponseDto| null>;
 }
