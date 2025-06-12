@@ -15,7 +15,12 @@ export class UpdateUser implements IUpdateUser {
     if (!userById) {
       throw new Error();
     }
-    inforInput.password = await this.returnPasswordHashed(inforInput.password);
+    if (inforInput.password) {
+      inforInput.password = await this.returnPasswordHashed(
+        inforInput.password
+      );
+    }
+
     await this.userServices.updateEntity(inforInput.id, inforInput);
     return inforInput;
   };
