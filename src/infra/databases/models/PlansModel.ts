@@ -33,4 +33,7 @@ export class PlansModel {
 
   @OneToMany(() => SessionsModel, (sessions) => sessions.plan)
   sessions!: SessionsModel[];
+
+  @Column('nvarchar', { name: 'description', nullable: true })
+  description?: string;
 }

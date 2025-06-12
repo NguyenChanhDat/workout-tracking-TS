@@ -5,4 +5,5 @@ export type Plan = {
   userId: number;
   name: string;
   membershipTier: MembershipTierEnum;
+  description?: string;
 };
