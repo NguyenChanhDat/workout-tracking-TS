@@ -14,6 +14,7 @@ export type GetByDateUserIdResponse = {
 
 export type GetAllByUserIdResponseDto = {
   id: number; // setId
+  exerciseId: number;
   date: Date;
   name: string;
   weight: number;
