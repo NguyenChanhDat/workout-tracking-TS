@@ -25,19 +25,15 @@ jobs:
     - name: Install Dependencies
       run: |
         npm install
-        grunt
         
     - name: Build
       run: |
         npm run build
-        grunt
         
     - name: Typecheck
       run: |
         npm run typecheck
-        grunt
         
     - name: Unit Test
       run: |
         npm run unit-test
-        grunt
