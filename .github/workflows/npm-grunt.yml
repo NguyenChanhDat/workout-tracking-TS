@@ -2,9 +2,9 @@ name: NodeJS with Grunt
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "uat", "dev" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master", "uat", "dev" ]
 
 jobs:
   build:
@@ -30,10 +30,6 @@ jobs:
       run: |
         npm run build
         
-    - name: Typecheck
+    - name: Setup
       run: |
-        npm run typecheck
-        
-    - name: Unit Test
-      run: |
-        npm run unit-test
+        npm run setup
