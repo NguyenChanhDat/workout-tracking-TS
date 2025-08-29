@@ -14,8 +14,11 @@ import {
   createUserGlobal,
   deleteUserGlobal,
   getUserGlobal,
+  loginUseCase,
   updateUserGlobal,
-} from '../../../../infra/locator/UserUseCaseGlobal';
+} from '../../../../infra/locator/use-cases/UserUseCaseGlobal';
+import { LoginDto } from '@application/dto/user/loginDto';
+import { RoleEnum } from '@shared/enums/RoleEnum';
 
 export class UserController implements IUserController {
   constructor(
@@ -29,7 +32,7 @@ export class UserController implements IUserController {
       const userInputInfor: CreateUserDto = req.body;
       const userCreated = await this.createUser.execute(userInputInfor);
       res.status(UserApiStatus.OK.status);
-      res.send(userCreated + UserApiStatus.OK.message);
+      res.send(userCreated);
     } catch (error) {
       console.log(error);
       res.status(UserApiStatus.INTERNAL_SERVER_ERROR.status);
@@ -88,6 +91,80 @@ export class UserController implements IUserController {
         res.send(error.message);
         return;
       }
+      res.status(UserApiStatus.INTERNAL_SERVER_ERROR.status);
+      res.send(UserApiStatus.INTERNAL_SERVER_ERROR.message);
+    }
+  };
+
+  public adminLogin = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const inputLogin: LoginDto = req.body;
+      const token = await loginUseCase.returnResult(
+        { ...inputLogin },
+        RoleEnum.ADMIN
+      );
+      if (!token) {
+        res.status(UserApiStatus.UNPROCESSABLE_ENTITY.status);
+        res.send(UserApiStatus.UNPROCESSABLE_ENTITY);
+        return;
+      }
+      res.status(UserApiStatus.OK.status);
+      res.send(JSON.stringify(token));
+    } catch (error) {
+      res.status(UserApiStatus.UNPROCESSABLE_ENTITY.status);
+      res.send(UserApiStatus.UNPROCESSABLE_ENTITY);
+    }
+  };
+
+  public userLogin = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const inputLogin: LoginDto = req.body;
+      const token = await loginUseCase.returnResult(
+        { ...inputLogin },
+        RoleEnum.USER
+      );
+      if (!token) {
+        res.status(UserApiStatus.UNPROCESSABLE_ENTITY.status);
+        res.send(UserApiStatus.UNPROCESSABLE_ENTITY);
+        return;
+      }
+      res.status(UserApiStatus.OK.status);
+      res.send(JSON.stringify(token));
+    } catch (error) {
+      res.status(UserApiStatus.UNPROCESSABLE_ENTITY.status);
+      res.send(UserApiStatus.UNPROCESSABLE_ENTITY);
+    }
+  };
+
+  public adminSignup = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const userInputInfor: CreateUserDto = req.body;
+
+      const userCreated = await this.createUser.execute({
+        ...userInputInfor,
+        role: RoleEnum.ADMIN,
+      });
+      res.status(UserApiStatus.OK.status);
+      res.send(userCreated);
+    } catch (error) {
+      console.log(error);
+      res.status(UserApiStatus.INTERNAL_SERVER_ERROR.status);
+      res.send(UserApiStatus.INTERNAL_SERVER_ERROR.message);
+    }
+  };
+
+  public userSignup = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const userInputInfor: CreateUserDto = req.body;
+
+      const userCreated = await this.createUser.execute({
+        ...userInputInfor,
+        role: RoleEnum.USER,
+      });
+      res.status(UserApiStatus.OK.status);
+      res.send(userCreated);
+    } catch (error) {
+      console.log(error);
       res.status(UserApiStatus.INTERNAL_SERVER_ERROR.status);
       res.send(UserApiStatus.INTERNAL_SERVER_ERROR.message);
     }

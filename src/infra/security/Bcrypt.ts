@@ -3,7 +3,9 @@ import { compare, genSalt, hash } from 'bcryptjs';
 
 export class Bcrypt implements IPasswordHash {
   constructor(
-    public readonly saltRound = parseInt(process.env.SALT_ROUNDS as string)
+    public readonly saltRound = parseInt(
+      (process.env.SALT_ROUNDS as string) || '10'
+    )
   ) {}
 
   private async genSalt() {

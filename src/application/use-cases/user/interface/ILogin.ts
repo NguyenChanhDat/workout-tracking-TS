@@ -1,3 +1,11 @@
+import { LoginResponseDto } from '@application/dto/user/loginDto';
+import { RoleEnum } from '@shared/enums/RoleEnum';
 export interface ILogin {
-    validatePassword(username: string, inputPassword: string): Promise<boolean>
+  returnResult(
+    input: {
+      username: string;
+      password: string;
+    },
+    role: RoleEnum
+  ): Promise<LoginResponseDto>;
 }

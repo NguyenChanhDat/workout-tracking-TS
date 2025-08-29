@@ -11,6 +11,7 @@ class MockSetRepository implements ISetRepository {
   getEntityById = jest.fn();
   showListEntity = jest.fn();
   getExerciseBySessionId = jest.fn();
+  getAllByUserId = jest.fn();
 }
 
 describe('SetServices', () => {
@@ -38,7 +39,6 @@ describe('SetServices', () => {
   it('should update an existing set', async () => {
     const setId = 1;
     const updateInfo: UpdateSetDto = {
-      id: 1,
       exerciseId: 1,
       weight: 50,
       reps: 12,

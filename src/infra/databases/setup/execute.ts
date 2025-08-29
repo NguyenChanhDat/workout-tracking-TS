@@ -1,8 +1,8 @@
 import { connectionType, DatabaseFactory } from '../../factory/DatabaseFactory';
 import { IDatabase } from '../dataSource/IDatabase';
 import { MssqlRestoreDatabaseNamed } from './restore/restorQuery';
-import { CreateTableQueryList } from './seed/tables';
-import { InsertDataQueryList } from './seed/data';
+import { CreateTableQueryList } from './migration';
+import { InsertDataQueryList } from './seed';
 
 let dbInstance: IDatabase<connectionType>;
 

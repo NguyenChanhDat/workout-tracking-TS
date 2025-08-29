@@ -1,6 +1,7 @@
 import { CreateUser } from '../../../../src/application/use-cases/user/CreateUser';
 import { IUserServices } from '../../../../src/application/services/interfaces/IUserServices';
 import { MembershipTierEnum } from '@shared/enums/MembershipTierEnum';
+import { RoleEnum } from '@shared/enums/RoleEnum';
 
 class MockUserServices implements IUserServices {
   getUserById = jest.fn();
@@ -25,12 +26,18 @@ describe('CreateUser', () => {
       username: 'testuser',
       password: 'password',
       membershipTier: MembershipTierEnum.BASIC,
+      role: RoleEnum.USER,
     };
     const createdUser = { id: 1, ...userData };
     mockUserServices.createEntity.mockResolvedValue(createdUser);
 
     await createUser.execute(userData);
 
-    expect(mockUserServices.createEntity).toHaveBeenCalledWith(userData);
+    expect(mockUserServices.createEntity).toHaveBeenCalled();
+    const calledArg = mockUserServices.createEntity.mock.calls[0][0];
+
+    expect(calledArg.username).toBe(userData.username);
+    expect(calledArg.membershipTier).toBe(userData.membershipTier);
+    expect(calledArg.password).not.toBe(userData.password); // password should be hashed
   });
 });

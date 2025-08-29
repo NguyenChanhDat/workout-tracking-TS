@@ -15,7 +15,7 @@ import {
   getBodyTrackGlobal,
   updateBodyTrackGlobal,
   deleteBodyTrackGlobal,
-} from '../../../../infra/locator/BodyTrackUseCaseGlobal';
+} from '../../../../infra/locator/use-cases/BodyTrackUseCaseGlobal';
 
 export class BodyTrackController implements IBodyTrackController {
   constructor(
@@ -29,9 +29,7 @@ export class BodyTrackController implements IBodyTrackController {
     try {
       const bodyTrackInput: CreateBodyTrackDto = req.body;
       await this.createBodyTrack.execute(bodyTrackInput);
-      res
-        .status(BodyTrackApiStatus.OK.status)
-        .send(BodyTrackApiStatus.OK.message);
+      res.status(BodyTrackApiStatus.OK.status).send(bodyTrackInput);
     } catch (error) {
       console.error(error);
       res
@@ -72,12 +70,24 @@ export class BodyTrackController implements IBodyTrackController {
 
   public get = async (req: Request, res: Response): Promise<void> => {
     try {
-      const bodyTrackByInput: BodyTrack | BodyTrack[] | null =
-        'id' in req.query
-          ? await this.getBodyTrack.getById(Number(req.query.id))
-          : await this.getBodyTrack.getAll();
+      let bodyTrackData: BodyTrack | BodyTrack[] | null | any;
+
+      switch (true) {
+        case !!req.query.id:
+          bodyTrackData = await this.getBodyTrack.getById(Number(req.query.id));
+          break;
+        case !!req.query.userId:
+          bodyTrackData = await this.getBodyTrack.getBodyWeightByUserId(
+            Number(req.query.userId)
+          );
+          break;
+        default:
+          bodyTrackData = await this.getBodyTrack.getAll();
+          break;
+      }
+
       res.status(BodyTrackApiStatus.OK.status);
-      res.send(bodyTrackByInput);
+      res.send(bodyTrackData);
     } catch (error) {
       console.error(error);
       res
