@@ -1,0 +1,43 @@
+name: NodeJS with Grunt
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install Dependencies
+      run: |
+        npm install
+        grunt
+        
+    - name: Build
+      run: |
+        npm run build
+        grunt
+        
+    - name: Typecheck
+      run: |
+        npm run typecheck
+        grunt
+        
+    - name: Unit Test
+      run: |
+        npm run unit-test
+        grunt
