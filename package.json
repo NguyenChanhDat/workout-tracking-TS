@@ -1,5 +1,5 @@
 {
-  "name": "boilerplate-ts",
+  "name": "workout-tracking-BE",
   "scripts": {
     "dev-linux": "rm -rf dist && npm run build && node dist/src/index.js",
     "dev-win": "powershell Remove-Item dist -Recurse -Force && npm run build && node dist/src/index.js",

@@ -4,7 +4,7 @@ This document explains the fields set in the `package.json` file.
 
 ## Basic Information
 
-- `"name": "boilerplate-ts"`
+- `"name": "workout-tracking-BE"`
   - The package name as used in npm registry.
 - `"version": "0.1.0"`
   - Current version follow semantic versioning (SemVer).
