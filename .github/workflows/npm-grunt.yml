@@ -13,6 +13,7 @@ jobs:
     strategy:
       matrix:
         node-version: [20.x]
+        test-type: ["unit-test", "api-test"]
 
     steps:
     - uses: actions/checkout@v4
@@ -26,6 +27,15 @@ jobs:
       run: |
         npm install
         
-    - name: Setup
+    # only run setup if it's api-test
+    - name: Setup for API Test
+      if: matrix.test-type == 'api-test'
+      run: npm run setup
+
+    - name: Run ${{ matrix.test-type }}
       run: |
-        npm run setup
+        npm run ${{ matrix.test-type }}
+
+    - name: Clean up
+      run: |
+        npm run clean
