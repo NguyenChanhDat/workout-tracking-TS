@@ -3,4 +3,4 @@
 
 npm install
 npm run typecheck
-node scripts/run-tests.js
+node scripts/run-unit-tests.js
