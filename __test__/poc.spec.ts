@@ -42,14 +42,12 @@ describe('ADMIN REQUESTS', () => {
       role: RoleEnum.ADMIN,
     };
     const signupRes = await request.post('/admin/signup').send(signupData);
-    console.log('signupRes.body ', signupRes.body);
     expect(signupRes.status).toBe(200);
     const loginData: LoginDto = {
       username: 'admin1',
       password: 'veryStrongPassword',
     };
     const loginRes = await request.post('/admin/login').send(loginData);
-    console.log('loginRes.body ', loginRes.body);
     expect(loginRes.status).toBe(200);
     expect(loginRes.body).toHaveProperty('token');
   });
