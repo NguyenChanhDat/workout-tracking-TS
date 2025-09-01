@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: self-hosted
 
     strategy:
       matrix:
@@ -30,7 +30,7 @@ jobs:
       # only run setup if it's api-test
       - name: Setup for API Test
         if: matrix.test-type == 'api-test'
-        run: npm run setup-server-linux
+        run: npm run setup && npm run dev
 
       - name: Run ${{ matrix.test-type }}
         run: |
