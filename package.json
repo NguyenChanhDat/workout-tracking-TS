@@ -1,5 +1,5 @@
 {
-  "name": "boilerplate-ts",
+  "name": "workout-tracking-be",
   "scripts": {
     "dev-linux": "rm -rf dist && npm run build && node dist/src/index.js",
     "dev-win": "powershell Remove-Item dist -Recurse -Force && npm run build && node dist/src/index.js",
@@ -11,16 +11,20 @@
     "restore-seed-db-win": "powershell Remove-Item dist -Recurse -Force && npm run build && node dist/src/infra/databases/setup/execute.js",
     "deploy-linux": "npm run setup-linux && sh ./tools/run/localApi.sh",
     "deploy-win": "npm run setup-win && powershell ./tools/run/localApi.ps1",
-    "unit-test-linux": "rm -rf dist && npm run build && jest --config jest.config.js",
-    "unit-test-win": "powershell Remove-Item dist -Recurse -Force && npm run build && jest --config jest.config.js",
+    "unit-test-linux": "rm -rf dist && npm run build && jest --config jest.config.unit.js",
+    "unit-test-win": "powershell Remove-Item dist -Recurse -Force && npm run build && jest --config jest.config.unit.js",
+    "api-test-linux": "rm -rf dist && npm run build && jest --config jest.config.api.js",
+    "api-test-win": "powershell Remove-Item dist -Recurse -Force && npm run build && jest --config jest.config.api.js",
     "setup-streaming-win": "npm run setup-win && powershell ./tools/setup/setupCdcTools.ps1",
     "build": "concurrently \"swc src -d dist -D\" \"swc __test__ -d dist -D\"",
     "prepare": "husky",
     "typecheck": "tsc --noEmit",
-    "unit-test": "node scripts/run-tests.js",
+    "unit-test": "node scripts/run-unit-tests.js",
+    "api-test": "node scripts/run-api-tests.js",
     "dev": "node scripts/run-dev.js",
     "setup": "node scripts/run-setup.js",
-    "gen-type": "powershell ./tools/setup/genModel.ps1 && powershell ./tools/setup/renameGenModel.ps1"
+    "gen-type": "powershell ./tools/setup/genModel.ps1 && powershell ./tools/setup/renameGenModel.ps1", 
+    "clean": "sh ./tools/clean/clean.sh"
   },
   "author": "Dat NguyenChanh",
   "license": "ISC",
