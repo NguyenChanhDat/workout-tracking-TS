@@ -1,23 +1,17 @@
 name: workout-tracking-BE CI
 
 on:
-  push:
-    branches: ['master', 'uat', 'dev']
   pull_request:
     branches: ['master', 'uat', 'dev']
 
 jobs:
-  build:
-    permissions:
-      contents: read
-      pull-requests: write
-      issues: write
-
+  test:
     runs-on: ubuntu-22.04
 
     strategy:
       matrix:
         node-version: [20.x]
+        test-type: ['unit-test', 'api-test']
 
     steps:
       - uses: actions/checkout@v4
@@ -27,30 +21,31 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Trigger AI Code Reviewing
-        run: |
-          payload=$(jq -n \
-            --arg pr_number "${{ github.event.pull_request.number }}" \
-            --arg secret_token "${{ secrets.GITHUB_TOKEN }}" \
-            '{pullNumber: $pr_number, secretToken: $secret_token}')
-
-          # send to AI server
-          curl -X POST https://ai-coding-review-homie.onrender.com/review \
-            -H "Content-Type: application/json" \
-            -d "$payload"
-
       - name: Install Dependencies
         run: |
           npm install
 
       # only run setup if it's api-test
       - name: Setup for API Test
+        if: matrix.test-type == 'api-test'
         run: npm run setup
 
-      - name: Run API Test
+      - name: Run ${{ matrix.test-type }}
         run: |
-          npm run api-test
+          npm run ${{ matrix.test-type }}
 
       - name: Clean up
         run: |
           npm run clean
+
+  ai_code_review:
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+
+    uses: ./.github/workflows/ai-review.yml
+    with:
+      pr_number: ${{ github.event.pull_request.number }}
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
