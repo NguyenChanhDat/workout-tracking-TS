@@ -1,13 +1,11 @@
 name: workout-tracking-BE CI
 
 on:
-  push:
-    branches: ['master', 'uat', 'dev']
   pull_request:
     branches: ['master', 'uat', 'dev']
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-22.04
 
     strategy:
@@ -39,3 +37,15 @@ jobs:
       - name: Clean up
         run: |
           npm run clean
+
+  ai_code_review:
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+
+    uses: ./.github/workflows/ai-review.yml
+    with:
+      pr_number: ${{ github.event.pull_request.number }}
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
