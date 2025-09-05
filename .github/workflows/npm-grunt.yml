@@ -13,7 +13,7 @@ jobs:
       pull-requests: write
       issues: write
 
-    runs-on: self-hosted
+    runs-on: ubuntu-22.04
 
     strategy:
       matrix:
@@ -35,7 +35,7 @@ jobs:
             '{pullNumber: $pr_number, secretToken: $secret_token}')
 
           # send to AI server
-          curl -X POST http://localhost:8090/review \
+          curl -X POST https://ai-coding-review-homie.onrender.com/review \
             -H "Content-Type: application/json" \
             -d "$payload"
 
