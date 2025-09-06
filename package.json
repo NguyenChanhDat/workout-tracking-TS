@@ -1,7 +1,7 @@
 {
   "name": "workout-tracking-be",
   "scripts": {
-    "dev-linux": "rm -rf dist && npm run build && node dist/src/index.js",
+    "dev-linux": "rm -rf dist && npm run build && nohup node dist/src/index.js >/dev/null 2>&1 &",
     "dev-win": "npm run build && powershell Start-Process node -ArgumentList 'dist/src/index.js'",
     "setup-linux": "chmod +x tools/setup/setupLocalDbContainer.sh &&  npm run db-local-linux && npm run restore-seed-db-linux",
     "setup-win": "npm run db-local-win && npm run restore-seed-db-win",
@@ -18,7 +18,7 @@
     "prepare": "husky",
     "typecheck": "tsc --noEmit",
     "unit-test": "node scripts/run-unit-tests.js",
-    "api-test": "npm run dev && jest --config jest.config.api.js",
+    "api-test": "npm run setup && npm run dev && sleep 10 && jest --config jest.config.api.js",
     "dev": "node scripts/run-dev.js",
     "setup": "node scripts/run-setup.js",
     "gen-type": "powershell ./tools/setup/genModel.ps1 && powershell ./tools/setup/renameGenModel.ps1",
