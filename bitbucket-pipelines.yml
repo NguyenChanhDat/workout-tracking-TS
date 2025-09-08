@@ -1,0 +1,47 @@
+definitions:
+  steps:
+    - step: &unit-test
+        name: unit test
+        caches:
+          - node
+        script:
+          - npm install
+          - npm run unit-test
+          - npm run clean
+    - step: &api-test
+        name: api test
+        caches:
+          - node
+        script:
+          - npm install
+          - npm run setup
+          - npm run api-test
+          - npm run clean
+    - step: &ai-review
+        name: ai code review
+        image: atlassian/default-image:3
+        script:
+          - apt-get update && apt-get install -y jq curl
+          - |
+            payload=$(jq -n \
+              --arg pr_number "$BITBUCKET_PR_ID" \
+              --arg secret_token "$AI_REVIEW_TOKEN" \
+              '{pullNumber: $pr_number, secretToken: $secret_token, repositoryName: "Bitbucket"}')
+            curl -X POST http://localhost:8090/review \
+              -H "Content-Type: application/json" \
+              -d "$payload"
+
+pipelines:
+  pull-requests:
+    master:
+      - step: *unit-test
+      - step: *api-test
+      - step: *ai-review
+    uat:
+      - step: *unit-test
+      - step: *api-test
+      - step: *ai-review
+    dev:
+      - step: *unit-test
+      - step: *api-test
+      - step: *ai-review
