@@ -10,6 +10,7 @@ A BE Repo for healthcare services system in TS implements Clean Architecture. Yo
 - [Docker Desktop **27.4.0**](https://docs.docker.com/engine/release-notes/27/#2741)
 - [TypeORM](https://typeorm.io/#/)
 - [Typescript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
+- [JestJS](https://www.postgresql.org/docs/current/transaction-iso.html)
 
 ## DEVELOPING
 
