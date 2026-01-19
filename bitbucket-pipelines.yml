@@ -1,0 +1,46 @@
+definitions:
+  steps:
+    - step: &unit-test
+        name: unit test
+        image: node:20
+        caches:
+          - node
+        script:
+          - npm install
+          - npm run unit-test
+          - npm run clean
+    - step: &api-test
+        name: api test
+        image: node:20
+        services:
+          - docker
+        caches:
+          - node
+        script:
+          - npm install
+          - npm run setup
+          - npm run api-test
+          - npm run clean
+    - step: &ai-review
+        name: ai code review
+        runs-on:
+          - self.hosted
+          - macos
+        script:
+          - apt-get update && apt-get install -y jq curl
+          - |
+            payload=$(jq -n \
+              --arg pr_number "$BITBUCKET_PR_ID" \
+              --arg secret_token "$Pablo_Debugcasso_bot" \
+              '{pullNumber: $pr_number, secretToken: $secret_token, repositoryName: "BitBucket"}')
+            curl -X POST http://localhost:8090/review \
+              -H "Content-Type: application/json" \
+              -d "$payload"
+
+pipelines:
+  pull-requests:
+    '**':
+      - parallel:
+          - step: *unit-test
+          - step: *api-test
+          - step: *ai-review

@@ -1,0 +1,29 @@
+name: AI Review
+on:
+  workflow_call:
+    inputs:
+      pr_number:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
+
+jobs:
+  ai_code_review:
+    runs-on: self-hosted
+    steps:
+      - name: Trigger AI Code Reviewing
+        shell: pwsh
+        run: |
+          $payload = @{
+            pullNumber     = "${{ inputs.pr_number }}"
+            secretToken    = "${{ secrets.token }}"
+            repositoryName = "GitHub"
+          } | ConvertTo-Json
+
+          Invoke-RestMethod `
+            -Uri "http://localhost:8090/review" `
+            -Method Post `
+            -ContentType "application/json" `
+            -Body $payload
