@@ -6,7 +6,7 @@ config({ path: '.env' });
 
 export class JWT implements ITokenServices {
   constructor(
-    private readonly tokenSecret: string = process.env.TOKEN_SECRET || ''
+    private readonly tokenSecret: string = process.env.TOKEN_SECRET || 'token_secret'
   ) {}
   public generateToken = async (input: {
     username: string;

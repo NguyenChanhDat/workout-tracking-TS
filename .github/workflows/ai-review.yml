@@ -14,11 +14,16 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Trigger AI Code Reviewing
+        shell: pwsh
         run: |
-          payload=$(jq -n \
-            --arg pr_number "${{ inputs.pr_number }}" \
-            --arg secret_token "${{ secrets.token }}" \
-            '{pullNumber: $pr_number, secretToken: $secret_token, repositoryName: "GitHub"}')
-          curl -X POST http://localhost:8090/review \
-          -H "Content-Type: application/json" \
-          -d "$payload"
+          $payload = @{
+            pullNumber     = "${{ inputs.pr_number }}"
+            secretToken    = "${{ secrets.token }}"
+            repositoryName = "GitHub"
+          } | ConvertTo-Json
+
+          Invoke-RestMethod `
+            -Uri "http://localhost:8090/review" `
+            -Method Post `
+            -ContentType "application/json" `
+            -Body $payload
